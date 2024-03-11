@@ -67,8 +67,6 @@ class _GameWidgetState extends State<GameWidget> {
         });
       }
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -82,232 +80,227 @@ class _GameWidgetState extends State<GameWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Title(
-        title: 'Трансформациоонные игры',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            floatingActionButton: Visibility(
-              visible: FFAppState().roleUsers.contains('Admin'),
-              child: FloatingActionButton(
-                onPressed: () async {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    enableDrag: false,
-                    context: context,
-                    builder: (context) {
-                      return GestureDetector(
-                        onTap: () => _model.unfocusNode.canRequestFocus
-                            ? FocusScope.of(context)
-                                .requestFocus(_model.unfocusNode)
-                            : FocusScope.of(context).unfocus(),
-                        child: Padding(
-                          padding: MediaQuery.viewInsetsOf(context),
-                          child: const GameAddWidget(),
-                        ),
-                      );
-                    },
-                  ).then((value) => safeSetState(() {}));
+    return GestureDetector(
+      onTap: () => _model.unfocusNode.canRequestFocus
+          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+          : FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        floatingActionButton: Visibility(
+          visible: FFAppState().roleUsers.contains('Admin'),
+          child: FloatingActionButton(
+            onPressed: () async {
+              await showModalBottomSheet(
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                enableDrag: false,
+                context: context,
+                builder: (context) {
+                  return GestureDetector(
+                    onTap: () => _model.unfocusNode.canRequestFocus
+                        ? FocusScope.of(context)
+                            .requestFocus(_model.unfocusNode)
+                        : FocusScope.of(context).unfocus(),
+                    child: Padding(
+                      padding: MediaQuery.viewInsetsOf(context),
+                      child: const GameAddWidget(),
+                    ),
+                  );
                 },
-                backgroundColor: FlutterFlowTheme.of(context).primary,
-                elevation: 8.0,
-                child: Icon(
-                  Icons.add,
-                  color: FlutterFlowTheme.of(context).info,
-                  size: 24.0,
-                ),
-              ),
-            ),
-            appBar: responsiveVisibility(
-              context: context,
-              tablet: false,
-              tabletLandscape: false,
-              desktop: false,
-            )
-                ? AppBar(
-                    backgroundColor: FlutterFlowTheme.of(context).primary,
-                    automaticallyImplyLeading: false,
-                    leading: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30.0,
-                      borderWidth: 1.0,
-                      buttonSize: 60.0,
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colors.white,
-                        size: 30.0,
-                      ),
-                      onPressed: () async {
-                        context.pop();
-                      },
-                    ),
-                    title: Text(
-                      'Игры',
-                      style:
-                          FlutterFlowTheme.of(context).headlineMedium.override(
-                                fontFamily: 'Outfit',
-                                color: Colors.white,
-                                fontSize: 22.0,
-                              ),
-                    ),
-                    actions: const [],
-                    centerTitle: false,
-                    elevation: 2.0,
-                  )
-                : null,
-            body: SafeArea(
-              top: true,
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    if (responsiveVisibility(
-                      context: context,
-                      phone: false,
-                      tablet: false,
-                    ))
-                      Expanded(
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
-                              child: wrapWithModel(
-                                model: _model.menubarModel,
-                                updateCallback: () => setState(() {}),
-                                child: MenubarWidget(
-                                  email: valueOrDefault<String>(
-                                    currentUserEmail,
-                                    '@mail',
-                                  ),
-                                  pageName: 'Game',
-                                ),
-                              ),
-                            ),
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                              tablet: false,
-                            ))
-                              Expanded(
-                                child: FutureBuilder<List<GameRow>>(
-                                  future: GameTable().queryRows(
-                                    queryFn: (q) => q,
-                                  ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 10.0,
-                                          height: 10.0,
-                                          child: SpinKitDoubleBounce(
-                                            color: FlutterFlowTheme.of(context)
-                                                .accent1,
-                                            size: 10.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<GameRow> gridViewGameRowList =
-                                        snapshot.data!;
-                                    return GridView.builder(
-                                      padding: EdgeInsets.zero,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 3,
-                                        crossAxisSpacing: 10.0,
-                                        mainAxisSpacing: 10.0,
-                                        childAspectRatio: 1.0,
-                                      ),
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: gridViewGameRowList.length,
-                                      itemBuilder: (context, gridViewIndex) {
-                                        final gridViewGameRow =
-                                            gridViewGameRowList[gridViewIndex];
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 10.0, 0.0, 0.0),
-                                          child: BlockWidget(
-                                            key: Key(
-                                                'Keym3c_${gridViewIndex}_of_${gridViewGameRowList.length}'),
-                                            name: gridViewGameRow.nameGame!,
-                                            deskription:
-                                                gridViewGameRow.discription!,
-                                            author: gridViewGameRow.author!,
-                                            img: gridViewGameRow.img!,
-                                            buttonname: 'Расписание',
-                                            id: gridViewGameRow.id,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    if (responsiveVisibility(
-                      context: context,
-                      tabletLandscape: false,
-                      desktop: false,
-                    ))
-                      Expanded(
-                        child: FutureBuilder<List<GameRow>>(
-                          future: GameTable().queryRows(
-                            queryFn: (q) => q,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 10.0,
-                                  height: 10.0,
-                                  child: SpinKitDoubleBounce(
-                                    color: FlutterFlowTheme.of(context).accent1,
-                                    size: 10.0,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<GameRow> columnGameRowList = snapshot.data!;
-                            return Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: List.generate(columnGameRowList.length,
-                                  (columnIndex) {
-                                final columnGameRow =
-                                    columnGameRowList[columnIndex];
-                                return BlockWidget(
-                                  key: Key(
-                                      'Keymzy_${columnIndex}_of_${columnGameRowList.length}'),
-                                  name: columnGameRow.nameGame!,
-                                  deskription: columnGameRow.discription!,
-                                  author: columnGameRow.author!,
-                                  img: columnGameRow.img!,
-                                  buttonname: 'Расписание',
-                                  id: columnGameRow.id,
-                                );
-                              }),
-                            );
-                          },
-                        ),
-                      ),
-                  ],
-                ),
-              ),
+              ).then((value) => safeSetState(() {}));
+            },
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            elevation: 8.0,
+            child: Icon(
+              Icons.add,
+              color: FlutterFlowTheme.of(context).info,
+              size: 24.0,
             ),
           ),
-        ));
+        ),
+        appBar: responsiveVisibility(
+          context: context,
+          tablet: false,
+          tabletLandscape: false,
+          desktop: false,
+        )
+            ? AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primary,
+                automaticallyImplyLeading: false,
+                leading: FlutterFlowIconButton(
+                  borderColor: Colors.transparent,
+                  borderRadius: 30.0,
+                  borderWidth: 1.0,
+                  buttonSize: 60.0,
+                  icon: const Icon(
+                    Icons.arrow_back_rounded,
+                    color: Colors.white,
+                    size: 30.0,
+                  ),
+                  onPressed: () async {
+                    context.pop();
+                  },
+                ),
+                title: Text(
+                  'Игры',
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Outfit',
+                        color: Colors.white,
+                        fontSize: 22.0,
+                      ),
+                ),
+                actions: const [],
+                centerTitle: false,
+                elevation: 2.0,
+              )
+            : null,
+        body: SafeArea(
+          top: true,
+          child: Padding(
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                if (responsiveVisibility(
+                  context: context,
+                  phone: false,
+                  tablet: false,
+                ))
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          child: wrapWithModel(
+                            model: _model.menubarModel,
+                            updateCallback: () => setState(() {}),
+                            child: MenubarWidget(
+                              email: valueOrDefault<String>(
+                                currentUserEmail,
+                                '@mail',
+                              ),
+                              pageName: 'Game',
+                            ),
+                          ),
+                        ),
+                        if (responsiveVisibility(
+                          context: context,
+                          phone: false,
+                          tablet: false,
+                        ))
+                          Expanded(
+                            child: FutureBuilder<List<GameRow>>(
+                              future: GameTable().queryRows(
+                                queryFn: (q) => q,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 10.0,
+                                      height: 10.0,
+                                      child: SpinKitDoubleBounce(
+                                        color: FlutterFlowTheme.of(context)
+                                            .accent1,
+                                        size: 10.0,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<GameRow> gridViewGameRowList =
+                                    snapshot.data!;
+                                return GridView.builder(
+                                  padding: EdgeInsets.zero,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 3,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                    childAspectRatio: 1.0,
+                                  ),
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: gridViewGameRowList.length,
+                                  itemBuilder: (context, gridViewIndex) {
+                                    final gridViewGameRow =
+                                        gridViewGameRowList[gridViewIndex];
+                                    return Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 0.0),
+                                      child: BlockWidget(
+                                        key: Key(
+                                            'Keym3c_${gridViewIndex}_of_${gridViewGameRowList.length}'),
+                                        name: gridViewGameRow.nameGame!,
+                                        deskription:
+                                            gridViewGameRow.discription!,
+                                        author: gridViewGameRow.author!,
+                                        img: gridViewGameRow.img!,
+                                        buttonname: 'Расписание',
+                                        id: gridViewGameRow.id,
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                if (responsiveVisibility(
+                  context: context,
+                  tabletLandscape: false,
+                  desktop: false,
+                ))
+                  Expanded(
+                    child: FutureBuilder<List<GameRow>>(
+                      future: GameTable().queryRows(
+                        queryFn: (q) => q,
+                      ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 10.0,
+                              height: 10.0,
+                              child: SpinKitDoubleBounce(
+                                color: FlutterFlowTheme.of(context).accent1,
+                                size: 10.0,
+                              ),
+                            ),
+                          );
+                        }
+                        List<GameRow> columnGameRowList = snapshot.data!;
+                        return Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: List.generate(columnGameRowList.length,
+                              (columnIndex) {
+                            final columnGameRow =
+                                columnGameRowList[columnIndex];
+                            return BlockWidget(
+                              key: Key(
+                                  'Keymzy_${columnIndex}_of_${columnGameRowList.length}'),
+                              name: columnGameRow.nameGame!,
+                              deskription: columnGameRow.discription!,
+                              author: columnGameRow.author!,
+                              img: columnGameRow.img!,
+                              buttonname: 'Расписание',
+                              id: columnGameRow.id,
+                            );
+                          }),
+                        );
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

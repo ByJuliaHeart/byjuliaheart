@@ -48,8 +48,6 @@ class _RandomCardWidgetState extends State<RandomCardWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => RandomCardModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

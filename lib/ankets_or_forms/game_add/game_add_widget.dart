@@ -75,8 +75,6 @@ class _GameAddWidgetState extends State<GameAddWidget>
 
     _model.yourNameController2 ??= TextEditingController();
     _model.yourNameFocusNode2 ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

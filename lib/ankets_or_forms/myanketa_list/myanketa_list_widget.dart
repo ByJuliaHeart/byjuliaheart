@@ -61,8 +61,6 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
     _model.measuresFocusNode ??= FocusNode();
 
     _model.responseFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
