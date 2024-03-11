@@ -152,6 +152,11 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
 
                                   var downloadUrls = <String>[];
                                   try {
+                                    showUploadMessage(
+                                      context,
+                                      'Uploading file...',
+                                      showLoading: true,
+                                    );
                                     selectedUploadedFiles = selectedMedia
                                         .map((m) => FFUploadedFile(
                                               name:
@@ -169,6 +174,8 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                       selectedFiles: selectedMedia,
                                     );
                                   } finally {
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
                                     _model.isDataUploading = false;
                                   }
                                   if (selectedUploadedFiles.length ==
@@ -181,8 +188,11 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                       _model.uploadedFileUrl =
                                           downloadUrls.first;
                                     });
+                                    showUploadMessage(context, 'Success!');
                                   } else {
                                     setState(() {});
+                                    showUploadMessage(
+                                        context, 'Failed to upload data');
                                     return;
                                   }
                                 }
@@ -199,17 +209,7 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                     currentUserUid,
                                   ),
                                 );
-
-                                context.pushNamed(
-                                  'ProfileCreEdit',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 0),
-                                    ),
-                                  },
-                                );
+                                context.safePop();
                               },
                               text: 'Загрузить аватарку',
                               options: FFButtonOptions(
