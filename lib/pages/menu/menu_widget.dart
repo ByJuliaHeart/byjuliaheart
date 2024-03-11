@@ -1,12 +1,11 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/block_widget.dart';
 import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/game_component/block/block_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:provider/provider.dart';
 import 'menu_model.dart';
 export 'menu_model.dart';
 
@@ -39,8 +38,6 @@ class _MenuWidgetState extends State<MenuWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<UsersRow>>(
       future: FFAppState().userdata(
         requestFn: () => UsersTable().querySingleRow(
@@ -141,7 +138,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     key: Key(
                                         'Keyn9a_${gridViewIndex}_of_${gridViewGameRowList.length}'),
                                     name: gridViewGameRow.nameGame!,
-                                    diskription: gridViewGameRow.discription!,
+                                    deskription: gridViewGameRow.discription!,
                                     author: gridViewGameRow.author!,
                                     img: gridViewGameRow.img!,
                                     buttonname: 'Расписание',

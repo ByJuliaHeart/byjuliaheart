@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -73,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const GameWidget() : const AuthRegWidget(),
+          appStateNotifier.loggedIn ? const NavBarPage() : const AuthRegWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const GameWidget() : const AuthRegWidget(),
+              appStateNotifier.loggedIn ? const NavBarPage() : const AuthRegWidget(),
         ),
         FFRoute(
           name: 'AuthReg',
@@ -94,7 +94,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Game',
           path: '/game',
-          builder: (context, params) => const GameWidget(),
+          builder: (context, params) =>
+              params.isEmpty ? const NavBarPage(initialPage: 'Game') : const GameWidget(),
         ),
         FFRoute(
           name: 'menu',
@@ -104,7 +105,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'dategame',
           path: '/dategame',
-          builder: (context, params) => const DategameWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'dategame')
+              : const DategameWidget(),
         ),
         FFRoute(
           name: 'gameField',
@@ -116,17 +119,53 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 params.getParam<String>('idmembergame', ParamType.String, true),
             date: params.getParam('date', ParamType.String),
             time: params.getParam('time', ParamType.String),
+            id: params.getParam('id', ParamType.String),
+            gameid: params.getParam('gameid', ParamType.String),
+            nameGame: params.getParam('nameGame', ParamType.String),
+            description: params.getParam('description', ParamType.String),
           ),
         ),
         FFRoute(
           name: 'myregistration',
           path: '/myregistration',
-          builder: (context, params) => const MyregistrationWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'myregistration')
+              : const MyregistrationWidget(),
         ),
         FFRoute(
           name: 'resource',
           path: '/resource',
-          builder: (context, params) => const ResourceWidget(),
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'resource')
+              : const ResourceWidget(),
+        ),
+        FFRoute(
+          name: 'cards',
+          path: '/cards',
+          builder: (context, params) => const CardsWidget(),
+        ),
+        FFRoute(
+          name: 'ProfileCreEdit',
+          path: '/profile',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'ProfileCreEdit')
+              : const ProfileCreEditWidget(),
+        ),
+        FFRoute(
+          name: 'gameFieldCopy',
+          path: '/gameFieldCopy',
+          builder: (context, params) => GameFieldCopyWidget(
+            gamefield: params.getParam('gamefield', ParamType.String),
+            unix: params.getParam('unix', ParamType.int),
+            idmembergame:
+                params.getParam<String>('idmembergame', ParamType.String, true),
+            date: params.getParam('date', ParamType.String),
+            time: params.getParam('time', ParamType.String),
+            id: params.getParam('id', ParamType.String),
+            gameid: params.getParam('gameid', ParamType.String),
+            nameGame: params.getParam('nameGame', ParamType.String),
+            description: params.getParam('description', ParamType.String),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -309,13 +348,13 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 10.0,
-                    height: 10.0,
-                    child: SpinKitDoubleBounce(
-                      color: FlutterFlowTheme.of(context).accent1,
-                      size: 10.0,
+              ? Container(
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/Default_a_beautiful_woman_with_fulllength_golden_wings_20_year_3_(1)-Photoroom.png-Photoroom.png',
+                      width: 120.0,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 )

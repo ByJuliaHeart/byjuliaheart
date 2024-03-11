@@ -17,17 +17,17 @@ class ResourseRow extends SupabaseDataRow {
   DateTime? get createdAt => getField<DateTime>('created_at');
   set createdAt(DateTime? value) => setField<DateTime>('created_at', value);
 
-  String? get gameFieldID => getField<String>('gameFieldID');
-  set gameFieldID(String? value) => setField<String>('gameFieldID', value);
+  String? get gameFieldId => getField<String>('game_field_id');
+  set gameFieldId(String? value) => setField<String>('game_field_id', value);
 
-  String? get userID => getField<String>('userID');
-  set userID(String? value) => setField<String>('userID', value);
+  String? get userId => getField<String>('user_id');
+  set userId(String? value) => setField<String>('user_id', value);
 
   String? get usergameid => getField<String>('usergameid');
   set usergameid(String? value) => setField<String>('usergameid', value);
 
-  String? get unix => getField<String>('unix');
-  set unix(String? value) => setField<String>('unix', value);
+  int? get unix => getField<int>('unix');
+  set unix(int? value) => setField<int>('unix', value);
 
   String get id => getField<String>('id')!;
   set id(String value) => setField<String>('id', value);
@@ -52,4 +52,10 @@ class ResourseRow extends SupabaseDataRow {
 
   String? get feedbackTime => getField<String>('feedback_time');
   set feedbackTime(String? value) => setField<String>('feedback_time', value);
+
+  int? get ratingbar => getField<int>('ratingbar');
+  set ratingbar(int? value) => setField<int>('ratingbar', value);
+
+  List<int> get ratings => getListField<int>('ratings');
+  set ratings(List<int>? value) => setListField<int>('ratings', value);
 }

@@ -10,6 +10,10 @@ class ProfileCreateEditModel extends FlutterFlowModel<ProfileCreateEditWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
+  // State field(s) for name widget.
+  FocusNode? nameFocusNode;
+  TextEditingController? nameController;
+  String? Function(BuildContext, String?)? nameControllerValidator;
   // State field(s) for city widget.
   FocusNode? cityFocusNode;
   TextEditingController? cityController;
@@ -22,6 +26,9 @@ class ProfileCreateEditModel extends FlutterFlowModel<ProfileCreateEditWidget> {
 
   @override
   void dispose() {
+    nameFocusNode?.dispose();
+    nameController?.dispose();
+
     cityFocusNode?.dispose();
     cityController?.dispose();
   }

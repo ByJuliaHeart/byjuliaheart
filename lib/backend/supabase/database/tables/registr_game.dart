@@ -26,8 +26,8 @@ class RegistrGameRow extends SupabaseDataRow {
   String? get dateGame => getField<String>('dateGame');
   set dateGame(String? value) => setField<String>('dateGame', value);
 
-  String? get unix => getField<String>('unix');
-  set unix(String? value) => setField<String>('unix', value);
+  int? get unix => getField<int>('unix');
+  set unix(int? value) => setField<int>('unix', value);
 
   String? get gameid => getField<String>('gameid');
   set gameid(String? value) => setField<String>('gameid', value);

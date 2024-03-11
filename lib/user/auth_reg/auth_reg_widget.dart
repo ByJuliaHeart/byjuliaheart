@@ -4,11 +4,9 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'auth_reg_model.dart';
 export 'auth_reg_model.dart';
 
@@ -122,8 +120,6 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
         title: 'AuthReg',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
@@ -133,7 +129,6 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
               : FocusScope.of(context).unfocus(),
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             body: SafeArea(
               top: true,
               child: Row(
@@ -558,7 +553,7 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
+                                                              .tertiary,
                                                       textStyle:
                                                           FlutterFlowTheme.of(
                                                                   context)
@@ -1173,21 +1168,21 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                   ))
                     Expanded(
                       flex: 6,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          width: 100.0,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: CachedNetworkImageProvider(
-                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/f-f-games-660ryh/assets/41gtlg4nnch2/demoProject@2x.jpg',
-                              ),
-                            ),
-                            borderRadius: BorderRadius.circular(16.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: Image.asset(
+                              'assets/images/Default_a_beautiful_woman_with_fulllength_golden_wings_20_year_3_(1).jpg',
+                            ).image,
+                          ),
+                          borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(16.0),
+                            bottomRight: Radius.circular(0.0),
+                            topLeft: Radius.circular(16.0),
+                            topRight: Radius.circular(0.0),
                           ),
                         ),
                       ),

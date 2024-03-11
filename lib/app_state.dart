@@ -53,6 +53,88 @@ class FFAppState extends ChangeNotifier {
     _email = value;
   }
 
+  String _cardRundo = '';
+  String get cardRundo => _cardRundo;
+  set cardRundo(String value) {
+    _cardRundo = value;
+  }
+
+  String _cardConfirm = '';
+  String get cardConfirm => _cardConfirm;
+  set cardConfirm(String value) {
+    _cardConfirm = value;
+  }
+
+  List<String> _cardsArray = [];
+  List<String> get cardsArray => _cardsArray;
+  set cardsArray(List<String> value) {
+    _cardsArray = value;
+  }
+
+  void addToCardsArray(String value) {
+    _cardsArray.add(value);
+  }
+
+  void removeFromCardsArray(String value) {
+    _cardsArray.remove(value);
+  }
+
+  void removeAtIndexFromCardsArray(int index) {
+    _cardsArray.removeAt(index);
+  }
+
+  void updateCardsArrayAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    _cardsArray[index] = updateFn(_cardsArray[index]);
+  }
+
+  void insertAtIndexInCardsArray(int index, String value) {
+    _cardsArray.insert(index, value);
+  }
+
+  int _cubeNumber = 0;
+  int get cubeNumber => _cubeNumber;
+  set cubeNumber(int value) {
+    _cubeNumber = value;
+  }
+
+  List<String> _roleUsers = [];
+  List<String> get roleUsers => _roleUsers;
+  set roleUsers(List<String> value) {
+    _roleUsers = value;
+  }
+
+  void addToRoleUsers(String value) {
+    _roleUsers.add(value);
+  }
+
+  void removeFromRoleUsers(String value) {
+    _roleUsers.remove(value);
+  }
+
+  void removeAtIndexFromRoleUsers(int index) {
+    _roleUsers.removeAt(index);
+  }
+
+  void updateRoleUsersAtIndex(
+    int index,
+    String Function(String) updateFn,
+  ) {
+    _roleUsers[index] = updateFn(_roleUsers[index]);
+  }
+
+  void insertAtIndexInRoleUsers(int index, String value) {
+    _roleUsers.insert(index, value);
+  }
+
+  String _city = '';
+  String get city => _city;
+  set city(String value) {
+    _city = value;
+  }
+
   final _userdataManager = FutureRequestManager<List<UsersRow>>();
   Future<List<UsersRow>> userdata({
     String? uniqueQueryKey,

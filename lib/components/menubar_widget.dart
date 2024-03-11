@@ -1,10 +1,12 @@
 import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'menubar_model.dart';
@@ -55,6 +57,21 @@ class _MenubarWidgetState extends State<MenubarWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => MenubarModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.user = await UsersTable().queryRows(
+        queryFn: (q) => q.eq(
+          'id',
+          currentUserUid,
+        ),
+      );
+      setState(() {
+        FFAppState().name = _model.user!.first.name!;
+        FFAppState().avatar = _model.user!.first.avatar!;
+        FFAppState().city = _model.user!.first.city!;
+      });
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -386,10 +403,10 @@ class _MenubarWidgetState extends State<MenubarWidget>
                         opaque: false,
                         cursor: MouseCursor.defer ?? MouseCursor.defer,
                         onEnter: ((event) async {
-                          setState(() => _model.mouseRegionHovered4 = true);
+                          setState(() => _model.myresourceHovered = true);
                         }),
                         onExit: ((event) async {
-                          setState(() => _model.mouseRegionHovered4 = false);
+                          setState(() => _model.myresourceHovered = false);
                         }),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
@@ -418,7 +435,7 @@ class _MenubarWidgetState extends State<MenubarWidget>
                               height: 44.0,
                               decoration: BoxDecoration(
                                 color: () {
-                                  if (_model.mouseRegionHovered4) {
+                                  if (_model.myresourceHovered) {
                                     return FlutterFlowTheme.of(context)
                                         .secondaryBackground;
                                   } else if (widget.pageName == 'resource') {
@@ -459,6 +476,83 @@ class _MenubarWidgetState extends State<MenubarWidget>
                           ),
                         ),
                       ),
+                      MouseRegion(
+                        opaque: false,
+                        cursor: MouseCursor.defer ?? MouseCursor.defer,
+                        onEnter: ((event) async {
+                          setState(() => _model.mouseRegionHovered4 = true);
+                        }),
+                        onExit: ((event) async {
+                          setState(() => _model.mouseRegionHovered4 = false);
+                        }),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'cards',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 350),
+                              curve: Curves.easeInOut,
+                              width: double.infinity,
+                              height: 44.0,
+                              decoration: BoxDecoration(
+                                color: () {
+                                  if (_model.mouseRegionHovered4) {
+                                    return FlutterFlowTheme.of(context)
+                                        .secondaryBackground;
+                                  } else if (widget.pageName == 'cards') {
+                                    return FlutterFlowTheme.of(context).accent1;
+                                  } else {
+                                    return FlutterFlowTheme.of(context)
+                                        .primaryBackground;
+                                  }
+                                }(),
+                                borderRadius: BorderRadius.circular(12.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 6.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.sim_card,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Карты',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
@@ -479,246 +573,75 @@ class _MenubarWidgetState extends State<MenubarWidget>
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 350),
-                            curve: Curves.easeInOut,
-                            width: double.infinity,
-                            height: 44.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).accent1,
-                              borderRadius: BorderRadius.circular(12.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 6.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.notifications_rounded,
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 24.0,
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pushNamed(
+                                'ProfileCreEdit',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
                                   ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Профиль',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    height: 32.0,
-                                    decoration: BoxDecoration(
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 350),
+                              curve: Curves.easeInOut,
+                              width: double.infinity,
+                              height: 44.0,
+                              decoration: BoxDecoration(
+                                color: () {
+                                  if (_model.mouseRegionHovered5) {
+                                    return FlutterFlowTheme.of(context)
+                                        .secondaryBackground;
+                                  } else if (widget.pageName ==
+                                      'profileCreEdit') {
+                                    return FlutterFlowTheme.of(context).accent1;
+                                  } else {
+                                    return FlutterFlowTheme.of(context)
+                                        .primaryBackground;
+                                  }
+                                }(),
+                                borderRadius: BorderRadius.circular(12.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 6.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.notifications_rounded,
                                       color:
                                           FlutterFlowTheme.of(context).primary,
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      size: 24.0,
                                     ),
-                                    child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                    Expanded(
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 4.0, 8.0, 4.0),
+                                            12.0, 0.0, 0.0, 0.0),
                                         child: Text(
-                                          '12',
+                                          'Профиль',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .info,
-                                              ),
+                                              .bodyMedium,
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ].divide(const SizedBox(height: 12.0)),
-                  ),
-                ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 16.0),
-                    child: Container(
-                      width: 250.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.circular(12.0),
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).alternate,
-                          width: 1.0,
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setDarkModeSetting(context, ThemeMode.light);
-                                },
-                                child: Container(
-                                  width: 115.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.light
-                                        ? FlutterFlowTheme.of(context)
-                                            .secondaryBackground
-                                        : FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: valueOrDefault<Color>(
-                                        Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? FlutterFlowTheme.of(context)
-                                                .alternate
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        FlutterFlowTheme.of(context).alternate,
-                                      ),
-                                      width: 1.0,
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.wb_sunny_rounded,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.light
-                                            ? FlutterFlowTheme.of(context)
-                                                .primaryText
-                                            : FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                        size: 16.0,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          'Light Mode',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.light
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setDarkModeSetting(context, ThemeMode.dark);
-                                },
-                                child: Container(
-                                  width: 115.0,
-                                  height: 100.0,
-                                  decoration: BoxDecoration(
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? FlutterFlowTheme.of(context)
-                                            .secondaryBackground
-                                        : FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    border: Border.all(
-                                      color: valueOrDefault<Color>(
-                                        Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? FlutterFlowTheme.of(context)
-                                                .alternate
-                                            : FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                        FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                      ),
-                                      width: 1.0,
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.nightlight_round,
-                                        color: Theme.of(context).brightness ==
-                                                Brightness.dark
-                                            ? FlutterFlowTheme.of(context)
-                                                .primaryText
-                                            : FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                        size: 16.0,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            4.0, 0.0, 0.0, 0.0),
-                                        child: Text(
-                                          'Dark Mode',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color: Theme.of(context)
-                                                            .brightness ==
-                                                        Brightness.dark
-                                                    ? FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText
-                                                    : FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                              ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ),
                 ),
                 Divider(
@@ -750,8 +673,10 @@ class _MenubarWidgetState extends State<MenubarWidget>
                             child: CachedNetworkImage(
                               fadeInDuration: const Duration(milliseconds: 500),
                               fadeOutDuration: const Duration(milliseconds: 500),
-                              imageUrl:
-                                  'https://img.freepik.com/free-psd/girl-avatar-emoji-3d-icon_23-2150579870.jpg?w=1380&t=st=1709051229~exp=1709051829~hmac=338dc18ea26a90d06b94e0aafed6c6d2b026ce23b06f4137ec22258632f37b36',
+                              imageUrl: valueOrDefault<String>(
+                                FFAppState().avatar,
+                                'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/useravatar/1709976654976000.png',
+                              ),
                               width: 44.0,
                               height: 44.0,
                               fit: BoxFit.cover,
@@ -768,16 +693,20 @@ class _MenubarWidgetState extends State<MenubarWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Макс',
+                                FFAppState().name,
                                 style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 4.0, 0.0, 0.0),
                                 child: Text(
-                                  'mail.ru',
-                                  style:
-                                      FlutterFlowTheme.of(context).labelMedium,
+                                  FFAppState().city,
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 12.0,
+                                      ),
                                 ),
                               ),
                             ],

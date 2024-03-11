@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'profile_create_edit_model.dart';
 export 'profile_create_edit_model.dart';
 
@@ -29,6 +28,9 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
     super.initState();
     _model = createModel(context, () => ProfileCreateEditModel());
 
+    _model.nameController ??= TextEditingController();
+    _model.nameFocusNode ??= FocusNode();
+
     _model.cityController ??= TextEditingController();
     _model.cityFocusNode ??= FocusNode();
 
@@ -44,79 +46,87 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Title(
-        title: 'ProfileCreateEdit',
+        title: 'Профиль',
         color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(100.0),
-            child: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-              automaticallyImplyLeading: false,
-              actions: const [],
-              flexibleSpace: FlexibleSpaceBar(
-                title: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
+          appBar: responsiveVisibility(
+            context: context,
+            tablet: false,
+            tabletLandscape: false,
+            desktop: false,
+          )
+              ? PreferredSize(
+                  preferredSize: const Size.fromHeight(100.0),
+                  child: AppBar(
+                    backgroundColor:
+                        FlutterFlowTheme.of(context).secondaryBackground,
+                    automaticallyImplyLeading: false,
+                    actions: const [],
+                    flexibleSpace: FlexibleSpaceBar(
+                      title: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 8.0),
-                        child: Row(
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                        child: Column(
                           mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 50.0,
-                                icon: Icon(
-                                  Icons.arrow_back_rounded,
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  size: 30.0,
-                                ),
-                                onPressed: () async {
-                                  context.pop();
-                                },
+                                  0.0, 0.0, 0.0, 8.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: FlutterFlowIconButton(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: 30.0,
+                                      borderWidth: 1.0,
+                                      buttonSize: 50.0,
+                                      icon: Icon(
+                                        Icons.arrow_back_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 30.0,
+                                      ),
+                                      onPressed: () async {
+                                        context.pop();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'Заполните ваш профиль',
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      fontSize: 22.0,
+                                    ),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Заполните ваш профиль',
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: 'Outfit',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 22.0,
-                              ),
-                        ),
-                      ),
-                    ],
+                      centerTitle: true,
+                      expandedTitleScale: 1.0,
+                    ),
+                    elevation: 0.0,
                   ),
-                ),
-                centerTitle: true,
-                expandedTitleScale: 1.0,
-              ),
-              elevation: 0.0,
-            ),
-          ),
+                )
+              : null,
           body: SafeArea(
             top: true,
             child: Column(
@@ -217,6 +227,58 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
                   child: TextFormField(
+                    controller: _model.nameController,
+                    focusNode: _model.nameFocusNode,
+                    textCapitalization: TextCapitalization.words,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      labelText: 'Имя',
+                      labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                      hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).primary,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).error,
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      filled: true,
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      contentPadding:
+                          const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                    ),
+                    style: FlutterFlowTheme.of(context).bodyMedium,
+                    keyboardType: TextInputType.name,
+                    validator:
+                        _model.nameControllerValidator.asValidator(context),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
+                  child: TextFormField(
                     controller: _model.cityController,
                     focusNode: _model.cityFocusNode,
                     textCapitalization: TextCapitalization.words,
@@ -278,12 +340,18 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                               _model.uploadedFileUrl,
                               'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/9280082.jpg',
                             ),
+                            'name': _model.nameController.text,
                           },
                           matchingRows: (rows) => rows.eq(
                             'id',
                             currentUserUid,
                           ),
                         );
+                        setState(() {
+                          FFAppState().name = _model.nameController.text;
+                          FFAppState().avatar = _model.uploadedFileUrl;
+                          FFAppState().city = _model.cityController.text;
+                        });
 
                         context.pushNamed(
                           'Game',
