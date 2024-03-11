@@ -255,83 +255,89 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                               }
                               List<RegistrGameRow> columnRegistrGameRowList =
                                   snapshot.data!;
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnRegistrGameRowList.length,
-                                    (columnIndex) {
-                                  final columnRegistrGameRow =
-                                      columnRegistrGameRowList[columnIndex];
-                                  return FutureBuilder<List<GameFieldRow>>(
-                                    future: GameFieldTable().querySingleRow(
-                                      queryFn: (q) => q.eq(
-                                        'id',
-                                        columnRegistrGameRow.gamefieldid,
+                              return SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: List.generate(
+                                      columnRegistrGameRowList.length,
+                                      (columnIndex) {
+                                    final columnRegistrGameRow =
+                                        columnRegistrGameRowList[columnIndex];
+                                    return FutureBuilder<List<GameFieldRow>>(
+                                      future: GameFieldTable().querySingleRow(
+                                        queryFn: (q) => q.eq(
+                                          'id',
+                                          columnRegistrGameRow.gamefieldid,
+                                        ),
                                       ),
-                                    ),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 10.0,
-                                            height: 10.0,
-                                            child: SpinKitDoubleBounce(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .accent1,
-                                              size: 10.0,
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 10.0,
+                                              height: 10.0,
+                                              child: SpinKitDoubleBounce(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent1,
+                                                size: 10.0,
+                                              ),
                                             ),
+                                          );
+                                        }
+                                        List<GameFieldRow>
+                                            containerGameFieldRowList =
+                                            snapshot.data!;
+                                        final containerGameFieldRow =
+                                            containerGameFieldRowList.isNotEmpty
+                                                ? containerGameFieldRowList
+                                                    .first
+                                                : null;
+                                        return Container(
+                                          decoration: const BoxDecoration(),
+                                          child: BlockMyGameWidget(
+                                            key: Key(
+                                                'Keyxz2_${columnIndex}_of_${columnRegistrGameRowList.length}'),
+                                            name: valueOrDefault<String>(
+                                              containerGameFieldRow?.nameGame,
+                                              '-',
+                                            ),
+                                            discription: valueOrDefault<String>(
+                                              containerGameFieldRow
+                                                  ?.discription,
+                                              '-',
+                                            ),
+                                            leader: valueOrDefault<String>(
+                                              containerGameFieldRow?.author,
+                                              '-',
+                                            ),
+                                            img: valueOrDefault<String>(
+                                              containerGameFieldRow?.img,
+                                              'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/useravatar/1709976654976000.png',
+                                            ),
+                                            buttonname: 'начать игру',
+                                            unix: valueOrDefault<int>(
+                                              containerGameFieldRow?.unix,
+                                              123,
+                                            ),
+                                            idgamefield: columnRegistrGameRow
+                                                .gamefieldid!,
+                                            date: containerGameFieldRow
+                                                ?.dateGame
+                                                ?.toString(),
+                                            time:
+                                                '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
+                                            gameID:
+                                                columnRegistrGameRow.gameid!,
+                                            idmembergame: containerGameFieldRow
+                                                ?.idMemberGame,
                                           ),
                                         );
-                                      }
-                                      List<GameFieldRow>
-                                          containerGameFieldRowList =
-                                          snapshot.data!;
-                                      final containerGameFieldRow =
-                                          containerGameFieldRowList.isNotEmpty
-                                              ? containerGameFieldRowList.first
-                                              : null;
-                                      return Container(
-                                        decoration: const BoxDecoration(),
-                                        child: BlockMyGameWidget(
-                                          key: Key(
-                                              'Keyxz2_${columnIndex}_of_${columnRegistrGameRowList.length}'),
-                                          name: valueOrDefault<String>(
-                                            containerGameFieldRow?.nameGame,
-                                            '-',
-                                          ),
-                                          discription: valueOrDefault<String>(
-                                            containerGameFieldRow?.discription,
-                                            '-',
-                                          ),
-                                          leader: valueOrDefault<String>(
-                                            containerGameFieldRow?.author,
-                                            '-',
-                                          ),
-                                          img: valueOrDefault<String>(
-                                            containerGameFieldRow?.img,
-                                            'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/useravatar/1709976654976000.png',
-                                          ),
-                                          buttonname: 'начать игру',
-                                          unix: valueOrDefault<int>(
-                                            containerGameFieldRow?.unix,
-                                            123,
-                                          ),
-                                          idgamefield:
-                                              columnRegistrGameRow.gamefieldid!,
-                                          date: containerGameFieldRow?.dateGame
-                                              ?.toString(),
-                                          time:
-                                              '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
-                                          gameID: columnRegistrGameRow.gameid!,
-                                          idmembergame: containerGameFieldRow
-                                              ?.idMemberGame,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }),
+                                      },
+                                    );
+                                  }),
+                                ),
                               );
                             },
                           ),

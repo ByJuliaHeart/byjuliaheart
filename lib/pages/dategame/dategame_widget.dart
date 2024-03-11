@@ -215,28 +215,30 @@ class _DategameWidgetState extends State<DategameWidget> {
                           }
                           List<GameFieldRow> columnGameFieldRowList =
                               snapshot.data!;
-                          return Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: List.generate(
-                                columnGameFieldRowList.length, (columnIndex) {
-                              final columnGameFieldRow =
-                                  columnGameFieldRowList[columnIndex];
-                              return BlockDateGameWidget(
-                                key: Key(
-                                    'Key6b3_${columnIndex}_of_${columnGameFieldRowList.length}'),
-                                name: columnGameFieldRow.nameGame!,
-                                description: columnGameFieldRow.discription!,
-                                author: columnGameFieldRow.author!,
-                                img: columnGameFieldRow.img!,
-                                buttonname: 'Зарегистрироваться',
-                                gameid: columnGameFieldRow.gameId!,
-                                date: columnGameFieldRow.dateGame!.toString(),
-                                gamefieldid: columnGameFieldRow.id,
-                                idmembergame: columnGameFieldRow.idMemberGame,
-                                dateTime:
-                                    '${functions.datecut(functions.datecut(columnGameFieldRow.dateGame?.toString()))}${columnGameFieldRow.hhTime}:${columnGameFieldRow.mmTime}',
-                              );
-                            }).divide(const SizedBox(height: 8.0)),
+                          return SingleChildScrollView(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: List.generate(
+                                  columnGameFieldRowList.length, (columnIndex) {
+                                final columnGameFieldRow =
+                                    columnGameFieldRowList[columnIndex];
+                                return BlockDateGameWidget(
+                                  key: Key(
+                                      'Key6b3_${columnIndex}_of_${columnGameFieldRowList.length}'),
+                                  name: columnGameFieldRow.nameGame!,
+                                  description: columnGameFieldRow.discription!,
+                                  author: columnGameFieldRow.author!,
+                                  img: columnGameFieldRow.img!,
+                                  buttonname: 'Зарегистрироваться',
+                                  gameid: columnGameFieldRow.gameId!,
+                                  date: columnGameFieldRow.dateGame!.toString(),
+                                  gamefieldid: columnGameFieldRow.id,
+                                  idmembergame: columnGameFieldRow.idMemberGame,
+                                  dateTime:
+                                      '${functions.datecut(functions.datecut(columnGameFieldRow.dateGame?.toString()))}${columnGameFieldRow.hhTime}:${columnGameFieldRow.mmTime}',
+                                );
+                              }).divide(const SizedBox(height: 8.0)),
+                            ),
                           );
                         },
                       ),
