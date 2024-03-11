@@ -275,23 +275,27 @@ class _GameWidgetState extends State<GameWidget> {
                           );
                         }
                         List<GameRow> columnGameRowList = snapshot.data!;
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(columnGameRowList.length,
-                              (columnIndex) {
-                            final columnGameRow =
-                                columnGameRowList[columnIndex];
-                            return BlockWidget(
-                              key: Key(
-                                  'Keymzy_${columnIndex}_of_${columnGameRowList.length}'),
-                              name: columnGameRow.nameGame!,
-                              deskription: columnGameRow.discription!,
-                              author: columnGameRow.author!,
-                              img: columnGameRow.img!,
-                              buttonname: 'Расписание',
-                              id: columnGameRow.id,
-                            );
-                          }),
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: List.generate(columnGameRowList.length,
+                                    (columnIndex) {
+                              final columnGameRow =
+                                  columnGameRowList[columnIndex];
+                              return BlockWidget(
+                                key: Key(
+                                    'Keymzy_${columnIndex}_of_${columnGameRowList.length}'),
+                                name: columnGameRow.nameGame!,
+                                deskription: columnGameRow.discription!,
+                                author: columnGameRow.author!,
+                                img: columnGameRow.img!,
+                                buttonname: 'Расписание',
+                                id: columnGameRow.id,
+                              );
+                            })
+                                .divide(const SizedBox(height: 3.0))
+                                .around(const SizedBox(height: 3.0)),
+                          ),
                         );
                       },
                     ),
