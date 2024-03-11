@@ -1,7 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/menubar_widget.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/game_component/block_date_game/block_date_game_widget.dart';
@@ -53,20 +52,6 @@ class _DategameWidgetState extends State<DategameWidget> {
             ? AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primary,
                 automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 60.0,
-                  icon: const Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
-                    size: 30.0,
-                  ),
-                  onPressed: () async {
-                    context.pop();
-                  },
-                ),
                 title: Text(
                   'Расписание игр',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(

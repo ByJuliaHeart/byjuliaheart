@@ -4,7 +4,6 @@ import '/ankets_or_forms/recource/recource_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -175,20 +174,6 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
             ? AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primary,
                 automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 60.0,
-                  icon: const Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
-                    size: 30.0,
-                  ),
-                  onPressed: () async {
-                    context.pop();
-                  },
-                ),
                 title: Text(
                   valueOrDefault<String>(
                     widget.nameGame,
