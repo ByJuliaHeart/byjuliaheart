@@ -202,6 +202,9 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                   }
                                 }
 
+                                setState(() {
+                                  FFAppState().avatar = _model.uploadedFileUrl;
+                                });
                                 await UsersTable().update(
                                   data: {
                                     'avatar': _model.uploadedFileUrl,
@@ -211,9 +214,6 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                     currentUserUid,
                                   ),
                                 );
-                                setState(() {
-                                  FFAppState().avatar = _model.uploadedFileUrl;
-                                });
 
                                 context.pushNamed(
                                   'ProfileCreEdit',
