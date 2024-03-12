@@ -26,6 +26,8 @@ class _CardsWidgetState extends State<CardsWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => CardsModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -37,196 +39,205 @@ class _CardsWidgetState extends State<CardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Padding(
-                    padding: MediaQuery.viewInsetsOf(context),
-                    child: const CardAddWidget(),
-                  ),
-                );
-              },
-            ).then((value) => safeSetState(() {}));
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          elevation: 8.0,
-          child: Icon(
-            Icons.add,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
-          ),
-        ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    wrapWithModel(
-                      model: _model.menubarModel,
-                      updateCallback: () => setState(() {}),
-                      child: const MenubarWidget(
-                        email: 'mail',
-                        pageName: 'cards',
+    return Title(
+        title: 'cards',
+        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
+        child: GestureDetector(
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (context) {
+                    return GestureDetector(
+                      onTap: () => _model.unfocusNode.canRequestFocus
+                          ? FocusScope.of(context)
+                              .requestFocus(_model.unfocusNode)
+                          : FocusScope.of(context).unfocus(),
+                      child: Padding(
+                        padding: MediaQuery.viewInsetsOf(context),
+                        child: const CardAddWidget(),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 15.0, 0.0, 0.0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Text(
-                                  'Карты',
-                                  style:
-                                      FlutterFlowTheme.of(context).bodyMedium,
-                                ),
-                              ],
-                            ),
+                    );
+                  },
+                ).then((value) => safeSetState(() {}));
+              },
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              elevation: 8.0,
+              child: Icon(
+                Icons.add,
+                color: FlutterFlowTheme.of(context).info,
+                size: 24.0,
+              ),
+            ),
+            body: SafeArea(
+              top: true,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        wrapWithModel(
+                          model: _model.menubarModel,
+                          updateCallback: () => setState(() {}),
+                          child: const MenubarWidget(
+                            email: 'mail',
+                            pageName: 'cards',
                           ),
-                          Expanded(
-                            child: FutureBuilder<List<CardsRow>>(
-                              future: (_model.requestCompleter ??=
-                                      Completer<List<CardsRow>>()
-                                        ..complete(CardsTable().queryRows(
-                                          queryFn: (q) => q,
-                                        )))
-                                  .future,
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 10.0,
-                                      height: 10.0,
-                                      child: SpinKitDoubleBounce(
-                                        color: FlutterFlowTheme.of(context)
-                                            .accent1,
-                                        size: 10.0,
-                                      ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 15.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Text(
+                                      'Карты',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
                                     ),
-                                  );
-                                }
-                                List<CardsRow> gridViewCardsRowList =
-                                    snapshot.data!;
-                                return GridView.builder(
-                                  padding: EdgeInsets.zero,
-                                  gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    crossAxisSpacing: 10.0,
-                                    mainAxisSpacing: 10.0,
-                                    childAspectRatio: 1.0,
-                                  ),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: gridViewCardsRowList.length,
-                                  itemBuilder: (context, gridViewIndex) {
-                                    final gridViewCardsRow =
-                                        gridViewCardsRowList[gridViewIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                          child: Image.network(
-                                            valueOrDefault<String>(
-                                              gridViewCardsRow.frontCard,
-                                              'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/1709472187052000.jpg',
-                                            ),
-                                            width: 120.0,
-                                            height: 200.0,
-                                            fit: BoxFit.fitHeight,
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: FutureBuilder<List<CardsRow>>(
+                                  future: (_model.requestCompleter ??=
+                                          Completer<List<CardsRow>>()
+                                            ..complete(CardsTable().queryRows(
+                                              queryFn: (q) => q,
+                                            )))
+                                      .future,
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 10.0,
+                                          height: 10.0,
+                                          child: SpinKitDoubleBounce(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 10.0,
                                           ),
                                         ),
-                                        Text(
-                                          valueOrDefault<String>(
-                                            gridViewCardsRow.quaeryCards,
-                                            '-',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(6.0),
-                                          child: FFButtonWidget(
-                                            onPressed: () async {
-                                              await CardsTable().delete(
-                                                matchingRows: (rows) => rows.eq(
-                                                  'id',
-                                                  gridViewCardsRow.id,
+                                      );
+                                    }
+                                    List<CardsRow> gridViewCardsRowList =
+                                        snapshot.data!;
+                                    return GridView.builder(
+                                      padding: EdgeInsets.zero,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 10.0,
+                                        mainAxisSpacing: 10.0,
+                                        childAspectRatio: 1.0,
+                                      ),
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: gridViewCardsRowList.length,
+                                      itemBuilder: (context, gridViewIndex) {
+                                        final gridViewCardsRow =
+                                            gridViewCardsRowList[gridViewIndex];
+                                        return Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                              child: Image.network(
+                                                valueOrDefault<String>(
+                                                  gridViewCardsRow.frontCard,
+                                                  'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/1709472187052000.jpg',
                                                 ),
-                                              );
-                                              setState(() => _model
-                                                  .requestCompleter = null);
-                                            },
-                                            text: 'Удалить',
-                                            options: FFButtonOptions(
-                                              height: 40.0,
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color:
+                                                width: 120.0,
+                                                height: 200.0,
+                                                fit: BoxFit.fitHeight,
+                                              ),
+                                            ),
+                                            Text(
+                                              valueOrDefault<String>(
+                                                gridViewCardsRow.quaeryCards,
+                                                '-',
+                                              ),
+                                              style:
                                                   FlutterFlowTheme.of(context)
+                                                      .bodyMedium,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(6.0),
+                                              child: FFButtonWidget(
+                                                onPressed: () async {
+                                                  await CardsTable().delete(
+                                                    matchingRows: (rows) =>
+                                                        rows.eq(
+                                                      'id',
+                                                      gridViewCardsRow.id,
+                                                    ),
+                                                  );
+                                                  setState(() => _model
+                                                      .requestCompleter = null);
+                                                },
+                                                text: 'Удалить',
+                                                options: FFButtonOptions(
+                                                  height: 40.0,
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          24.0, 0.0, 24.0, 0.0),
+                                                  iconPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .alternate,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
                                                       .titleLarge
                                                       .override(
                                                         fontFamily: 'Outfit',
                                                         fontSize: 12.0,
                                                       ),
-                                              elevation: 3.0,
-                                              borderSide: const BorderSide(
-                                                color: Colors.transparent,
-                                                width: 1.0,
+                                                  elevation: 3.0,
+                                                  borderSide: const BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
                                             ),
-                                          ),
-                                        ),
-                                      ],
+                                          ],
+                                        );
+                                      },
                                     );
                                   },
-                                );
-                              },
-                            ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

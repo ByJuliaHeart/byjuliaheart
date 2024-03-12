@@ -75,6 +75,8 @@ class _GameAddWidgetState extends State<GameAddWidget>
 
     _model.yourNameController2 ??= TextEditingController();
     _model.yourNameFocusNode2 ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -104,7 +106,7 @@ class _GameAddWidgetState extends State<GameAddWidget>
                 width: 10.0,
                 height: 10.0,
                 child: SpinKitDoubleBounce(
-                  color: FlutterFlowTheme.of(context).accent1,
+                  color: FlutterFlowTheme.of(context).primary,
                   size: 10.0,
                 ),
               ),

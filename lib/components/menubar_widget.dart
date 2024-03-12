@@ -1,13 +1,11 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'menubar_model.dart';
 export 'menubar_model.dart';
@@ -28,24 +26,8 @@ class MenubarWidget extends StatefulWidget {
   State<MenubarWidget> createState() => _MenubarWidgetState();
 }
 
-class _MenubarWidgetState extends State<MenubarWidget>
-    with TickerProviderStateMixin {
+class _MenubarWidgetState extends State<MenubarWidget> {
   late MenubarModel _model;
-
-  final animationsMap = {
-    'rowOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 140.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-      ],
-    ),
-  };
 
   @override
   void setState(VoidCallback callback) {
@@ -72,6 +54,8 @@ class _MenubarWidgetState extends State<MenubarWidget>
         FFAppState().city = _model.user!.first.city!;
       });
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -123,13 +107,13 @@ class _MenubarWidgetState extends State<MenubarWidget>
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 12.0, 0.0),
-                        child: Icon(
-                          Icons.flourescent_rounded,
-                          color: FlutterFlowTheme.of(context).primary,
-                          size: 36.0,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/Default_a_beautiful_woman_with_fulllength_golden_wings_20_year_3_(1)-Photoroom.png-Photoroom.png',
+                          width: 50.0,
+                          height: 50.0,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Expanded(
@@ -160,7 +144,7 @@ class _MenubarWidgetState extends State<MenubarWidget>
                         padding: const EdgeInsetsDirectional.fromSTEB(
                             16.0, 12.0, 0.0, 0.0),
                         child: Text(
-                          'Platform Navigation',
+                          'Меню',
                           style: FlutterFlowTheme.of(context).labelMedium,
                         ),
                       ),
@@ -555,7 +539,7 @@ class _MenubarWidgetState extends State<MenubarWidget>
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                         child: Text(
-                          'Settings',
+                          'Настройки',
                           style: FlutterFlowTheme.of(context).labelMedium,
                         ),
                       ),
@@ -717,7 +701,7 @@ class _MenubarWidgetState extends State<MenubarWidget>
                         ),
                       ),
                     ],
-                  ).animateOnPageLoad(animationsMap['rowOnPageLoadAnimation']!),
+                  ),
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,

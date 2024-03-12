@@ -54,6 +54,8 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockMyGameModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

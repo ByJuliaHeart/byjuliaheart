@@ -13,14 +13,13 @@ class GameFieldModel extends FlutterFlowModel<GameFieldWidget> {
 
   final unfocusNode = FocusNode();
   Completer<List<GameFieldRow>>? requestCompleter1;
-  Completer<List<GameFieldRow>>? requestCompleter3;
   Completer<List<CardsLiveGameRow>>? requestCompleter2;
   // Stores action output result for [Backend Call - Query Rows] action in gameField widget.
   List<AnktetsRow>? ankets;
   // State field(s) for Timer widget.
-  int timerMilliseconds = 0;
+  int timerMilliseconds = 60000;
   String timerValue = StopWatchTimer.getDisplayTime(
-    0,
+    60000,
     hours: false,
     milliSecond: false,
   );
@@ -81,21 +80,6 @@ class GameFieldModel extends FlutterFlowModel<GameFieldWidget> {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
       final requestComplete = requestCompleter1?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForRequestCompleted3({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter3?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

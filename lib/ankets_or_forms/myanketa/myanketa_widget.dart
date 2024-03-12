@@ -69,6 +69,8 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
     _model.measuresFocusNode ??= FocusNode();
 
     _model.responseFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -129,7 +131,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                           width: 10.0,
                           height: 10.0,
                           child: SpinKitDoubleBounce(
-                            color: FlutterFlowTheme.of(context).accent1,
+                            color: FlutterFlowTheme.of(context).primary,
                             size: 10.0,
                           ),
                         ),
@@ -1251,7 +1253,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                   alignment: const AlignmentDirectional(0.0, 0.05),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      context.safePop();
+                                      Navigator.pop(context);
                                     },
                                     text: 'Отменить',
                                     options: FFButtonOptions(

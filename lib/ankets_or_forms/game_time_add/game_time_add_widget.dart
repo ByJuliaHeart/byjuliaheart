@@ -85,6 +85,8 @@ class _GameTimeAddWidgetState extends State<GameTimeAddWidget>
     _model.discriptionController ??=
         TextEditingController(text: widget.discription);
     _model.discriptionFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -114,7 +116,7 @@ class _GameTimeAddWidgetState extends State<GameTimeAddWidget>
                 width: 10.0,
                 height: 10.0,
                 child: SpinKitDoubleBounce(
-                  color: FlutterFlowTheme.of(context).accent1,
+                  color: FlutterFlowTheme.of(context).primary,
                   size: 10.0,
                 ),
               ),

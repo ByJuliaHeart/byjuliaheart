@@ -62,6 +62,8 @@ class _RecourceWidgetState extends State<RecourceWidget> {
     _model.highlightsForPlayerFocusNode ??= FocusNode();
 
     _model.feedbackTimeFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -126,7 +128,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                           width: 10.0,
                           height: 10.0,
                           child: SpinKitDoubleBounce(
-                            color: FlutterFlowTheme.of(context).accent1,
+                            color: FlutterFlowTheme.of(context).primary,
                             size: 10.0,
                           ),
                         ),
@@ -303,7 +305,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                           height: 10.0,
                                           child: SpinKitDoubleBounce(
                                             color: FlutterFlowTheme.of(context)
-                                                .accent1,
+                                                .primary,
                                             size: 10.0,
                                           ),
                                         ),

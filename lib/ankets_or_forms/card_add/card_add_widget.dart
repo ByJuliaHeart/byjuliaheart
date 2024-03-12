@@ -71,6 +71,8 @@ class _CardAddWidgetState extends State<CardAddWidget>
 
     _model.yourNameController ??= TextEditingController();
     _model.yourNameFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -94,7 +96,7 @@ class _CardAddWidgetState extends State<CardAddWidget>
               width: 10.0,
               height: 10.0,
               child: SpinKitDoubleBounce(
-                color: FlutterFlowTheme.of(context).accent1,
+                color: FlutterFlowTheme.of(context).primary,
                 size: 10.0,
               ),
             ),
