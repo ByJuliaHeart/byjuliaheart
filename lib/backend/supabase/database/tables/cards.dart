@@ -31,4 +31,10 @@ class CardsRow extends SupabaseDataRow {
 
   String? get quaeryCards => getField<String>('quaery_cards');
   set quaeryCards(String? value) => setField<String>('quaery_cards', value);
+
+  String? get nameCarddesk => getField<String>('name_carddesk');
+  set nameCarddesk(String? value) => setField<String>('name_carddesk', value);
+
+  String? get nameGame => getField<String>('name_game');
+  set nameGame(String? value) => setField<String>('name_game', value);
 }

@@ -13,14 +13,12 @@ class MyanketaListWidget extends StatefulWidget {
     super.key,
     required this.userid,
     required this.name,
-    required this.email,
     required this.avatar,
     required this.gamefiledid,
   });
 
   final String? userid;
   final String? name;
-  final String? email;
   final String? avatar;
   final String? gamefiledid;
 
@@ -61,8 +59,6 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
     _model.measuresFocusNode ??= FocusNode();
 
     _model.responseFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -176,10 +172,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(40.0),
                                               child: Image.network(
-                                                valueOrDefault<String>(
-                                                  widget.avatar,
-                                                  'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
-                                                ),
+                                                'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
                                                 width: 32.0,
                                                 height: 32.0,
                                                 fit: BoxFit.cover,
@@ -198,10 +191,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  valueOrDefault<String>(
-                                                    widget.name,
-                                                    'Макс',
-                                                  ),
+                                                  'Randy Peterson',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -220,10 +210,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                                       .fromSTEB(
                                                           0.0, 4.0, 0.0, 0.0),
                                                   child: Text(
-                                                    valueOrDefault<String>(
-                                                      widget.email,
-                                                      'mail.ru',
-                                                    ),
+                                                    'Участник',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodySmall

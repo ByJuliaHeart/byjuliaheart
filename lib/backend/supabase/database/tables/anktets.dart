@@ -68,4 +68,13 @@ class AnktetsRow extends SupabaseDataRow {
 
   String? get response => getField<String>('response');
   set response(String? value) => setField<String>('response', value);
+
+  String? get namegame => getField<String>('namegame');
+  set namegame(String? value) => setField<String>('namegame', value);
+
+  String? get avatar => getField<String>('avatar');
+  set avatar(String? value) => setField<String>('avatar', value);
+
+  String? get nameUser => getField<String>('name_user');
+  set nameUser(String? value) => setField<String>('name_user', value);
 }

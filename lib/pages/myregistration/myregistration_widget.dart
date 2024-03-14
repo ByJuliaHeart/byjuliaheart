@@ -26,8 +26,6 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyregistrationModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -41,10 +39,32 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Title(
-        title: 'Мои регистрации',
-        color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-        child: GestureDetector(
+    return FutureBuilder<List<RegistrGameRow>>(
+      future: RegistrGameTable().queryRows(
+        queryFn: (q) => q.eq(
+          'userid',
+          currentUserUid,
+        ),
+      ),
+      builder: (context, snapshot) {
+        // Customize what your widget looks like when it's loading.
+        if (!snapshot.hasData) {
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 10.0,
+                height: 10.0,
+                child: SpinKitDoubleBounce(
+                  color: FlutterFlowTheme.of(context).primary,
+                  size: 10.0,
+                ),
+              ),
+            ),
+          );
+        }
+        List<RegistrGameRow> myregistrationRegistrGameRowList = snapshot.data!;
+        return GestureDetector(
           onTap: () => _model.unfocusNode.canRequestFocus
               ? FocusScope.of(context).requestFocus(_model.unfocusNode)
               : FocusScope.of(context).unfocus(),
@@ -98,225 +118,171 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                               ),
                             ),
                           ),
-                          Expanded(
-                            child: FutureBuilder<List<RegistrGameRow>>(
-                              future: RegistrGameTable().queryRows(
-                                queryFn: (q) => q.eq(
-                                  'userid',
-                                  currentUserUid,
-                                ),
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 10.0,
-                                      height: 10.0,
-                                      child: SpinKitDoubleBounce(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        size: 10.0,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<RegistrGameRow>
-                                    gridViewRegistrGameRowList = snapshot.data!;
-                                return GridView.builder(
-                                  padding: EdgeInsets.zero,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: valueOrDefault<int>(
-                                      () {
-                                        if (MediaQuery.sizeOf(context).width <
-                                            kBreakpointSmall) {
-                                          return 1;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointMedium) {
-                                          return 1;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointLarge) {
-                                          return 2;
-                                        } else {
-                                          return 3;
-                                        }
-                                      }(),
-                                      1,
-                                    ),
-                                    crossAxisSpacing: valueOrDefault<double>(
-                                      () {
-                                        if (MediaQuery.sizeOf(context).width <
-                                            kBreakpointSmall) {
-                                          return 0.8;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointMedium) {
-                                          return 1.0;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointLarge) {
-                                          return 1.0;
-                                        } else {
-                                          return 1.0;
-                                        }
-                                      }(),
-                                      1.0,
-                                    ),
-                                    mainAxisSpacing: valueOrDefault<double>(
-                                      () {
-                                        if (MediaQuery.sizeOf(context).width <
-                                            kBreakpointSmall) {
-                                          return 0.8;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointMedium) {
-                                          return 1.0;
-                                        } else if (MediaQuery.sizeOf(context)
-                                                .width <
-                                            kBreakpointLarge) {
-                                          return 1.0;
-                                        } else {
-                                          return 1.0;
-                                        }
-                                      }(),
-                                      1.0,
-                                    ),
-                                    childAspectRatio: 1.0,
-                                  ),
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: gridViewRegistrGameRowList.length,
-                                  itemBuilder: (context, gridViewIndex) {
-                                    final gridViewRegistrGameRow =
-                                        gridViewRegistrGameRowList[
-                                            gridViewIndex];
-                                    return FutureBuilder<List<GameFieldRow>>(
-                                      future: GameFieldTable().querySingleRow(
-                                        queryFn: (q) => q.eq(
-                                          'id',
-                                          gridViewRegistrGameRow.gamefieldid,
-                                        ),
-                                      ),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 10.0,
-                                              height: 10.0,
-                                              child: SpinKitDoubleBounce(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                size: 10.0,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<GameFieldRow>
-                                            containerGameFieldRowList =
-                                            snapshot.data!;
-                                        final containerGameFieldRow =
-                                            containerGameFieldRowList.isNotEmpty
-                                                ? containerGameFieldRowList
-                                                    .first
-                                                : null;
-                                        return Container(
-                                          decoration: const BoxDecoration(),
-                                          child: BlockMyGameWidget(
-                                            key: Key(
-                                                'Keyenu_${gridViewIndex}_of_${gridViewRegistrGameRowList.length}'),
-                                            name: valueOrDefault<String>(
-                                              gridViewRegistrGameRow.nameGame,
-                                              '-',
-                                            ),
-                                            discription: valueOrDefault<String>(
-                                              gridViewRegistrGameRow
-                                                  .discription,
-                                              '-',
-                                            ),
-                                            leader: valueOrDefault<String>(
-                                              gridViewRegistrGameRow.author,
-                                              '-',
-                                            ),
-                                            img: valueOrDefault<String>(
-                                              gridViewRegistrGameRow.img,
-                                              'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/useravatar/1709976654976000.png',
-                                            ),
-                                            buttonname: 'начать игру',
-                                            unix: valueOrDefault<int>(
-                                              gridViewRegistrGameRow.unix,
-                                              123,
-                                            ),
-                                            idgamefield: gridViewRegistrGameRow
-                                                .gamefieldid!,
-                                            date:
-                                                gridViewRegistrGameRow.dateGame,
-                                            time:
-                                                '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
-                                            gameID:
-                                                gridViewRegistrGameRow.gameid!,
-                                            idmembergame: containerGameFieldRow
-                                                ?.idMemberGame,
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                );
-                              },
-                            ),
-                          ),
                           if (responsiveVisibility(
                             context: context,
                             phone: false,
                             tablet: false,
+                          ))
+                            Expanded(
+                              child: Builder(
+                                builder: (context) {
+                                  final regGame =
+                                      myregistrationRegistrGameRowList.toList();
+                                  return GridView.builder(
+                                    padding: EdgeInsets.zero,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: valueOrDefault<int>(
+                                        () {
+                                          if (MediaQuery.sizeOf(context).width <
+                                              kBreakpointSmall) {
+                                            return 1;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointMedium) {
+                                            return 1;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointLarge) {
+                                            return 2;
+                                          } else {
+                                            return 3;
+                                          }
+                                        }(),
+                                        1,
+                                      ),
+                                      crossAxisSpacing: valueOrDefault<double>(
+                                        () {
+                                          if (MediaQuery.sizeOf(context).width <
+                                              kBreakpointSmall) {
+                                            return 0.8;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointMedium) {
+                                            return 1.0;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointLarge) {
+                                            return 1.0;
+                                          } else {
+                                            return 1.0;
+                                          }
+                                        }(),
+                                        1.0,
+                                      ),
+                                      mainAxisSpacing: valueOrDefault<double>(
+                                        () {
+                                          if (MediaQuery.sizeOf(context).width <
+                                              kBreakpointSmall) {
+                                            return 0.8;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointMedium) {
+                                            return 1.0;
+                                          } else if (MediaQuery.sizeOf(context)
+                                                  .width <
+                                              kBreakpointLarge) {
+                                            return 1.0;
+                                          } else {
+                                            return 1.0;
+                                          }
+                                        }(),
+                                        1.0,
+                                      ),
+                                      childAspectRatio: 1.0,
+                                    ),
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: regGame.length,
+                                    itemBuilder: (context, regGameIndex) {
+                                      final regGameItem = regGame[regGameIndex];
+                                      return FutureBuilder<List<GameFieldRow>>(
+                                        future: GameFieldTable().querySingleRow(
+                                          queryFn: (q) => q.eq(
+                                            'id',
+                                            regGameItem.gamefieldid,
+                                          ),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 10.0,
+                                                height: 10.0,
+                                                child: SpinKitDoubleBounce(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  size: 10.0,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<GameFieldRow>
+                                              containerGameFieldRowList =
+                                              snapshot.data!;
+                                          final containerGameFieldRow =
+                                              containerGameFieldRowList
+                                                      .isNotEmpty
+                                                  ? containerGameFieldRowList
+                                                      .first
+                                                  : null;
+                                          return Container(
+                                            decoration: const BoxDecoration(),
+                                            child: BlockMyGameWidget(
+                                              key: Key(
+                                                  'Keyenu_${regGameIndex}_of_${regGame.length}'),
+                                              name: regGameItem.nameGame!,
+                                              discription:
+                                                  regGameItem.discription!,
+                                              leader: regGameItem.author!,
+                                              img: regGameItem.img!,
+                                              buttonname: 'начать игру',
+                                              unix: regGameItem.unix!,
+                                              idgamefield:
+                                                  regGameItem.gamefieldid!,
+                                              date: regGameItem.dateGame,
+                                              time:
+                                                  '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
+                                              gameID: regGameItem.gameid!,
+                                              idmembergame:
+                                                  containerGameFieldRow
+                                                      ?.idMemberGame,
+                                              nameUser: FFAppState().name,
+                                              avatar: FFAppState().avatar,
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          if (responsiveVisibility(
+                            context: context,
                             tabletLandscape: false,
                             desktop: false,
                           ))
                             Expanded(
-                              child: FutureBuilder<List<RegistrGameRow>>(
-                                future: RegistrGameTable().queryRows(
-                                  queryFn: (q) => q.eq(
-                                    'userid',
-                                    currentUserUid,
-                                  ),
-                                ),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 10.0,
-                                        height: 10.0,
-                                        child: SpinKitDoubleBounce(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          size: 10.0,
-                                        ),
-                                      ),
-                                    );
-                                  }
-                                  List<RegistrGameRow>
-                                      columnRegistrGameRowList = snapshot.data!;
+                              child: Builder(
+                                builder: (context) {
+                                  final regGameMob =
+                                      myregistrationRegistrGameRowList.toList();
                                   return SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
-                                      children: List.generate(
-                                          columnRegistrGameRowList.length,
-                                          (columnIndex) {
-                                        final columnRegistrGameRow =
-                                            columnRegistrGameRowList[
-                                                columnIndex];
+                                      children: List.generate(regGameMob.length,
+                                          (regGameMobIndex) {
+                                        final regGameMobItem =
+                                            regGameMob[regGameMobIndex];
                                         return FutureBuilder<
                                             List<GameFieldRow>>(
                                           future:
                                               GameFieldTable().querySingleRow(
                                             queryFn: (q) => q.eq(
                                               'id',
-                                              columnRegistrGameRow.gamefieldid,
+                                              regGameMobItem.gamefieldid,
                                             ),
                                           ),
                                           builder: (context, snapshot) {
@@ -348,7 +314,7 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                                               decoration: const BoxDecoration(),
                                               child: BlockMyGameWidget(
                                                 key: Key(
-                                                    'Keyxz2_${columnIndex}_of_${columnRegistrGameRowList.length}'),
+                                                    'Keyxz2_${regGameMobIndex}_of_${regGameMob.length}'),
                                                 name: valueOrDefault<String>(
                                                   containerGameFieldRow
                                                       ?.nameGame,
@@ -374,18 +340,19 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                                                   123,
                                                 ),
                                                 idgamefield:
-                                                    columnRegistrGameRow
-                                                        .gamefieldid!,
+                                                    regGameMobItem.gamefieldid!,
                                                 date: containerGameFieldRow
                                                     ?.dateGame
                                                     ?.toString(),
                                                 time:
                                                     '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
-                                                gameID: columnRegistrGameRow
-                                                    .gameid!,
+                                                gameID: containerGameFieldRow!
+                                                    .gameId!,
                                                 idmembergame:
                                                     containerGameFieldRow
-                                                        ?.idMemberGame,
+                                                        .idMemberGame,
+                                                nameUser: FFAppState().name,
+                                                avatar: FFAppState().avatar,
                                               ),
                                             );
                                           },
@@ -404,6 +371,8 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
               ),
             ),
           ),
-        ));
+        );
+      },
+    );
   }
 }

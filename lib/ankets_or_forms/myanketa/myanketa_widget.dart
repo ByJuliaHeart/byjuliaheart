@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:provider/provider.dart';
 import 'myanketa_model.dart';
 export 'myanketa_model.dart';
 
@@ -20,6 +21,7 @@ class MyanketaWidget extends StatefulWidget {
     required this.avatar,
     this.date,
     this.time,
+    required this.nameGame,
   });
 
   final String? userid;
@@ -31,6 +33,7 @@ class MyanketaWidget extends StatefulWidget {
   final String? avatar;
   final String? date;
   final String? time;
+  final String? nameGame;
 
   @override
   State<MyanketaWidget> createState() => _MyanketaWidgetState();
@@ -69,8 +72,6 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
     _model.measuresFocusNode ??= FocusNode();
 
     _model.responseFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -82,6 +83,8 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -185,8 +188,8 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                                   BorderRadius.circular(40.0),
                                               child: Image.network(
                                                 valueOrDefault<String>(
-                                                  widget.avatar,
-                                                  'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=900&q=60',
+                                                  FFAppState().avatar,
+                                                  'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/9280082.jpg',
                                                 ),
                                                 width: 32.0,
                                                 height: 32.0,
@@ -206,10 +209,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  valueOrDefault<String>(
-                                                    widget.name,
-                                                    'Макс',
-                                                  ),
+                                                  FFAppState().name,
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -228,10 +228,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                                       .fromSTEB(
                                                           0.0, 4.0, 0.0, 0.0),
                                                   child: Text(
-                                                    valueOrDefault<String>(
-                                                      widget.email,
-                                                      'mail.ru',
-                                                    ),
+                                                    'Участник',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodySmall
@@ -1314,6 +1311,9 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                               _model.measuresController.text,
                                           'response':
                                               _model.responseController.text,
+                                          'namegame': widget.nameGame,
+                                          'avatar': widget.avatar,
+                                          'name_user': widget.name,
                                         },
                                         matchingRows: (rows) => rows
                                             .eq(

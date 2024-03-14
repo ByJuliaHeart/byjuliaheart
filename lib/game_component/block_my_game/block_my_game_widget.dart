@@ -23,6 +23,8 @@ class BlockMyGameWidget extends StatefulWidget {
     this.date,
     required this.time,
     required this.gameID,
+    required this.nameUser,
+    required this.avatar,
   });
 
   final String? name;
@@ -36,6 +38,8 @@ class BlockMyGameWidget extends StatefulWidget {
   final String? date;
   final String? time;
   final String? gameID;
+  final String? nameUser;
+  final String? avatar;
 
   @override
   State<BlockMyGameWidget> createState() => _BlockMyGameWidgetState();
@@ -54,8 +58,6 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockMyGameModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -219,6 +221,14 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
                                   ),
                                   'description': serializeParam(
                                     widget.discription,
+                                    ParamType.String,
+                                  ),
+                                  'avatar': serializeParam(
+                                    FFAppState().avatar,
+                                    ParamType.String,
+                                  ),
+                                  'nameUser': serializeParam(
+                                    widget.nameUser,
                                     ParamType.String,
                                   ),
                                 }.withoutNulls,

@@ -20,8 +20,8 @@ class GameRow extends SupabaseDataRow {
   String? get nameGame => getField<String>('nameGame');
   set nameGame(String? value) => setField<String>('nameGame', value);
 
-  String? get discription => getField<String>('discription');
-  set discription(String? value) => setField<String>('discription', value);
+  String? get description => getField<String>('description');
+  set description(String? value) => setField<String>('description', value);
 
   String? get idUser => getField<String>('id_user');
   set idUser(String? value) => setField<String>('id_user', value);

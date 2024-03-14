@@ -20,6 +20,8 @@ class GameINWidget extends StatefulWidget {
     required this.time,
     this.idmembergame,
     this.unix,
+    this.name,
+    this.avatar,
   });
 
   final String? idgame;
@@ -30,6 +32,8 @@ class GameINWidget extends StatefulWidget {
   final String? time;
   final List<String>? idmembergame;
   final int? unix;
+  final String? name;
+  final String? avatar;
 
   @override
   State<GameINWidget> createState() => _GameINWidgetState();
@@ -87,8 +91,6 @@ class _GameINWidgetState extends State<GameINWidget>
 
     _model.discriptionController ??= TextEditingController();
     _model.discriptionFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -280,6 +282,8 @@ class _GameINWidgetState extends State<GameINWidget>
                                 'buttomcardsaction': false,
                                 'unix': widget.unix,
                                 'cube_num': 0,
+                                'namegame': widget.nameGame,
+                                'avatar': widget.avatar,
                               });
                               context.safePop();
                             },

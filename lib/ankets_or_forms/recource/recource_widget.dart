@@ -17,10 +17,10 @@ class RecourceWidget extends StatefulWidget {
     required this.unix,
     required this.usergameid,
     required this.name,
-    required this.email,
     required this.avatar,
     this.date,
     this.time,
+    this.nameGame,
   });
 
   final String? userid;
@@ -28,10 +28,10 @@ class RecourceWidget extends StatefulWidget {
   final int? unix;
   final String? usergameid;
   final String? name;
-  final String? email;
   final String? avatar;
   final String? date;
   final String? time;
+  final String? nameGame;
 
   @override
   State<RecourceWidget> createState() => _RecourceWidgetState();
@@ -62,8 +62,6 @@ class _RecourceWidgetState extends State<RecourceWidget> {
     _model.highlightsForPlayerFocusNode ??= FocusNode();
 
     _model.feedbackTimeFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -226,10 +224,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                                       .fromSTEB(
                                                           0.0, 4.0, 0.0, 0.0),
                                                   child: Text(
-                                                    valueOrDefault<String>(
-                                                      widget.email,
-                                                      'mail.ru',
-                                                    ),
+                                                    'Участник',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodySmall
@@ -1043,6 +1038,9 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                               .feedbackTimeController.text,
                                           'ratingbar':
                                               _model.ratingBarValue?.round(),
+                                          'namegame': widget.nameGame,
+                                          'name_user': widget.name,
+                                          'avatar': widget.avatar,
                                         });
                                       }
 

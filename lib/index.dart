@@ -9,7 +9,7 @@ export '/pages/game_field/game_field_widget.dart' show GameFieldWidget;
 export '/pages/myregistration/myregistration_widget.dart'
     show MyregistrationWidget;
 export '/pages/resource/resource_widget.dart' show ResourceWidget;
-export '/cards/cards_widget.dart' show CardsWidget;
+export '/pages/cards/cards_widget.dart' show CardsWidget;
 export '/user/profile_cre_edit/profile_cre_edit_widget.dart'
     show ProfileCreEditWidget;
 export '/pages/game_field_copy/game_field_copy_widget.dart'

@@ -123,6 +123,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             gameid: params.getParam('gameid', ParamType.String),
             nameGame: params.getParam('nameGame', ParamType.String),
             description: params.getParam('description', ParamType.String),
+            avatar: params.getParam('avatar', ParamType.String),
+            nameUser: params.getParam('nameUser', ParamType.String),
           ),
         ),
         FFRoute(
