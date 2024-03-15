@@ -522,7 +522,7 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                             PageTransitionType
                                                                 .fade,
                                                         duration: Duration(
-                                                            milliseconds: 1000),
+                                                            milliseconds: 0),
                                                       ),
                                                     },
                                                   );
