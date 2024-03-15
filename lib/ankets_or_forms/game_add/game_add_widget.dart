@@ -89,7 +89,7 @@ class _GameAddWidgetState extends State<GameAddWidget>
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.sizeOf(context).height * 0.9,
+      height: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).accent4,
       ),

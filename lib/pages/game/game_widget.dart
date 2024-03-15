@@ -103,7 +103,10 @@ class _GameWidgetState extends State<GameWidget> {
                         : FocusScope.of(context).unfocus(),
                     child: Padding(
                       padding: MediaQuery.viewInsetsOf(context),
-                      child: const GameAddWidget(),
+                      child: SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 1.0,
+                        child: const GameAddWidget(),
+                      ),
                     ),
                   );
                 },
