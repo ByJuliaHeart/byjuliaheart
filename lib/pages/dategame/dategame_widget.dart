@@ -237,7 +237,7 @@ class _DategameWidgetState extends State<DategameWidget> {
                                     description:
                                         columnGameFieldRow.discription!,
                                     author: columnGameFieldRow.author!,
-                                    img: columnGameFieldRow.author!,
+                                    img: columnGameFieldRow.img!,
                                     buttonname: 'Зарегистрироваться',
                                     gameid: columnGameFieldRow.gameId!,
                                     date:
