@@ -105,7 +105,7 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Open Sans',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
                                   fontSize: 22.0,
@@ -360,7 +360,7 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                     color: FlutterFlowTheme.of(context).primary,
                     textStyle:
                         FlutterFlowTheme.of(context).titleMedium.override(
-                              fontFamily: 'Readex Pro',
+                              fontFamily: 'Roboto',
                               color: Colors.white,
                             ),
                     elevation: 2.0,

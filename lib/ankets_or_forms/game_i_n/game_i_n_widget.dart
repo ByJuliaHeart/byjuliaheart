@@ -151,7 +151,7 @@ class _GameINWidgetState extends State<GameINWidget>
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: 'Roboto',
                                   fontSize: 20.0,
                                 ),
                           ),

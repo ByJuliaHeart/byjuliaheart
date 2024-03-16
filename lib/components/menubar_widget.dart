@@ -120,7 +120,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                           style: FlutterFlowTheme.of(context)
                               .displaySmall
                               .override(
-                                fontFamily: 'Outfit',
+                                fontFamily: 'Open Sans',
                                 fontSize: 16.0,
                               ),
                         ),
@@ -689,7 +689,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .labelMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: 'Roboto',
                                         fontSize: 12.0,
                                       ),
                                 ),
@@ -725,7 +725,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: 'Roboto',
                                     color: Colors.white,
                                   ),
                           elevation: 3.0,

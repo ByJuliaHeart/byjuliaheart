@@ -280,7 +280,8 @@ class _CardsWidgetState extends State<CardsWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .titleLarge
                                                         .override(
-                                                          fontFamily: 'Outfit',
+                                                          fontFamily:
+                                                              'Open Sans',
                                                           fontSize: 12.0,
                                                         ),
                                                 elevation: 3.0,

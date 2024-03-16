@@ -58,7 +58,7 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                 title: Text(
                   'Мои регистрации',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Open Sans',
                         color: Colors.white,
                         fontSize: 22.0,
                       ),

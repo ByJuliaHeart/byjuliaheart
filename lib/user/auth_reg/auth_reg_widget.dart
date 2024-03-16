@@ -217,7 +217,7 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
-                                                fontFamily: 'Outfit',
+                                                fontFamily: 'Open Sans',
                                                 color: _model.create == false
                                                     ? FlutterFlowTheme.of(
                                                             context)
@@ -247,7 +247,7 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .displaySmall
                                               .override(
-                                                fontFamily: 'Outfit',
+                                                fontFamily: 'Open Sans',
                                                 color: _model.create == true
                                                     ? FlutterFlowTheme.of(
                                                             context)
@@ -541,15 +541,13 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .tertiary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                'Readex Pro',
-                                                            color: Colors.white,
-                                                          ),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Roboto',
+                                                        color: Colors.white,
+                                                      ),
                                                   elevation: 3.0,
                                                   borderSide: const BorderSide(
                                                     color: Colors.transparent,
@@ -1098,15 +1096,13 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primary,
-                                                  textStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .titleSmall
-                                                          .override(
-                                                            fontFamily:
-                                                                'Readex Pro',
-                                                            color: Colors.white,
-                                                          ),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily: 'Roboto',
+                                                        color: Colors.white,
+                                                      ),
                                                   elevation: 3.0,
                                                   borderSide: const BorderSide(
                                                     color: Colors.transparent,

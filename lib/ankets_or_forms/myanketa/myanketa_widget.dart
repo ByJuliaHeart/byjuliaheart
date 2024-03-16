@@ -295,7 +295,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -391,7 +391,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -488,7 +488,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -585,7 +585,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -681,7 +681,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -781,7 +781,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -878,7 +878,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -974,7 +974,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -1070,7 +1070,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -1166,7 +1166,7 @@ class _MyanketaWidgetState extends State<MyanketaWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),

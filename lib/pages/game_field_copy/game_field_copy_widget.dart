@@ -234,7 +234,7 @@ class _GameFieldCopyWidgetState extends State<GameFieldCopyWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -263,7 +263,7 @@ class _GameFieldCopyWidgetState extends State<GameFieldCopyWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -292,7 +292,7 @@ class _GameFieldCopyWidgetState extends State<GameFieldCopyWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -321,7 +321,7 @@ class _GameFieldCopyWidgetState extends State<GameFieldCopyWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -1223,7 +1223,7 @@ class _GameFieldCopyWidgetState extends State<GameFieldCopyWidget>
                                                                       .titleSmall
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Readex Pro',
+                                                                            'Roboto',
                                                                         color: Colors
                                                                             .white,
                                                                       ),

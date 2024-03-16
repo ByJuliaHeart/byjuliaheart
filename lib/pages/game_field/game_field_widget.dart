@@ -183,7 +183,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                     'Трасформационная игра',
                   ),
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Open Sans',
                         color: Colors.white,
                         fontSize: 22.0,
                       ),
@@ -249,7 +249,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -278,7 +278,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -307,7 +307,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              fontFamily: 'Roboto',
                                               color: Colors.white,
                                             ),
                                         elevation: 3.0,
@@ -340,7 +340,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: 'Roboto',
                                         color: Colors.white,
                                       ),
                                   elevation: 3.0,
@@ -503,7 +503,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                                       .bodyMedium
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Readex Pro',
+                                                                            'Roboto',
                                                                         fontSize: MediaQuery.sizeOf(context).width <
                                                                                 kBreakpointSmall
                                                                             ? 10.0
@@ -929,7 +929,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                                       .bodyMedium
                                                                       .override(
                                                                         fontFamily:
-                                                                            'Readex Pro',
+                                                                            'Roboto',
                                                                         fontSize: MediaQuery.sizeOf(context).width <
                                                                                 kBreakpointSmall
                                                                             ? 10.0
@@ -1249,7 +1249,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                                     .titleSmall
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Readex Pro',
+                                                                          'Roboto',
                                                                       color: Colors
                                                                           .white,
                                                                     ),

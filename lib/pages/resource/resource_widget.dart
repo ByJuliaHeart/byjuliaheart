@@ -89,7 +89,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                 title: Text(
                   'Мои ресурсы',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Open Sans',
                         color: Colors.white,
                         fontSize: 22.0,
                       ),
@@ -401,7 +401,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           fontSize:
                                                                               10.0,
                                                                           fontWeight:
@@ -420,7 +420,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           fontSize:
                                                                               10.0,
                                                                         ),
@@ -448,7 +448,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           fontSize:
                                                                               10.0,
                                                                         ),
@@ -780,7 +780,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           fontSize:
                                                                               10.0,
                                                                           fontWeight:
@@ -799,7 +799,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                         .bodyMedium
                                                                         .override(
                                                                           fontFamily:
-                                                                              'Readex Pro',
+                                                                              'Roboto',
                                                                           fontSize:
                                                                               10.0,
                                                                         ),
@@ -822,7 +822,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                                                                     .bodyMedium
                                                                     .override(
                                                                       fontFamily:
-                                                                          'Readex Pro',
+                                                                          'Roboto',
                                                                       fontSize:
                                                                           10.0,
                                                                     ),

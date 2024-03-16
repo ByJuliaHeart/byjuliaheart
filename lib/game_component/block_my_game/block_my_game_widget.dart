@@ -245,7 +245,7 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: 'Roboto',
                                     color: Colors.white,
                                   ),
                               elevation: 2.0,

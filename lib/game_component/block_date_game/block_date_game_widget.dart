@@ -250,7 +250,7 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget> {
                               textStyle: FlutterFlowTheme.of(context)
                                   .titleSmall
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    fontFamily: 'Roboto',
                                     color: Colors.white,
                                   ),
                               elevation: 2.0,

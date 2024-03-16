@@ -322,13 +322,13 @@ class _GameTimeAddWidgetState extends State<GameTimeAddWidget>
                             titleStyle: FlutterFlowTheme.of(context)
                                 .headlineSmall
                                 .override(
-                                  fontFamily: 'Outfit',
+                                  fontFamily: 'Open Sans',
                                   fontSize: 18.0,
                                 ),
                             dayOfWeekStyle: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: 'Roboto',
                                   fontSize: 13.0,
                                 ),
                             dateStyle: FlutterFlowTheme.of(context).bodyMedium,

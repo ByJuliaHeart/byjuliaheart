@@ -65,7 +65,7 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
               title: Text(
                 'Личный профиль',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
+                      fontFamily: 'Open Sans',
                       color: Colors.white,
                       fontSize: 22.0,
                     ),
@@ -232,7 +232,7 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: 'Roboto',
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
@@ -392,7 +392,7 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: 'Roboto',
                                         color: Colors.white,
                                       ),
                                   elevation: 2.0,
@@ -439,7 +439,7 @@ class _ProfileCreEditWidgetState extends State<ProfileCreEditWidget> {
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleMedium
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          fontFamily: 'Roboto',
                                           color: Colors.white,
                                         ),
                                     elevation: 2.0,

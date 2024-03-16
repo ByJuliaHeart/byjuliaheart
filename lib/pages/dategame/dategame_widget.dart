@@ -55,7 +55,7 @@ class _DategameWidgetState extends State<DategameWidget> {
                 title: Text(
                   'Расписание игр',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        fontFamily: 'Outfit',
+                        fontFamily: 'Open Sans',
                         color: Colors.white,
                         fontSize: 22.0,
                       ),

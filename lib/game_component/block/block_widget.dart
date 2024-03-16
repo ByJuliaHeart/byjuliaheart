@@ -162,7 +162,7 @@ class _BlockWidgetState extends State<BlockWidget> {
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  fontFamily: 'Roboto',
                                   color: Colors.white,
                                 ),
                             elevation: 2.0,
@@ -242,7 +242,7 @@ class _BlockWidgetState extends State<BlockWidget> {
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        fontFamily: 'Roboto',
                                         color: Colors.white,
                                       ),
                                   elevation: 3.0,

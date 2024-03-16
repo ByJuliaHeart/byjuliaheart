@@ -357,7 +357,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -454,7 +454,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -551,7 +551,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -648,7 +648,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -751,7 +751,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -850,7 +850,7 @@ class _RecourceWidgetState extends State<RecourceWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),

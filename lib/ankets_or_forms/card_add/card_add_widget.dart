@@ -400,7 +400,7 @@ class _CardAddWidgetState extends State<CardAddWidget>
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      fontFamily: 'Roboto',
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,

@@ -114,7 +114,7 @@ class _CubeWidgetState extends State<CubeWidget> with TickerProviderStateMixin {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                     color: FlutterFlowTheme.of(context).tertiary,
                     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Readex Pro',
+                          fontFamily: 'Roboto',
                           color: Colors.white,
                         ),
                     elevation: 3.0,

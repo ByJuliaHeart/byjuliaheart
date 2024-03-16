@@ -277,7 +277,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -373,7 +373,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -470,7 +470,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -567,7 +567,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -663,7 +663,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -763,7 +763,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -860,7 +860,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -956,7 +956,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -1052,7 +1052,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -1148,7 +1148,7 @@ class _MyanketaListWidgetState extends State<MyanketaListWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  fontFamily: 'Roboto',
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
