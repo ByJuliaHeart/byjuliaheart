@@ -62,6 +62,8 @@ class _RecourceWidgetState extends State<RecourceWidget> {
     _model.highlightsForPlayerFocusNode ??= FocusNode();
 
     _model.feedbackTimeFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

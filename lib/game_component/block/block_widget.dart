@@ -44,6 +44,8 @@ class _BlockWidgetState extends State<BlockWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

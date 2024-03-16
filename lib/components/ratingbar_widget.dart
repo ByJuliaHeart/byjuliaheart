@@ -36,6 +36,8 @@ class _RatingbarWidgetState extends State<RatingbarWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => RatingbarModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
