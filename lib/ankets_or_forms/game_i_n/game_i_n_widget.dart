@@ -91,8 +91,6 @@ class _GameINWidgetState extends State<GameINWidget>
 
     _model.discriptionController ??= TextEditingController();
     _model.discriptionFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

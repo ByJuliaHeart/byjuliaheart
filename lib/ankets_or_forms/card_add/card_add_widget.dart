@@ -74,8 +74,6 @@ class _CardAddWidgetState extends State<CardAddWidget>
 
     _model.carddeskController ??= TextEditingController();
     _model.carddeskFocusNode ??= FocusNode();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -54,8 +54,6 @@ class _MenubarWidgetState extends State<MenubarWidget> {
         FFAppState().city = _model.user!.first.city!;
       });
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

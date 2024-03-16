@@ -53,8 +53,6 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockDateGameModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

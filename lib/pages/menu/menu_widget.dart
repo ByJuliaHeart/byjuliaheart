@@ -25,8 +25,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MenuModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -67,94 +65,88 @@ class _MenuWidgetState extends State<MenuWidget> {
         List<UsersRow> menuUsersRowList = snapshot.data!;
         final menuUsersRow =
             menuUsersRowList.isNotEmpty ? menuUsersRowList.first : null;
-        return Title(
-            title: 'menu',
-            color: FlutterFlowTheme.of(context).primary.withAlpha(0XFF),
-            child: GestureDetector(
-              onTap: () => _model.unfocusNode.canRequestFocus
-                  ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                  : FocusScope.of(context).unfocus(),
-              child: Scaffold(
-                key: scaffoldKey,
-                backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-                body: SafeArea(
-                  top: true,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      wrapWithModel(
-                        model: _model.menubarModel,
-                        updateCallback: () => setState(() {}),
-                        child: MenubarWidget(
-                          nameUser: menuUsersRow!.name!,
-                          email: menuUsersRow.email!,
-                          pageName: 'Game',
-                        ),
+        return GestureDetector(
+          onTap: () => _model.unfocusNode.canRequestFocus
+              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
+              : FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            key: scaffoldKey,
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: SafeArea(
+              top: true,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  wrapWithModel(
+                    model: _model.menubarModel,
+                    updateCallback: () => setState(() {}),
+                    child: MenubarWidget(
+                      nameUser: menuUsersRow!.name!,
+                      email: menuUsersRow.email!,
+                      pageName: 'Game',
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: FutureBuilder<List<GameRow>>(
-                            future: GameTable().queryRows(
-                              queryFn: (q) => q,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 10.0,
-                                    height: 10.0,
-                                    child: SpinKitDoubleBounce(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 10.0,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<GameRow> gridViewGameRowList =
-                                  snapshot.data!;
-                              return GridView.builder(
-                                padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 10.0,
-                                  mainAxisSpacing: 10.0,
-                                  childAspectRatio: 1.0,
+                      child: FutureBuilder<List<GameRow>>(
+                        future: GameTable().queryRows(
+                          queryFn: (q) => q,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 10.0,
+                                height: 10.0,
+                                child: SpinKitDoubleBounce(
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 10.0,
                                 ),
-                                scrollDirection: Axis.vertical,
-                                itemCount: gridViewGameRowList.length,
-                                itemBuilder: (context, gridViewIndex) {
-                                  final gridViewGameRow =
-                                      gridViewGameRowList[gridViewIndex];
-                                  return BlockWidget(
-                                    key: Key(
-                                        'Keyn9a_${gridViewIndex}_of_${gridViewGameRowList.length}'),
-                                    name: gridViewGameRow.nameGame!,
-                                    deskription: gridViewGameRow.description!,
-                                    author: gridViewGameRow.author!,
-                                    img: gridViewGameRow.img!,
-                                    buttonname: 'Расписание',
-                                    id: gridViewGameRow.id,
-                                  );
-                                },
+                              ),
+                            );
+                          }
+                          List<GameRow> gridViewGameRowList = snapshot.data!;
+                          return GridView.builder(
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 10.0,
+                              childAspectRatio: 1.0,
+                            ),
+                            scrollDirection: Axis.vertical,
+                            itemCount: gridViewGameRowList.length,
+                            itemBuilder: (context, gridViewIndex) {
+                              final gridViewGameRow =
+                                  gridViewGameRowList[gridViewIndex];
+                              return BlockWidget(
+                                key: Key(
+                                    'Keyn9a_${gridViewIndex}_of_${gridViewGameRowList.length}'),
+                                name: gridViewGameRow.nameGame!,
+                                deskription: gridViewGameRow.description!,
+                                author: gridViewGameRow.author!,
+                                img: gridViewGameRow.img!,
+                                buttonname: 'Расписание',
+                                id: gridViewGameRow.id,
                               );
                             },
-                          ),
-                        ),
+                          );
+                        },
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ));
+            ),
+          ),
+        );
       },
     );
   }
