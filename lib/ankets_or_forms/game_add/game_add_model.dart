@@ -1,7 +1,5 @@
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'dart:async';
 import 'game_add_widget.dart' show GameAddWidget;
 import 'package:flutter/material.dart';
 
@@ -24,8 +22,6 @@ class GameAddModel extends FlutterFlowModel<GameAddWidget> {
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';
 
-  Completer<List<UsersRow>>? requestCompleter;
-
   /// Initialization and disposal methods.
 
   @override
@@ -43,19 +39,4 @@ class GameAddModel extends FlutterFlowModel<GameAddWidget> {
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
-  Future waitForRequestCompleted({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = requestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
 }
