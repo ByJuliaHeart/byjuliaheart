@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'block_date_game_widget.dart' show BlockDateGameWidget;
+import 'card07_image_text_widget.dart' show Card07ImageTextWidget;
 import 'package:flutter/material.dart';
 
-class BlockDateGameModel extends FlutterFlowModel<BlockDateGameWidget> {
+class Card07ImageTextModel extends FlutterFlowModel<Card07ImageTextWidget> {
   /// Initialization and disposal methods.
 
   @override

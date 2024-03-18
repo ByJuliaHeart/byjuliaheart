@@ -107,7 +107,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPageName = 'Game';
+  String _currentPageName = 'GameNewBlockPage';
   late Widget? _currentPage;
 
   @override
@@ -120,11 +120,12 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
+      'Game': const GameWidget(),
       'dategame': const DategameWidget(),
       'myregistration': const MyregistrationWidget(),
-      'Game': const GameWidget(),
       'resource': const ResourceWidget(),
       'ProfileCreEdit': const ProfileCreEditWidget(),
+      'GameNewBlockPage': const GameNewBlockPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -152,6 +153,18 @@ class _NavBarPageState extends State<NavBarPage> {
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.gamepad_rounded,
+                size: 24.0,
+              ),
+              activeIcon: Icon(
+                Icons.games_outlined,
+                size: 32.0,
+              ),
+              label: 'Игры',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.date_range_sharp,
                 size: 24.0,
               ),
@@ -168,18 +181,6 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.gamepad_rounded,
-                size: 24.0,
-              ),
-              activeIcon: Icon(
-                Icons.games_outlined,
-                size: 32.0,
-              ),
-              label: 'Игры',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
                 Icons.record_voice_over_rounded,
                 size: 24.0,
               ),
@@ -192,6 +193,18 @@ class _NavBarPageState extends State<NavBarPage> {
                 size: 24.0,
               ),
               label: 'Профиль',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.gamepad_rounded,
+                size: 24.0,
+              ),
+              activeIcon: Icon(
+                Icons.games_outlined,
+                size: 32.0,
+              ),
+              label: 'Игры',
               tooltip: '',
             )
           ],

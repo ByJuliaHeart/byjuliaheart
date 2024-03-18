@@ -6,7 +6,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'profile_create_edit_model.dart';
 export 'profile_create_edit_model.dart';
 
@@ -31,6 +33,12 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
     _model.nameController ??= TextEditingController();
     _model.nameFocusNode ??= FocusNode();
 
+    _model.lastNameController ??= TextEditingController();
+    _model.lastNameFocusNode ??= FocusNode();
+
+    _model.phoneController ??= TextEditingController();
+    _model.phoneFocusNode ??= FocusNode();
+
     _model.cityController ??= TextEditingController();
     _model.cityFocusNode ??= FocusNode();
   }
@@ -44,6 +52,8 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -97,19 +107,22 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Заполните ваш профиль',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: 'Open Sans',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 22.0,
-                                ),
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              'Заполните ваш профиль',
+                              style: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    fontSize: 22.0,
+                                  ),
+                            ),
                           ),
                         ),
                       ],
@@ -221,6 +234,21 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
               child: TextFormField(
                 controller: _model.nameController,
                 focusNode: _model.nameFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.nameController',
+                  const Duration(milliseconds: 100),
+                  () async {
+                    if (_model.nameController.text != '') {
+                      setState(() {
+                        FFAppState().nameProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().nameProfile = true;
+                      });
+                    }
+                  },
+                ),
                 textCapitalization: TextCapitalization.words,
                 obscureText: false,
                 decoration: InputDecoration(
@@ -229,29 +257,31 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                   hintStyle: FlutterFlowTheme.of(context).labelMedium,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 2.0,
+                      color: FFAppState().nameProfile
+                          ? FlutterFlowTheme.of(context).error
+                          : FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).primary,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).error,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).error,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -259,6 +289,10 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   contentPadding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                  prefixIcon: Icon(
+                    Icons.person_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
                 keyboardType: TextInputType.name,
@@ -268,8 +302,165 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
               child: TextFormField(
+                controller: _model.lastNameController,
+                focusNode: _model.lastNameFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.lastNameController',
+                  const Duration(milliseconds: 100),
+                  () async {
+                    if (_model.lastNameController.text != '') {
+                      setState(() {
+                        FFAppState().lastNameProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().lastNameProfile = true;
+                      });
+                    }
+                  },
+                ),
+                textCapitalization: TextCapitalization.words,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Фамилия',
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FFAppState().lastNameProfile
+                          ? FlutterFlowTheme.of(context).error
+                          : FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  contentPadding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                  prefixIcon: Icon(
+                    Icons.person_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+                keyboardType: TextInputType.name,
+                validator:
+                    _model.lastNameControllerValidator.asValidator(context),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
+              child: TextFormField(
+                controller: _model.phoneController,
+                focusNode: _model.phoneFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.phoneController',
+                  const Duration(milliseconds: 100),
+                  () async {
+                    if (_model.phoneController.text != '') {
+                      setState(() {
+                        FFAppState().phoneProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().phoneProfile = false;
+                      });
+                    }
+                  },
+                ),
+                textCapitalization: TextCapitalization.words,
+                obscureText: false,
+                decoration: InputDecoration(
+                  labelText: 'Номер телефона',
+                  labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                  hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FFAppState().phoneProfile
+                          ? FlutterFlowTheme.of(context).error
+                          : FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).primary,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: FlutterFlowTheme.of(context).error,
+                      width: 1.0,
+                    ),
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  filled: true,
+                  fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  contentPadding:
+                      const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                  prefixIcon: Icon(
+                    Icons.phone,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
+                ),
+                style: FlutterFlowTheme.of(context).bodyMedium,
+                keyboardType: TextInputType.phone,
+                validator: _model.phoneControllerValidator.asValidator(context),
+                inputFormatters: [_model.phoneMask],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 16.0),
+              child: TextFormField(
                 controller: _model.cityController,
                 focusNode: _model.cityFocusNode,
+                onChanged: (_) => EasyDebounce.debounce(
+                  '_model.cityController',
+                  const Duration(milliseconds: 2000),
+                  () async {
+                    if (_model.cityController.text != '') {
+                      setState(() {
+                        FFAppState().cityProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().cityProfile = true;
+                      });
+                    }
+                  },
+                ),
                 textCapitalization: TextCapitalization.words,
                 obscureText: false,
                 decoration: InputDecoration(
@@ -278,29 +469,31 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                   hintStyle: FlutterFlowTheme.of(context).labelMedium,
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                      color: FlutterFlowTheme.of(context).alternate,
-                      width: 2.0,
+                      color: FFAppState().cityProfile
+                          ? FlutterFlowTheme.of(context).error
+                          : FlutterFlowTheme.of(context).alternate,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).primary,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).error,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   focusedErrorBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: FlutterFlowTheme.of(context).error,
-                      width: 2.0,
+                      width: 1.0,
                     ),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
@@ -308,6 +501,10 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                   fillColor: FlutterFlowTheme.of(context).secondaryBackground,
                   contentPadding:
                       const EdgeInsetsDirectional.fromSTEB(20.0, 24.0, 0.0, 24.0),
+                  prefixIcon: Icon(
+                    Icons.location_city_rounded,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                  ),
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium,
                 validator: _model.cityControllerValidator.asValidator(context),
@@ -319,36 +516,98 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    await UsersTable().update(
-                      data: {
-                        'city': _model.cityController.text,
-                        'avatar': valueOrDefault<String>(
-                          _model.uploadedFileUrl,
-                          'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/9280082.jpg',
-                        ),
-                        'name': _model.nameController.text,
-                      },
-                      matchingRows: (rows) => rows.eq(
-                        'id',
-                        currentUserUid,
-                      ),
-                    );
-                    setState(() {
-                      FFAppState().name = _model.nameController.text;
-                      FFAppState().avatar = _model.uploadedFileUrl;
-                      FFAppState().city = _model.cityController.text;
-                    });
+                    if (_model.nameController.text != '') {
+                      setState(() {
+                        FFAppState().nameProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().nameProfile = true;
+                      });
+                    }
 
-                    context.pushNamed(
-                      'Game',
-                      extra: <String, dynamic>{
-                        kTransitionInfoKey: const TransitionInfo(
-                          hasTransition: true,
-                          transitionType: PageTransitionType.fade,
-                          duration: Duration(milliseconds: 0),
+                    if (_model.lastNameController.text != '') {
+                      setState(() {
+                        FFAppState().lastNameProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().lastNameProfile = true;
+                      });
+                    }
+
+                    if (_model.cityController.text != '') {
+                      setState(() {
+                        FFAppState().cityProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().cityProfile = true;
+                      });
+                    }
+
+                    if (_model.phoneController.text != '') {
+                      setState(() {
+                        FFAppState().phoneProfile = false;
+                      });
+                    } else {
+                      setState(() {
+                        FFAppState().phoneProfile = true;
+                      });
+                    }
+
+                    if ((_model.nameController.text != '') &&
+                        (/* NOT RECOMMENDED */ _model.lastNameController.text ==
+                            'true') &&
+                        (_model.cityController.text != '') &&
+                        (_model.phoneController.text != '')) {
+                      await UsersTable().update(
+                        data: {
+                          'city': _model.cityController.text,
+                          'avatar': valueOrDefault<String>(
+                            _model.uploadedFileUrl,
+                            'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/9280082.jpg',
+                          ),
+                          'name':
+                              '${_model.nameController.text} ${_model.lastNameController.text}',
+                          'phone': _model.phoneController.text,
+                        },
+                        matchingRows: (rows) => rows.eq(
+                          'id',
+                          currentUserUid,
                         ),
-                      },
-                    );
+                      );
+                      setState(() {
+                        FFAppState().name = _model.nameController.text;
+                        FFAppState().avatar = _model.uploadedFileUrl;
+                        FFAppState().city = _model.cityController.text;
+                      });
+
+                      context.pushNamed(
+                        'GameNewBlockPage',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: const TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                            duration: Duration(milliseconds: 0),
+                          ),
+                        },
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Не все поля заполнены',
+                            style: TextStyle(
+                              color: FlutterFlowTheme.of(context).primaryText,
+                            ),
+                          ),
+                          duration: const Duration(milliseconds: 4000),
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondary,
+                        ),
+                      );
+                    }
                   },
                   text: 'Сохранить',
                   options: FFButtonOptions(
@@ -368,7 +627,7 @@ class _ProfileCreateEditWidgetState extends State<ProfileCreateEditWidget> {
                       color: Colors.transparent,
                       width: 1.0,
                     ),
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
               ),

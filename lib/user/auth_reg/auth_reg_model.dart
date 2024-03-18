@@ -19,10 +19,6 @@ class AuthRegModel extends FlutterFlowModel<AuthRegWidget> {
   TextEditingController? passwordController;
   late bool passwordVisibility;
   String? Function(BuildContext, String?)? passwordControllerValidator;
-  // State field(s) for name widget.
-  FocusNode? nameFocusNode;
-  TextEditingController? nameController;
-  String? Function(BuildContext, String?)? nameControllerValidator;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
   TextEditingController? emailAddressCreateController;
@@ -38,6 +34,8 @@ class AuthRegModel extends FlutterFlowModel<AuthRegWidget> {
   TextEditingController? passwordConfirmController;
   late bool passwordConfirmVisibility;
   String? Function(BuildContext, String?)? passwordConfirmControllerValidator;
+  // State field(s) for Switch widget.
+  bool? switchValue;
 
   /// Initialization and disposal methods.
 
@@ -56,9 +54,6 @@ class AuthRegModel extends FlutterFlowModel<AuthRegWidget> {
 
     passwordFocusNode?.dispose();
     passwordController?.dispose();
-
-    nameFocusNode?.dispose();
-    nameController?.dispose();
 
     emailAddressCreateFocusNode?.dispose();
     emailAddressCreateController?.dispose();

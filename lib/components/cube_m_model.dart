@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'block_date_game_widget.dart' show BlockDateGameWidget;
+import 'cube_m_widget.dart' show CubeMWidget;
 import 'package:flutter/material.dart';
 
-class BlockDateGameModel extends FlutterFlowModel<BlockDateGameWidget> {
+class CubeMModel extends FlutterFlowModel<CubeMWidget> {
   /// Initialization and disposal methods.
 
   @override

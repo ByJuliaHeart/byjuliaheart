@@ -6,29 +6,30 @@ import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/game_component/block/block_widget.dart';
+import '/game_component/game_newblock/game_newblock_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'game_model.dart';
-export 'game_model.dart';
+import 'game_new_block_page_model.dart';
+export 'game_new_block_page_model.dart';
 
-class GameWidget extends StatefulWidget {
-  const GameWidget({super.key});
+class GameNewBlockPageWidget extends StatefulWidget {
+  const GameNewBlockPageWidget({super.key});
 
   @override
-  State<GameWidget> createState() => _GameWidgetState();
+  State<GameNewBlockPageWidget> createState() => _GameNewBlockPageWidgetState();
 }
 
-class _GameWidgetState extends State<GameWidget> {
-  late GameModel _model;
+class _GameNewBlockPageWidgetState extends State<GameNewBlockPageWidget> {
+  late GameNewBlockPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GameModel());
+    _model = createModel(context, () => GameNewBlockPageModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -180,78 +181,90 @@ class _GameWidgetState extends State<GameWidget> {
                         tablet: false,
                       ))
                         Expanded(
-                          child: FutureBuilder<List<GameRow>>(
-                            future: GameTable().queryRows(
-                              queryFn: (q) => q,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 10.0,
-                                    height: 10.0,
-                                    child: SpinKitDoubleBounce(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 10.0,
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            child: FutureBuilder<List<GameRow>>(
+                              future: GameTable().queryRows(
+                                queryFn: (q) => q,
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 10.0,
+                                      height: 10.0,
+                                      child: SpinKitDoubleBounce(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 10.0,
+                                      ),
                                     ),
-                                  ),
-                                );
-                              }
-                              List<GameRow> gridViewGameRowList =
-                                  snapshot.data!;
-                              return GridView.builder(
-                                padding: const EdgeInsets.fromLTRB(
-                                  0,
-                                  10.0,
-                                  0,
-                                  0,
-                                ),
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: valueOrDefault<int>(
-                                    () {
-                                      if (MediaQuery.sizeOf(context).width <
-                                          kBreakpointSmall) {
-                                        return 1;
-                                      } else if (MediaQuery.sizeOf(context)
-                                              .width <
-                                          kBreakpointMedium) {
-                                        return 1;
-                                      } else if (MediaQuery.sizeOf(context)
-                                              .width <
-                                          kBreakpointLarge) {
-                                        return 2;
-                                      } else {
-                                        return 3;
-                                      }
-                                    }(),
-                                    1,
-                                  ),
-                                  crossAxisSpacing: 5.0,
-                                  mainAxisSpacing: 0.0,
-                                  childAspectRatio: 1.0,
-                                ),
-                                primary: false,
-                                scrollDirection: Axis.vertical,
-                                itemCount: gridViewGameRowList.length,
-                                itemBuilder: (context, gridViewIndex) {
-                                  final gridViewGameRow =
-                                      gridViewGameRowList[gridViewIndex];
-                                  return BlockWidget(
-                                    key: Key(
-                                        'Keym3c_${gridViewIndex}_of_${gridViewGameRowList.length}'),
-                                    name: gridViewGameRow.nameGame!,
-                                    deskription: gridViewGameRow.description!,
-                                    author: gridViewGameRow.author!,
-                                    img: gridViewGameRow.img!,
-                                    buttonname: 'Расписание',
-                                    id: gridViewGameRow.id,
                                   );
-                                },
-                              );
-                            },
+                                }
+                                List<GameRow> gridViewGameRowList =
+                                    snapshot.data!;
+                                return GridView.builder(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    0,
+                                    5.0,
+                                    0,
+                                    0,
+                                  ),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 3.0,
+                                    mainAxisSpacing: 10.0,
+                                    childAspectRatio: 3.0,
+                                  ),
+                                  primary: false,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: gridViewGameRowList.length,
+                                  itemBuilder: (context, gridViewIndex) {
+                                    final gridViewGameRow =
+                                        gridViewGameRowList[gridViewIndex];
+                                    return Align(
+                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          context.pushNamed(
+                                            'dategame',
+                                            extra: <String, dynamic>{
+                                              kTransitionInfoKey:
+                                                  const TransitionInfo(
+                                                hasTransition: true,
+                                                transitionType:
+                                                    PageTransitionType.fade,
+                                                duration:
+                                                    Duration(milliseconds: 0),
+                                              ),
+                                            },
+                                          );
+                                        },
+                                        child: GameNewblockWidget(
+                                          key: Key(
+                                              'Key1yg_${gridViewIndex}_of_${gridViewGameRowList.length}'),
+                                          nameGame: gridViewGameRow.nameGame,
+                                          description:
+                                              gridViewGameRow.description,
+                                          img: valueOrDefault<String>(
+                                            gridViewGameRow.img,
+                                            'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/528fa359-1dfd-4a26-8a0d-7215e8661878.jpg',
+                                          ),
+                                          id: gridViewGameRow.id,
+                                          authorUserID: gridViewGameRow.idUser!,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                     ],
@@ -292,7 +305,7 @@ class _GameWidgetState extends State<GameWidget> {
                                 columnGameRowList[columnIndex];
                             return BlockWidget(
                               key: Key(
-                                  'Key46e_${columnIndex}_of_${columnGameRowList.length}'),
+                                  'Key1ss_${columnIndex}_of_${columnGameRowList.length}'),
                               name: columnGameRow.nameGame!,
                               deskription: columnGameRow.description!,
                               author: columnGameRow.author!,

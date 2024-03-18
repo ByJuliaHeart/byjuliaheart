@@ -168,6 +168,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             nameGame: params.getParam('nameGame', ParamType.String),
             description: params.getParam('description', ParamType.String),
           ),
+        ),
+        FFRoute(
+          name: 'GameNewBlockPage',
+          path: '/gameNewBlockPage',
+          builder: (context, params) => params.isEmpty
+              ? const NavBarPage(initialPage: 'GameNewBlockPage')
+              : const GameNewBlockPageWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -351,7 +358,7 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: FlutterFlowTheme.of(context).primaryText,
+                  color: FlutterFlowTheme.of(context).alternate,
                   child: Center(
                     child: Image.asset(
                       'assets/images/Default_a_beautiful_woman_with_fulllength_golden_wings_20_year_3_(1)-Photoroom.png-Photoroom.png',

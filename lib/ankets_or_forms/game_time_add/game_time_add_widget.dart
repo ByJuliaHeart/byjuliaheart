@@ -18,12 +18,12 @@ class GameTimeAddWidget extends StatefulWidget {
     super.key,
     required this.idgame,
     required this.nameGame,
-    required this.discription,
+    required this.description,
   });
 
   final String? idgame;
   final String? nameGame;
-  final String? discription;
+  final String? description;
 
   @override
   State<GameTimeAddWidget> createState() => _GameTimeAddWidgetState();
@@ -83,7 +83,7 @@ class _GameTimeAddWidgetState extends State<GameTimeAddWidget>
     _model.textFieldFocusNode ??= FocusNode();
 
     _model.discriptionController ??=
-        TextEditingController(text: widget.discription);
+        TextEditingController(text: widget.description);
     _model.discriptionFocusNode ??= FocusNode();
   }
 

@@ -45,31 +45,37 @@ class _CardsWidgetState extends State<CardsWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await showModalBottomSheet(
-              isScrollControlled: true,
-              backgroundColor: Colors.transparent,
-              context: context,
-              builder: (context) {
-                return GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Padding(
-                    padding: MediaQuery.viewInsetsOf(context),
-                    child: const CardAddWidget(),
-                  ),
-                );
-              },
-            ).then((value) => safeSetState(() {}));
-          },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          elevation: 8.0,
-          child: Icon(
-            Icons.add,
-            color: FlutterFlowTheme.of(context).info,
-            size: 24.0,
+        floatingActionButton: Builder(
+          builder: (context) => FloatingActionButton(
+            onPressed: () async {
+              showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (dialogContext) {
+                  return Dialog(
+                    elevation: 0,
+                    insetPadding: EdgeInsets.zero,
+                    backgroundColor: Colors.transparent,
+                    alignment: const AlignmentDirectional(0.0, 0.0)
+                        .resolve(Directionality.of(context)),
+                    child: GestureDetector(
+                      onTap: () => _model.unfocusNode.canRequestFocus
+                          ? FocusScope.of(context)
+                              .requestFocus(_model.unfocusNode)
+                          : FocusScope.of(context).unfocus(),
+                      child: const CardAddWidget(),
+                    ),
+                  );
+                },
+              ).then((value) => setState(() {}));
+            },
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            elevation: 8.0,
+            child: Icon(
+              Icons.add,
+              color: FlutterFlowTheme.of(context).info,
+              size: 24.0,
+            ),
           ),
         ),
         body: SafeArea(
@@ -112,7 +118,9 @@ class _CardsWidgetState extends State<CardsWidget> {
                               future: (_model.requestCompleter ??=
                                       Completer<List<CardsRow>>()
                                         ..complete(CardsTable().queryRows(
-                                          queryFn: (q) => q,
+                                          queryFn: (q) => q.order(
+                                              'quaery_cards',
+                                              ascending: true),
                                         )))
                                   .future,
                               builder: (context, snapshot) {
@@ -152,10 +160,11 @@ class _CardsWidgetState extends State<CardsWidget> {
                                         return 3;
                                       }
                                     }(),
-                                    crossAxisSpacing: 10.0,
+                                    crossAxisSpacing: 4.0,
                                     mainAxisSpacing: 10.0,
                                     childAspectRatio: 1.0,
                                   ),
+                                  primary: false,
                                   scrollDirection: Axis.vertical,
                                   itemCount: gridViewCardsRowList.length,
                                   itemBuilder: (context, gridViewIndex) {
@@ -164,7 +173,7 @@ class _CardsWidgetState extends State<CardsWidget> {
                                     return Container(
                                       decoration: const BoxDecoration(),
                                       child: Column(
-                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Builder(
                                             builder: (context) => InkWell(
@@ -222,11 +231,8 @@ class _CardsWidgetState extends State<CardsWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(16.0),
                                                 child: Image.network(
-                                                  valueOrDefault<String>(
-                                                    gridViewCardsRow.frontCard,
-                                                    'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/1709472187052000.jpg',
-                                                  ),
-                                                  width: 120.0,
+                                                  gridViewCardsRow.frontCard!,
+                                                  width: 150.0,
                                                   height: 200.0,
                                                   fit: BoxFit.fitHeight,
                                                 ),

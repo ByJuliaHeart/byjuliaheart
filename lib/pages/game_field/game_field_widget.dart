@@ -3,6 +3,7 @@ import '/ankets_or_forms/myanketa/myanketa_widget.dart';
 import '/ankets_or_forms/recource/recource_widget.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/components/cube_m_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
@@ -85,16 +86,13 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await actions.newCustomAction(
         'game_field',
-        () async {
-          setState(() => _model.requestCompleter1 = null);
-          await _model.waitForRequestCompleted1();
-        },
+        () async {},
       );
       await actions.newCustomAction(
         'cards_live_game',
         () async {
-          setState(() => _model.requestCompleter2 = null);
-          await _model.waitForRequestCompleted2();
+          setState(() => _model.requestCompleter = null);
+          await _model.waitForRequestCompleted();
         },
       );
       _model.ankets = await AnktetsTable().queryRows(
@@ -514,7 +512,7 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                               FutureBuilder<
                                                                   List<
                                                                       CardsLiveGameRow>>(
-                                                                future: (_model.requestCompleter2 ??= Completer<
+                                                                future: (_model.requestCompleter ??= Completer<
                                                                         List<
                                                                             CardsLiveGameRow>>()
                                                                       ..complete(
@@ -948,49 +946,35 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                             },
                                           ),
                                         ),
-                                        FutureBuilder<List<GameFieldRow>>(
-                                          future: (_model.requestCompleter1 ??=
-                                                  Completer<
-                                                      List<GameFieldRow>>()
-                                                    ..complete(GameFieldTable()
-                                                        .querySingleRow(
-                                                      queryFn: (q) => q.eq(
-                                                        'id',
-                                                        widget.gamefield,
-                                                      ),
-                                                    )))
-                                              .future,
-                                          builder: (context, snapshot) {
-                                            // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: 10.0,
-                                                  height: 10.0,
-                                                  child: SpinKitDoubleBounce(
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primary,
-                                                    size: 10.0,
+                                        Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(6.0),
+                                              child: FutureBuilder<
+                                                  List<GameFieldRow>>(
+                                                future: GameFieldTable()
+                                                    .querySingleRow(
+                                                  queryFn: (q) => q.eq(
+                                                    'id',
+                                                    widget.gamefield,
                                                   ),
                                                 ),
-                                              );
-                                            }
-                                            List<GameFieldRow>
-                                                columnCubGameFieldRowList =
-                                                snapshot.data!;
-                                            final columnCubGameFieldRow =
-                                                columnCubGameFieldRowList
-                                                        .isNotEmpty
-                                                    ? columnCubGameFieldRowList
-                                                        .first
-                                                    : null;
-                                            return Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(6.0),
-                                                  child: InkWell(
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return const CubeMWidget();
+                                                  }
+                                                  List<GameFieldRow>
+                                                      cubGameFieldRowList =
+                                                      snapshot.data!;
+                                                  final cubGameFieldRow =
+                                                      cubGameFieldRowList
+                                                              .isNotEmpty
+                                                          ? cubGameFieldRowList
+                                                              .first
+                                                          : null;
+                                                  return InkWell(
                                                     splashColor:
                                                         Colors.transparent,
                                                     focusColor:
@@ -1082,9 +1066,9 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                               8.0),
                                                       child: Image.network(
                                                         valueOrDefault<String>(
-                                                          columnCubGameFieldRow
+                                                          cubGameFieldRow
                                                               ?.cubeImg,
-                                                          'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/cube/four.png',
+                                                          'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/cube/five.png',
                                                         ),
                                                         width: 50.0,
                                                         fit: BoxFit.contain,
@@ -1094,157 +1078,161 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                       animationsMap[
                                                           'imageOnActionTriggerAnimation']!,
                                                       hasBeenTriggered:
-                                                          hasImageTriggered),
+                                                          hasImageTriggered);
+                                                },
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      10.0, 0.0, 10.0, 10.0),
+                                              child: FutureBuilder<
+                                                  List<AnktetsRow>>(
+                                                future: AnktetsTable()
+                                                    .querySingleRow(
+                                                  queryFn: (q) => q
+                                                      .eq(
+                                                        'user_id',
+                                                        currentUserUid,
+                                                      )
+                                                      .eq(
+                                                        'gameFeild_id',
+                                                        widget.gamefield,
+                                                      ),
                                                 ),
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(10.0, 0.0, 10.0,
-                                                          10.0),
-                                                  child: FutureBuilder<
-                                                      List<AnktetsRow>>(
-                                                    future: AnktetsTable()
-                                                        .querySingleRow(
-                                                      queryFn: (q) => q
-                                                          .eq(
-                                                            'user_id',
-                                                            currentUserUid,
-                                                          )
-                                                          .eq(
-                                                            'gameFeild_id',
-                                                            widget.gamefield,
-                                                          ),
-                                                    ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 10.0,
-                                                            height: 10.0,
-                                                            child:
-                                                                SpinKitDoubleBounce(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primary,
-                                                              size: 10.0,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<AnktetsRow>
-                                                          columnAnktetsRowList =
-                                                          snapshot.data!;
-                                                      final columnAnktetsRow =
-                                                          columnAnktetsRowList
-                                                                  .isNotEmpty
-                                                              ? columnAnktetsRowList
-                                                                  .first
-                                                              : null;
-                                                      return Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        children: [
-                                                          if (columnAnktetsRow
-                                                                  ?.cubeNum !=
-                                                              0)
-                                                            FFButtonWidget(
-                                                              onPressed:
-                                                                  () async {
-                                                                _model.mycardQ =
-                                                                    await CardsTable()
-                                                                        .queryRows(
-                                                                  queryFn:
-                                                                      (q) => q,
-                                                                );
-                                                                setState(() {
-                                                                  FFAppState().cardConfirm = _model
-                                                                      .mycardQ![
-                                                                          random_data.randomInteger(
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 10.0,
+                                                        height: 10.0,
+                                                        child:
+                                                            SpinKitDoubleBounce(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          size: 10.0,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<AnktetsRow>
+                                                      columnAnktetsRowList =
+                                                      snapshot.data!;
+                                                  final columnAnktetsRow =
+                                                      columnAnktetsRowList
+                                                              .isNotEmpty
+                                                          ? columnAnktetsRowList
+                                                              .first
+                                                          : null;
+                                                  return Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      if (columnAnktetsRow
+                                                              ?.cubeNum !=
+                                                          0)
+                                                        FFButtonWidget(
+                                                          onPressed: () async {
+                                                            _model.mycardQ =
+                                                                await CardsTable()
+                                                                    .queryRows(
+                                                              queryFn: (q) => q,
+                                                            );
+                                                            setState(() {
+                                                              FFAppState().cardConfirm = _model
+                                                                  .mycardQ![
+                                                                      random_data
+                                                                          .randomInteger(
                                                                               0,
                                                                               5)]
-                                                                      .frontCard!;
-                                                                });
-                                                                _model.cards =
-                                                                    await CardsLiveGameTable()
-                                                                        .insert({
-                                                                  'id_user':
-                                                                      currentUserUid,
-                                                                  'id_game_field':
-                                                                      widget
-                                                                          .gamefield,
-                                                                  'unix': widget
-                                                                      .unix,
-                                                                  'front_card':
-                                                                      FFAppState()
-                                                                          .cardConfirm,
-                                                                  'back_cards': _model
-                                                                      .mycardQ
-                                                                      ?.first
-                                                                      .backCards,
-                                                                });
-                                                                await showModalBottomSheet(
-                                                                  isScrollControlled:
-                                                                      true,
-                                                                  backgroundColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  context:
-                                                                      context,
-                                                                  builder:
-                                                                      (context) {
-                                                                    return GestureDetector(
-                                                                      onTap: () => _model
-                                                                              .unfocusNode
-                                                                              .canRequestFocus
-                                                                          ? FocusScope.of(context).requestFocus(_model
+                                                                  .frontCard!;
+                                                            });
+                                                            _model.cards =
+                                                                await CardsLiveGameTable()
+                                                                    .insert({
+                                                              'id_user':
+                                                                  currentUserUid,
+                                                              'id_game_field':
+                                                                  widget
+                                                                      .gamefield,
+                                                              'unix':
+                                                                  widget.unix,
+                                                              'front_card':
+                                                                  FFAppState()
+                                                                      .cardConfirm,
+                                                              'back_cards': _model
+                                                                  .mycardQ
+                                                                  ?.first
+                                                                  .backCards,
+                                                            });
+                                                            await showModalBottomSheet(
+                                                              isScrollControlled:
+                                                                  true,
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              context: context,
+                                                              builder:
+                                                                  (context) {
+                                                                return GestureDetector(
+                                                                  onTap: () => _model
+                                                                          .unfocusNode
+                                                                          .canRequestFocus
+                                                                      ? FocusScope.of(
+                                                                              context)
+                                                                          .requestFocus(_model
                                                                               .unfocusNode)
-                                                                          : FocusScope.of(context)
-                                                                              .unfocus(),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding:
-                                                                            MediaQuery.viewInsetsOf(context),
-                                                                        child:
-                                                                            RandomCardWidget(
-                                                                          img: FFAppState()
-                                                                              .cardConfirm,
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                ).then((value) =>
-                                                                    safeSetState(
-                                                                        () {}));
-
-                                                                setState(() =>
-                                                                    _model.requestCompleter2 =
-                                                                        null);
-
-                                                                setState(() {});
+                                                                      : FocusScope.of(
+                                                                              context)
+                                                                          .unfocus(),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: MediaQuery
+                                                                        .viewInsetsOf(
+                                                                            context),
+                                                                    child:
+                                                                        RandomCardWidget(
+                                                                      img: FFAppState()
+                                                                          .cardConfirm,
+                                                                    ),
+                                                                  ),
+                                                                );
                                                               },
-                                                              text:
-                                                                  'Взять карту',
-                                                              options:
-                                                                  FFButtonOptions(
-                                                                height: 40.0,
-                                                                padding: const EdgeInsetsDirectional
+                                                            ).then((value) =>
+                                                                safeSetState(
+                                                                    () {}));
+
+                                                            setState(() => _model
+                                                                    .requestCompleter =
+                                                                null);
+
+                                                            setState(() {});
+                                                          },
+                                                          text: 'Взять карту',
+                                                          options:
+                                                              FFButtonOptions(
+                                                            height: 40.0,
+                                                            padding:
+                                                                const EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         24.0,
                                                                         0.0,
                                                                         24.0,
                                                                         0.0),
-                                                                iconPadding:
-                                                                    const EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primary,
-                                                                textStyle: FlutterFlowTheme.of(
+                                                            iconPadding:
+                                                                const EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0,
+                                                                        0.0),
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primary,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
                                                                         context)
                                                                     .titleSmall
                                                                     .override(
@@ -1253,27 +1241,25 @@ class _GameFieldWidgetState extends State<GameFieldWidget>
                                                                       color: Colors
                                                                           .white,
                                                                     ),
-                                                                elevation: 3.0,
-                                                                borderSide:
-                                                                    const BorderSide(
-                                                                  color: Colors
-                                                                      .transparent,
-                                                                  width: 1.0,
-                                                                ),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                              ),
+                                                            elevation: 3.0,
+                                                            borderSide:
+                                                                const BorderSide(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              width: 1.0,
                                                             ),
-                                                        ],
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            );
-                                          },
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        8.0),
+                                                          ),
+                                                        ),
+                                                    ],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),

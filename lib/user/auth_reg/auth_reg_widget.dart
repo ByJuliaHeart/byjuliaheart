@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'auth_reg_model.dart';
 export 'auth_reg_model.dart';
 
@@ -96,9 +97,6 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
     _model.passwordController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.nameController ??= TextEditingController();
-    _model.nameFocusNode ??= FocusNode();
-
     _model.emailAddressCreateController ??= TextEditingController();
     _model.emailAddressCreateFocusNode ??= FocusNode();
 
@@ -118,6 +116,8 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -361,6 +361,12 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           .secondaryBackground,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.mail,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -454,6 +460,12 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           .secondaryBackground,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.key,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -512,7 +524,7 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                   }
 
                                                   context.goNamedAuth(
-                                                    'Game',
+                                                    'GameNewBlockPage',
                                                     context.mounted,
                                                     extra: <String, dynamic>{
                                                       kTransitionInfoKey:
@@ -625,95 +637,6 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                             child: SizedBox(
                                               width: double.infinity,
                                               child: TextFormField(
-                                                controller:
-                                                    _model.nameController,
-                                                focusNode: _model.nameFocusNode,
-                                                autofocus: true,
-                                                autofillHints: const [
-                                                  AutofillHints.name
-                                                ],
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Имя',
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFE0E3E7),
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  contentPadding:
-                                                      const EdgeInsets.all(24.0),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                                keyboardType:
-                                                    TextInputType.name,
-                                                validator: _model
-                                                    .nameControllerValidator
-                                                    .asValidator(context),
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
                                                 controller: _model
                                                     .emailAddressCreateController,
                                                 focusNode: _model
@@ -785,6 +708,12 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           .secondaryBackground,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.mail,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -875,6 +804,12 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           .secondaryBackground,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.key,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -985,6 +920,12 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           .secondaryBackground,
                                                   contentPadding:
                                                       const EdgeInsets.all(24.0),
+                                                  prefixIcon: Icon(
+                                                    Icons.key,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryText,
+                                                  ),
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
@@ -1018,69 +959,168 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                               ),
                                             ),
                                           ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Switch.adaptive(
+                                                value: _model.switchValue ??=
+                                                    FFAppState()
+                                                        .agreementSwitch,
+                                                onChanged: (newValue) async {
+                                                  setState(() => _model
+                                                      .switchValue = newValue);
+                                                },
+                                                activeColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                activeTrackColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                inactiveTrackColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .alternate,
+                                                inactiveThumbColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                              ),
+                                              Flexible(
+                                                child: Text(
+                                                  'Нажимая на кнопку \"Зарегистрироваться\" вы принимаете пользовательское соглашение',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Roboto',
+                                                        fontSize: 12.0,
+                                                      ),
+                                                ),
+                                              ),
+                                            ].divide(const SizedBox(width: 5.0)),
+                                          ),
                                           Align(
                                             alignment:
                                                 const AlignmentDirectional(0.0, 0.0),
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
-                                                      0.0, 0.0, 0.0, 16.0),
+                                                      0.0, 16.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  GoRouter.of(context)
-                                                      .prepareAuthEvent();
-                                                  if (_model
-                                                          .passwordCreateController
-                                                          .text !=
-                                                      _model
-                                                          .passwordConfirmController
-                                                          .text) {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                      const SnackBar(
-                                                        content: Text(
-                                                          'Passwords don\'t match!',
+                                                  if (_model.switchValue ==
+                                                      true) {
+                                                    GoRouter.of(context)
+                                                        .prepareAuthEvent();
+                                                    if (_model
+                                                            .passwordCreateController
+                                                            .text !=
+                                                        _model
+                                                            .passwordConfirmController
+                                                            .text) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        const SnackBar(
+                                                          content: Text(
+                                                            'Passwords don\'t match!',
+                                                          ),
                                                         ),
-                                                      ),
+                                                      );
+                                                      return;
+                                                    }
+
+                                                    final user = await authManager
+                                                        .createAccountWithEmail(
+                                                      context,
+                                                      _model
+                                                          .emailAddressCreateController
+                                                          .text,
+                                                      _model
+                                                          .passwordCreateController
+                                                          .text,
                                                     );
-                                                    return;
+                                                    if (user == null) {
+                                                      return;
+                                                    }
+
+                                                    await UsersTable().insert({
+                                                      'id': currentUserUid,
+                                                      'email': currentUserEmail,
+                                                    });
+
+                                                    context.pushNamedAuth(
+                                                      'ProfileCreateEdit',
+                                                      context.mounted,
+                                                      extra: <String, dynamic>{
+                                                        kTransitionInfoKey:
+                                                            const TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                        ),
+                                                      },
+                                                    );
+                                                  } else {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: const Text(
+                                                                      'Пользовательское соглашение'),
+                                                                  content: const Text(
+                                                                      'Пожалуйста для регистрации примите пользовательское соглашение '),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: const Text(
+                                                                          'Отменить'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: const Text(
+                                                                          'Принять'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      setState(() {
+                                                        FFAppState()
+                                                                .agreementSwitch =
+                                                            true;
+                                                      });
+                                                    } else {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          content: Text(
+                                                            'trcxrtxct',
+                                                            style: TextStyle(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                            ),
+                                                          ),
+                                                          duration: const Duration(
+                                                              milliseconds:
+                                                                  4000),
+                                                          backgroundColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondary,
+                                                        ),
+                                                      );
+                                                    }
                                                   }
-
-                                                  final user = await authManager
-                                                      .createAccountWithEmail(
-                                                    context,
-                                                    _model
-                                                        .emailAddressCreateController
-                                                        .text,
-                                                    _model
-                                                        .passwordCreateController
-                                                        .text,
-                                                  );
-                                                  if (user == null) {
-                                                    return;
-                                                  }
-
-                                                  await UsersTable().insert({
-                                                    'id': currentUserUid,
-                                                    'name': _model
-                                                        .nameController.text,
-                                                    'email': currentUserEmail,
-                                                  });
-
-                                                  context.pushNamedAuth(
-                                                    'ProfileCreateEdit',
-                                                    context.mounted,
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          const TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .fade,
-                                                      ),
-                                                    },
-                                                  );
                                                 },
                                                 text: 'Зарегистрироваться',
                                                 options: FFButtonOptions(

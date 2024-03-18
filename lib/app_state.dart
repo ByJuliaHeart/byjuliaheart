@@ -135,6 +135,42 @@ class FFAppState extends ChangeNotifier {
     _city = value;
   }
 
+  bool _gameDrop = false;
+  bool get gameDrop => _gameDrop;
+  set gameDrop(bool value) {
+    _gameDrop = value;
+  }
+
+  bool _nameProfile = false;
+  bool get nameProfile => _nameProfile;
+  set nameProfile(bool value) {
+    _nameProfile = value;
+  }
+
+  bool _lastNameProfile = false;
+  bool get lastNameProfile => _lastNameProfile;
+  set lastNameProfile(bool value) {
+    _lastNameProfile = value;
+  }
+
+  bool _cityProfile = false;
+  bool get cityProfile => _cityProfile;
+  set cityProfile(bool value) {
+    _cityProfile = value;
+  }
+
+  bool _phoneProfile = false;
+  bool get phoneProfile => _phoneProfile;
+  set phoneProfile(bool value) {
+    _phoneProfile = value;
+  }
+
+  bool _agreementSwitch = false;
+  bool get agreementSwitch => _agreementSwitch;
+  set agreementSwitch(bool value) {
+    _agreementSwitch = value;
+  }
+
   final _userdataManager = FutureRequestManager<List<UsersRow>>();
   Future<List<UsersRow>> userdata({
     String? uniqueQueryKey,

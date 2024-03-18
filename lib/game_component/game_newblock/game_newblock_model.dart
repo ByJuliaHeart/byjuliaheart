@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'block_date_game_widget.dart' show BlockDateGameWidget;
+import 'game_newblock_widget.dart' show GameNewblockWidget;
 import 'package:flutter/material.dart';
 
-class BlockDateGameModel extends FlutterFlowModel<BlockDateGameWidget> {
+class GameNewblockModel extends FlutterFlowModel<GameNewblockWidget> {
   /// Initialization and disposal methods.
 
   @override

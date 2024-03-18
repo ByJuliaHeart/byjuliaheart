@@ -24,12 +24,14 @@ class MenubarModel extends FlutterFlowModel<MenubarWidget> {
   bool mouseRegionHovered2 = false;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered3 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered4 = false;
   // State field(s) for myresource widget.
   bool myresourceHovered = false;
   // State field(s) for MouseRegion widget.
-  bool mouseRegionHovered4 = false;
-  // State field(s) for MouseRegion widget.
   bool mouseRegionHovered5 = false;
+  // State field(s) for MouseRegion widget.
+  bool mouseRegionHovered6 = false;
 
   /// Initialization and disposal methods.
 

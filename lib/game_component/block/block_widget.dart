@@ -111,7 +111,10 @@ class _BlockWidgetState extends State<BlockWidget> {
                         widget.name,
                         'Название',
                       ),
-                      style: FlutterFlowTheme.of(context).titleLarge,
+                      style: FlutterFlowTheme.of(context).titleLarge.override(
+                            fontFamily: 'Open Sans',
+                            fontSize: 20.0,
+                          ),
                     ),
                     Padding(
                       padding:
@@ -225,7 +228,7 @@ class _BlockWidgetState extends State<BlockWidget> {
                                         child: GameTimeAddWidget(
                                           idgame: widget.id!,
                                           nameGame: widget.name!,
-                                          discription: widget.deskription!,
+                                          description: widget.deskription!,
                                         ),
                                       );
                                     },

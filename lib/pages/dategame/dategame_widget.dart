@@ -4,6 +4,7 @@ import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/game_component/block_date_game/block_date_game_widget.dart';
+import '/game_component/block_date_game_copy/block_date_game_copy_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -65,19 +66,24 @@ class _DategameWidgetState extends State<DategameWidget> {
                 elevation: 2.0,
               )
             : null,
-        body: SafeArea(
-          top: true,
-          child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).secondaryBackground,
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: FlutterFlowTheme.of(context).secondaryBackground,
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              if (responsiveVisibility(
+                context: context,
+                phone: false,
+                tablet: false,
+                tabletLandscape: false,
+              ))
                 Column(
                   mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: wrapWithModel(
@@ -91,116 +97,15 @@ class _DategameWidgetState extends State<DategameWidget> {
                     ),
                   ],
                 ),
-                if (responsiveVisibility(
-                  context: context,
-                  phone: false,
-                  tablet: false,
-                ))
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Flexible(
-                          child: FutureBuilder<List<GameFieldRow>>(
-                            future: GameFieldTable().queryRows(
-                              queryFn: (q) => q,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 10.0,
-                                    height: 10.0,
-                                    child: SpinKitDoubleBounce(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      size: 10.0,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<GameFieldRow> gridViewGameFieldRowList =
-                                  snapshot.data!;
-                              return GridView.builder(
-                                padding: EdgeInsets.zero,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: () {
-                                    if (MediaQuery.sizeOf(context).width <
-                                        kBreakpointSmall) {
-                                      return 1;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointMedium) {
-                                      return 2;
-                                    } else {
-                                      return 3;
-                                    }
-                                  }(),
-                                  crossAxisSpacing: valueOrDefault<double>(
-                                    () {
-                                      if (MediaQuery.sizeOf(context).width <
-                                          kBreakpointSmall) {
-                                        return 0.8;
-                                      } else if (MediaQuery.sizeOf(context)
-                                              .width <
-                                          kBreakpointMedium) {
-                                        return 1.0;
-                                      } else if (MediaQuery.sizeOf(context)
-                                              .width <
-                                          kBreakpointLarge) {
-                                        return 1.0;
-                                      } else {
-                                        return 1.0;
-                                      }
-                                    }(),
-                                    1.0,
-                                  ),
-                                  mainAxisSpacing: 1.0,
-                                  childAspectRatio: 1.0,
-                                ),
-                                primary: false,
-                                scrollDirection: Axis.vertical,
-                                itemCount: gridViewGameFieldRowList.length,
-                                itemBuilder: (context, gridViewIndex) {
-                                  final gridViewGameFieldRow =
-                                      gridViewGameFieldRowList[gridViewIndex];
-                                  return BlockDateGameWidget(
-                                    key: Key(
-                                        'Key1ek_${gridViewIndex}_of_${gridViewGameFieldRowList.length}'),
-                                    name: gridViewGameFieldRow.nameGame!,
-                                    description:
-                                        gridViewGameFieldRow.discription!,
-                                    author: gridViewGameFieldRow.author!,
-                                    img: gridViewGameFieldRow.img!,
-                                    buttonname: 'Зарегистрироваться',
-                                    gameid: gridViewGameFieldRow.gameId!,
-                                    date: gridViewGameFieldRow.dateGame!
-                                        .toString(),
-                                    gamefieldid: gridViewGameFieldRow.id,
-                                    idmembergame:
-                                        gridViewGameFieldRow.idMemberGame,
-                                    dateTime:
-                                        '${functions.datecut(gridViewGameFieldRow.dateGame?.toString())}${gridViewGameFieldRow.hhTime}:${gridViewGameFieldRow.mmTime}',
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                if (responsiveVisibility(
-                  context: context,
-                  tabletLandscape: false,
-                  desktop: false,
-                ))
-                  Expanded(
-                    child: Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
-                      child: FutureBuilder<List<GameFieldRow>>(
+              Flexible(
+                child: Builder(
+                  builder: (context) {
+                    if ((MediaQuery.sizeOf(context).width < kBreakpointSmall) ||
+                            (MediaQuery.sizeOf(context).width <
+                                kBreakpointMedium)
+                        ? false
+                        : true) {
+                      return FutureBuilder<List<GameFieldRow>>(
                         future: GameFieldTable().queryRows(
                           queryFn: (q) => q,
                         ),
@@ -218,46 +123,163 @@ class _DategameWidgetState extends State<DategameWidget> {
                               ),
                             );
                           }
-                          List<GameFieldRow> columnGameFieldRowList =
+                          List<GameFieldRow> gridViewGameFieldRowList =
                               snapshot.data!;
-                          return SingleChildScrollView(
+                          return GridView.builder(
+                            padding: const EdgeInsets.fromLTRB(
+                              0,
+                              10.0,
+                              0,
+                              0,
+                            ),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: valueOrDefault<int>(
+                                () {
+                                  if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointSmall) {
+                                    return 1;
+                                  } else if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointMedium) {
+                                    return 1;
+                                  } else {
+                                    return 1;
+                                  }
+                                }(),
+                                2,
+                              ),
+                              crossAxisSpacing: valueOrDefault<double>(
+                                () {
+                                  if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointSmall) {
+                                    return 0.8;
+                                  } else if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointMedium) {
+                                    return 1.0;
+                                  } else if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointLarge) {
+                                    return 1.0;
+                                  } else {
+                                    return 1.0;
+                                  }
+                                }(),
+                                1.0,
+                              ),
+                              mainAxisSpacing: 1.0,
+                              childAspectRatio: 3.0,
+                            ),
+                            primary: false,
+                            scrollDirection: Axis.vertical,
+                            itemCount: gridViewGameFieldRowList.length,
+                            itemBuilder: (context, gridViewIndex) {
+                              final gridViewGameFieldRow =
+                                  gridViewGameFieldRowList[gridViewIndex];
+                              return BlockDateGameWidget(
+                                key: Key(
+                                    'Key1ek_${gridViewIndex}_of_${gridViewGameFieldRowList.length}'),
+                                name: gridViewGameFieldRow.nameGame!,
+                                description: gridViewGameFieldRow.discription!,
+                                author: gridViewGameFieldRow.author!,
+                                img: gridViewGameFieldRow.img!,
+                                buttonname: 'Зарегистрироваться',
+                                gameid: gridViewGameFieldRow.gameId!,
+                                date: gridViewGameFieldRow.dateGame!.toString(),
+                                gamefieldid: gridViewGameFieldRow.id,
+                                idmembergame: gridViewGameFieldRow.idMemberGame,
+                                dateTime:
+                                    '${functions.datecut(gridViewGameFieldRow.dateGame?.toString())}${gridViewGameFieldRow.hhTime}:${gridViewGameFieldRow.mmTime}',
+                              );
+                            },
+                          );
+                        },
+                      );
+                    } else {
+                      return Visibility(
+                        visible: responsiveVisibility(
+                          context: context,
+                          tabletLandscape: false,
+                          desktop: false,
+                        ),
+                        child: Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: SingleChildScrollView(
                             primary: false,
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
-                              children: List.generate(
-                                  columnGameFieldRowList.length, (columnIndex) {
-                                final columnGameFieldRow =
-                                    columnGameFieldRowList[columnIndex];
-                                return Align(
-                                  alignment: const AlignmentDirectional(0.0, -1.0),
-                                  child: BlockDateGameWidget(
-                                    key: Key(
-                                        'Key6b3_${columnIndex}_of_${columnGameFieldRowList.length}'),
-                                    name: columnGameFieldRow.nameGame!,
-                                    description:
-                                        columnGameFieldRow.discription!,
-                                    author: columnGameFieldRow.author!,
-                                    img: columnGameFieldRow.img!,
-                                    buttonname: 'Зарегистрироваться',
-                                    gameid: columnGameFieldRow.gameId!,
-                                    date:
-                                        columnGameFieldRow.dateGame!.toString(),
-                                    gamefieldid: columnGameFieldRow.id,
-                                    idmembergame:
-                                        columnGameFieldRow.idMemberGame,
-                                    dateTime:
-                                        '${functions.datecut(functions.datecut(columnGameFieldRow.dateGame?.toString()))}${columnGameFieldRow.hhTime}:${columnGameFieldRow.mmTime}',
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                FutureBuilder<List<GameFieldRow>>(
+                                  future: GameFieldTable().queryRows(
+                                    queryFn: (q) => q,
                                   ),
-                                );
-                              }).addToStart(const SizedBox(height: 10.0)),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 10.0,
+                                          height: 10.0,
+                                          child: SpinKitDoubleBounce(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            size: 10.0,
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    List<GameFieldRow>
+                                        listViewGameFieldRowList =
+                                        snapshot.data!;
+                                    return ListView.separated(
+                                      padding: const EdgeInsets.fromLTRB(
+                                        0,
+                                        8.0,
+                                        0,
+                                        0,
+                                      ),
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount:
+                                          listViewGameFieldRowList.length,
+                                      separatorBuilder: (_, __) =>
+                                          const SizedBox(height: 8.0),
+                                      itemBuilder: (context, listViewIndex) {
+                                        final listViewGameFieldRow =
+                                            listViewGameFieldRowList[
+                                                listViewIndex];
+                                        return BlockDateGameCopyWidget(
+                                          key: Key(
+                                              'Keyapg_${listViewIndex}_of_${listViewGameFieldRowList.length}'),
+                                          name: listViewGameFieldRow.nameGame!,
+                                          description:
+                                              listViewGameFieldRow.discription!,
+                                          author: listViewGameFieldRow.author!,
+                                          img: listViewGameFieldRow.img!,
+                                          buttonname: 'Зарегистрироваться',
+                                          gameid: listViewGameFieldRow.gameId!,
+                                          date: listViewGameFieldRow.dateGame!
+                                              .toString(),
+                                          gamefieldid: listViewGameFieldRow.id,
+                                          dateTime:
+                                              '${listViewGameFieldRow.hhTime}${listViewGameFieldRow.mmTime}',
+                                          idmembergame:
+                                              listViewGameFieldRow.idMemberGame,
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ].addToStart(const SizedBox(height: 10.0)),
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
