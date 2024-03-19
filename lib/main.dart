@@ -120,7 +120,6 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Game': const GameWidget(),
       'dategame': const DategameWidget(),
       'myregistration': const MyregistrationWidget(),
       'resource': const ResourceWidget(),
@@ -151,18 +150,6 @@ class _NavBarPageState extends State<NavBarPage> {
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.gamepad_rounded,
-                size: 24.0,
-              ),
-              activeIcon: Icon(
-                Icons.games_outlined,
-                size: 32.0,
-              ),
-              label: 'Игры',
-              tooltip: '',
-            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.date_range_sharp,

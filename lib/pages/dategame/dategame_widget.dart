@@ -141,9 +141,9 @@ class _DategameWidgetState extends State<DategameWidget> {
                                     return 1;
                                   } else if (MediaQuery.sizeOf(context).width <
                                       kBreakpointMedium) {
-                                    return 1;
+                                    return 2;
                                   } else {
-                                    return 1;
+                                    return 3;
                                   }
                                 }(),
                                 2,

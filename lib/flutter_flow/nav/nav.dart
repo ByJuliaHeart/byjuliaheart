@@ -94,8 +94,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Game',
           path: '/game',
-          builder: (context, params) =>
-              params.isEmpty ? const NavBarPage(initialPage: 'Game') : const GameWidget(),
+          builder: (context, params) => const GameWidget(),
         ),
         FFRoute(
           name: 'menu',
