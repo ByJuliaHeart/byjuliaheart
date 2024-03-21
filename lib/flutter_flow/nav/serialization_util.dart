@@ -205,6 +205,8 @@ dynamic deserializeParam<T>(
         switch (T) {
           case RolesRow:
             return RolesRow(data);
+          case InviteUsersRow:
+            return InviteUsersRow(data);
           case ResourseRow:
             return ResourseRow(data);
           case CardsRow:

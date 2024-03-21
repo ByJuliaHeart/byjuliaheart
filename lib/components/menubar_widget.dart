@@ -54,6 +54,8 @@ class _MenubarWidgetState extends State<MenubarWidget> {
         FFAppState().city = _model.user!.first.city!;
       });
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -274,271 +276,285 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                         ),
                       ),
                     ),
-                    if (FFAppState().gameDrop == true)
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: ListView(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            MouseRegion(
-                              opaque: false,
-                              cursor: MouseCursor.defer ?? MouseCursor.defer,
-                              onEnter: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered2 = true);
-                              }),
-                              onExit: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered2 = false);
-                              }),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'GameNewBlockPage',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 0),
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 350),
-                                    curve: Curves.easeInOut,
-                                    width: double.infinity,
-                                    height: 35.0,
-                                    decoration: BoxDecoration(
-                                      color: () {
-                                        if (_model.mouseRegionHovered2) {
-                                          return FlutterFlowTheme.of(context)
-                                              .secondaryBackground;
-                                        } else if (widget.pageName == 'Game') {
-                                          return FlutterFlowTheme.of(context)
-                                              .accent1;
-                                        } else {
-                                          return FlutterFlowTheme.of(context)
-                                              .primaryBackground;
-                                        }
-                                      }(),
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 6.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.space_dashboard,
-                                            color: widget.pageName == 'Game'
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primary
-                                                : FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            size: 24.0,
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 100),
+                      curve: Curves.easeIn,
+                      decoration: const BoxDecoration(),
+                      child: Visibility(
+                        visible: FFAppState().gameDrop == true,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: ListView(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            children: [
+                              MouseRegion(
+                                opaque: false,
+                                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                                onEnter: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered2 = true);
+                                }),
+                                onExit: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered2 = false);
+                                }),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'GameNewBlockPage',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Игры',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                        },
+                                      );
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 350),
+                                      curve: Curves.easeInOut,
+                                      width: double.infinity,
+                                      height: 35.0,
+                                      decoration: BoxDecoration(
+                                        color: () {
+                                          if (_model.mouseRegionHovered2) {
+                                            return FlutterFlowTheme.of(context)
+                                                .secondaryBackground;
+                                          } else if (widget.pageName ==
+                                              'Game') {
+                                            return FlutterFlowTheme.of(context)
+                                                .accent1;
+                                          } else {
+                                            return FlutterFlowTheme.of(context)
+                                                .primaryBackground;
+                                          }
+                                        }(),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 6.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.space_dashboard,
+                                              color: widget.pageName == 'Game'
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .primary
+                                                  : FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              size: 24.0,
                                             ),
-                                          ),
-                                        ],
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Игры',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            MouseRegion(
-                              opaque: false,
-                              cursor: MouseCursor.defer ?? MouseCursor.defer,
-                              onEnter: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered3 = true);
-                              }),
-                              onExit: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered3 = false);
-                              }),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'dategame',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 0),
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 350),
-                                    curve: Curves.easeInOut,
-                                    width: double.infinity,
-                                    height: 35.0,
-                                    decoration: BoxDecoration(
-                                      color: () {
-                                        if (_model.mouseRegionHovered3) {
-                                          return FlutterFlowTheme.of(context)
-                                              .secondaryBackground;
-                                        } else if (widget.pageName ==
-                                            'dateGame') {
-                                          return FlutterFlowTheme.of(context)
-                                              .accent1;
-                                        } else {
-                                          return FlutterFlowTheme.of(context)
-                                              .primaryBackground;
-                                        }
-                                      }(),
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 6.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.forum_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
+                              MouseRegion(
+                                opaque: false,
+                                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                                onEnter: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered3 = true);
+                                }),
+                                onExit: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered3 = false);
+                                }),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'dategame',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Расписания',
-                                              style:
+                                        },
+                                      );
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 350),
+                                      curve: Curves.easeInOut,
+                                      width: double.infinity,
+                                      height: 35.0,
+                                      decoration: BoxDecoration(
+                                        color: () {
+                                          if (_model.mouseRegionHovered3) {
+                                            return FlutterFlowTheme.of(context)
+                                                .secondaryBackground;
+                                          } else if (widget.pageName ==
+                                              'dateGame') {
+                                            return FlutterFlowTheme.of(context)
+                                                .accent1;
+                                          } else {
+                                            return FlutterFlowTheme.of(context)
+                                                .primaryBackground;
+                                          }
+                                        }(),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 6.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.forum_rounded,
+                                              color:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .primaryText,
+                                              size: 24.0,
                                             ),
-                                          ),
-                                        ],
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Расписания',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            MouseRegion(
-                              opaque: false,
-                              cursor: MouseCursor.defer ?? MouseCursor.defer,
-                              onEnter: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered4 = true);
-                              }),
-                              onExit: ((event) async {
-                                setState(
-                                    () => _model.mouseRegionHovered4 = false);
-                              }),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    context.pushNamed(
-                                      'myregistration',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 0),
-                                        ),
-                                      },
-                                    );
-                                  },
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 350),
-                                    curve: Curves.easeInOut,
-                                    width: double.infinity,
-                                    height: 35.0,
-                                    decoration: BoxDecoration(
-                                      color: () {
-                                        if (_model.mouseRegionHovered4) {
-                                          return FlutterFlowTheme.of(context)
-                                              .secondaryBackground;
-                                        } else if (widget.pageName == 'myreg') {
-                                          return FlutterFlowTheme.of(context)
-                                              .accent1;
-                                        } else {
-                                          return FlutterFlowTheme.of(context)
-                                              .primaryBackground;
-                                        }
-                                      }(),
-                                      borderRadius: BorderRadius.circular(12.0),
-                                      shape: BoxShape.rectangle,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          8.0, 0.0, 6.0, 0.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Icon(
-                                            Icons.app_registration,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                            size: 24.0,
+                              MouseRegion(
+                                opaque: false,
+                                cursor: MouseCursor.defer ?? MouseCursor.defer,
+                                onEnter: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered4 = true);
+                                }),
+                                onExit: ((event) async {
+                                  setState(
+                                      () => _model.mouseRegionHovered4 = false);
+                                }),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed(
+                                        'myregistration',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration: Duration(milliseconds: 0),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    12.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Мои регистрации',
-                                              style:
+                                        },
+                                      );
+                                    },
+                                    child: AnimatedContainer(
+                                      duration: const Duration(milliseconds: 350),
+                                      curve: Curves.easeInOut,
+                                      width: double.infinity,
+                                      height: 35.0,
+                                      decoration: BoxDecoration(
+                                        color: () {
+                                          if (_model.mouseRegionHovered4) {
+                                            return FlutterFlowTheme.of(context)
+                                                .secondaryBackground;
+                                          } else if (widget.pageName ==
+                                              'myreg') {
+                                            return FlutterFlowTheme.of(context)
+                                                .accent1;
+                                          } else {
+                                            return FlutterFlowTheme.of(context)
+                                                .primaryBackground;
+                                          }
+                                        }(),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            8.0, 0.0, 6.0, 0.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.app_registration,
+                                              color:
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                                      .primaryText,
+                                              size: 24.0,
                                             ),
-                                          ),
-                                        ],
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      12.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                'Мои регистрации',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
+                    ),
                     MouseRegion(
                       opaque: false,
                       cursor: MouseCursor.defer ?? MouseCursor.defer,
@@ -620,87 +636,88 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                         ),
                       ),
                     ),
-                    MouseRegion(
-                      opaque: false,
-                      cursor: MouseCursor.defer ?? MouseCursor.defer,
-                      onEnter: ((event) async {
-                        setState(() => _model.mouseRegionHovered5 = true);
-                      }),
-                      onExit: ((event) async {
-                        setState(() => _model.mouseRegionHovered5 = false);
-                      }),
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            setState(() {
-                              FFAppState().gameDrop = false;
-                            });
+                    if (FFAppState().roleUsers.contains('Admin'))
+                      MouseRegion(
+                        opaque: false,
+                        cursor: MouseCursor.defer ?? MouseCursor.defer,
+                        onEnter: ((event) async {
+                          setState(() => _model.mouseRegionHovered5 = true);
+                        }),
+                        onExit: ((event) async {
+                          setState(() => _model.mouseRegionHovered5 = false);
+                        }),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                FFAppState().gameDrop = false;
+                              });
 
-                            context.pushNamed(
-                              'cards',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType: PageTransitionType.fade,
-                                  duration: Duration(milliseconds: 0),
-                                ),
-                              },
-                            );
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 350),
-                            curve: Curves.easeInOut,
-                            width: double.infinity,
-                            height: 44.0,
-                            decoration: BoxDecoration(
-                              color: () {
-                                if (_model.mouseRegionHovered5) {
-                                  return FlutterFlowTheme.of(context)
-                                      .secondaryBackground;
-                                } else if (widget.pageName == 'cards') {
-                                  return FlutterFlowTheme.of(context).accent1;
-                                } else {
-                                  return FlutterFlowTheme.of(context)
-                                      .primaryBackground;
-                                }
-                              }(),
-                              borderRadius: BorderRadius.circular(12.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 0.0, 6.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.sim_card,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
+                              context.pushNamed(
+                                'cards',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: const TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Карты',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                },
+                              );
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 350),
+                              curve: Curves.easeInOut,
+                              width: double.infinity,
+                              height: 44.0,
+                              decoration: BoxDecoration(
+                                color: () {
+                                  if (_model.mouseRegionHovered5) {
+                                    return FlutterFlowTheme.of(context)
+                                        .secondaryBackground;
+                                  } else if (widget.pageName == 'cards') {
+                                    return FlutterFlowTheme.of(context).accent1;
+                                  } else {
+                                    return FlutterFlowTheme.of(context)
+                                        .primaryBackground;
+                                  }
+                                }(),
+                                borderRadius: BorderRadius.circular(12.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 0.0, 6.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      Icons.sim_card,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                      size: 24.0,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Карты',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                     Padding(
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),

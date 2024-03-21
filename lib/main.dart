@@ -122,9 +122,9 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'dategame': const DategameWidget(),
       'myregistration': const MyregistrationWidget(),
+      'GameNewBlockPage': const GameNewBlockPageWidget(),
       'resource': const ResourceWidget(),
       'ProfileCreEdit': const ProfileCreEditWidget(),
-      'GameNewBlockPage': const GameNewBlockPageWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -168,6 +168,18 @@ class _NavBarPageState extends State<NavBarPage> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
+                Icons.gamepad_rounded,
+                size: 24.0,
+              ),
+              activeIcon: Icon(
+                Icons.games_outlined,
+                size: 32.0,
+              ),
+              label: 'Игры',
+              tooltip: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
                 Icons.record_voice_over_rounded,
                 size: 24.0,
               ),
@@ -180,18 +192,6 @@ class _NavBarPageState extends State<NavBarPage> {
                 size: 24.0,
               ),
               label: 'Профиль',
-              tooltip: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.gamepad_rounded,
-                size: 24.0,
-              ),
-              activeIcon: Icon(
-                Icons.games_outlined,
-                size: 32.0,
-              ),
-              label: 'Игры',
               tooltip: '',
             )
           ],

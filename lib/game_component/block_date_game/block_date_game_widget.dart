@@ -79,6 +79,8 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

@@ -64,6 +64,8 @@ class _CubeMWidgetState extends State<CubeMWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -75,20 +77,16 @@ class _CubeMWidgetState extends State<CubeMWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(6.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset(
-          'assets/images/six.png',
-          width: 50.0,
-          fit: BoxFit.contain,
-        ),
-      )
-          .animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!)
-          .animateOnActionTrigger(
-              animationsMap['imageOnActionTriggerAnimation']!,
-              hasBeenTriggered: hasImageTriggered),
-    );
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Image.asset(
+        'assets/images/six.png',
+        width: 50.0,
+        fit: BoxFit.contain,
+      ),
+    )
+        .animateOnPageLoad(animationsMap['imageOnPageLoadAnimation']!)
+        .animateOnActionTrigger(animationsMap['imageOnActionTriggerAnimation']!,
+            hasBeenTriggered: hasImageTriggered);
   }
 }

@@ -24,6 +24,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _avatar = prefs.getString('ff_avatar') ?? _avatar;
     });
+    _safeInit(() {
+      _userRef = prefs.getString('ff_userRef') ?? _userRef;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -171,6 +174,13 @@ class FFAppState extends ChangeNotifier {
     _agreementSwitch = value;
   }
 
+  String _userRef = '';
+  String get userRef => _userRef;
+  set userRef(String value) {
+    _userRef = value;
+    prefs.setString('ff_userRef', value);
+  }
+
   final _userdataManager = FutureRequestManager<List<UsersRow>>();
   Future<List<UsersRow>> userdata({
     String? uniqueQueryKey,
@@ -185,6 +195,51 @@ class FFAppState extends ChangeNotifier {
   void clearUserdataCache() => _userdataManager.clear();
   void clearUserdataCacheKey(String? uniqueKey) =>
       _userdataManager.clearRequest(uniqueKey);
+
+  final _dateGameManager = FutureRequestManager<List<GameFieldRow>>();
+  Future<List<GameFieldRow>> dateGame({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<GameFieldRow>> Function() requestFn,
+  }) =>
+      _dateGameManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearDateGameCache() => _dateGameManager.clear();
+  void clearDateGameCacheKey(String? uniqueKey) =>
+      _dateGameManager.clearRequest(uniqueKey);
+
+  final _myregManager = FutureRequestManager<List<RegistrGameRow>>();
+  Future<List<RegistrGameRow>> myreg({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<RegistrGameRow>> Function() requestFn,
+  }) =>
+      _myregManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearMyregCache() => _myregManager.clear();
+  void clearMyregCacheKey(String? uniqueKey) =>
+      _myregManager.clearRequest(uniqueKey);
+
+  final _gameFieldManager = FutureRequestManager<List<GameFieldRow>>();
+  Future<List<GameFieldRow>> gameField({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<List<GameFieldRow>> Function() requestFn,
+  }) =>
+      _gameFieldManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearGameFieldCache() => _gameFieldManager.clear();
+  void clearGameFieldCacheKey(String? uniqueKey) =>
+      _gameFieldManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

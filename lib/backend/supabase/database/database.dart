@@ -6,6 +6,7 @@ export 'row.dart';
 export 'table.dart';
 
 export 'tables/roles.dart';
+export 'tables/invite_users.dart';
 export 'tables/resourse.dart';
 export 'tables/cards.dart';
 export 'tables/anktets.dart';

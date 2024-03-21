@@ -85,6 +85,8 @@ class _GameTimeAddWidgetState extends State<GameTimeAddWidget>
     _model.discriptionController ??=
         TextEditingController(text: widget.description);
     _model.discriptionFocusNode ??= FocusNode();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

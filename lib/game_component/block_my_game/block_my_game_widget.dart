@@ -58,6 +58,8 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockMyGameModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -112,14 +114,11 @@ class _BlockMyGameWidgetState extends State<BlockMyGameWidget> {
                       topLeft: Radius.circular(12.0),
                       topRight: Radius.circular(12.0),
                     ),
-                    child: Image.network(
-                      valueOrDefault<String>(
-                        widget.img,
-                        'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/1709737784895000.png',
-                      ),
+                    child: Image.asset(
+                      'assets/images/528fa359-1dfd-4a26-8a0d-7215e8661878.jpg',
                       width: double.infinity,
                       height: 86.0,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

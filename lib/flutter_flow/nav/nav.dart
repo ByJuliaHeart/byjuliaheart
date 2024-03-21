@@ -80,101 +80,116 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/',
           builder: (context, _) =>
               appStateNotifier.loggedIn ? const NavBarPage() : const AuthRegWidget(),
+          routes: [
+            FFRoute(
+              name: 'AuthReg',
+              path: 'authReg',
+              builder: (context, params) => AuthRegWidget(
+                refid: params.getParam('refid', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'ProfileCreateEdit',
+              path: 'profileCreateEdit',
+              requireAuth: true,
+              builder: (context, params) => const ProfileCreateEditWidget(),
+            ),
+            FFRoute(
+              name: 'Game',
+              path: 'game',
+              requireAuth: true,
+              builder: (context, params) => const GameWidget(),
+            ),
+            FFRoute(
+              name: 'menu',
+              path: 'menu',
+              requireAuth: true,
+              builder: (context, params) => const MenuWidget(),
+            ),
+            FFRoute(
+              name: 'dategame',
+              path: 'dategame',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'dategame')
+                  : const DategameWidget(),
+            ),
+            FFRoute(
+              name: 'gameField',
+              path: 'gameField',
+              requireAuth: true,
+              builder: (context, params) => GameFieldWidget(
+                gamefield: params.getParam('gamefield', ParamType.String),
+                unix: params.getParam('unix', ParamType.int),
+                idmembergame: params.getParam<String>(
+                    'idmembergame', ParamType.String, true),
+                date: params.getParam('date', ParamType.String),
+                time: params.getParam('time', ParamType.String),
+                id: params.getParam('id', ParamType.String),
+                gameid: params.getParam('gameid', ParamType.String),
+                nameGame: params.getParam('nameGame', ParamType.String),
+                description: params.getParam('description', ParamType.String),
+                avatar: params.getParam('avatar', ParamType.String),
+                nameUser: params.getParam('nameUser', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'myregistration',
+              path: 'myregistration',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'myregistration')
+                  : const MyregistrationWidget(),
+            ),
+            FFRoute(
+              name: 'resource',
+              path: 'resource',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'resource')
+                  : const ResourceWidget(),
+            ),
+            FFRoute(
+              name: 'cards',
+              path: 'cards',
+              requireAuth: true,
+              builder: (context, params) => const CardsWidget(),
+            ),
+            FFRoute(
+              name: 'ProfileCreEdit',
+              path: 'profile',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'ProfileCreEdit')
+                  : const ProfileCreEditWidget(),
+            ),
+            FFRoute(
+              name: 'gameFieldCopy',
+              path: 'gameFieldCopy',
+              requireAuth: true,
+              builder: (context, params) => GameFieldCopyWidget(
+                gamefield: params.getParam('gamefield', ParamType.String),
+                unix: params.getParam('unix', ParamType.int),
+                idmembergame: params.getParam<String>(
+                    'idmembergame', ParamType.String, true),
+                date: params.getParam('date', ParamType.String),
+                time: params.getParam('time', ParamType.String),
+                id: params.getParam('id', ParamType.String),
+                gameid: params.getParam('gameid', ParamType.String),
+                nameGame: params.getParam('nameGame', ParamType.String),
+                description: params.getParam('description', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'GameNewBlockPage',
+              path: 'gameNewBlockPage',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'GameNewBlockPage')
+                  : const GameNewBlockPageWidget(),
+            )
+          ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
-        FFRoute(
-          name: 'AuthReg',
-          path: '/authReg',
-          builder: (context, params) => const AuthRegWidget(),
-        ),
-        FFRoute(
-          name: 'ProfileCreateEdit',
-          path: '/profileCreateEdit',
-          builder: (context, params) => const ProfileCreateEditWidget(),
-        ),
-        FFRoute(
-          name: 'Game',
-          path: '/game',
-          builder: (context, params) => const GameWidget(),
-        ),
-        FFRoute(
-          name: 'menu',
-          path: '/menu',
-          builder: (context, params) => const MenuWidget(),
-        ),
-        FFRoute(
-          name: 'dategame',
-          path: '/dategame',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'dategame')
-              : const DategameWidget(),
-        ),
-        FFRoute(
-          name: 'gameField',
-          path: '/gameField',
-          builder: (context, params) => GameFieldWidget(
-            gamefield: params.getParam('gamefield', ParamType.String),
-            unix: params.getParam('unix', ParamType.int),
-            idmembergame:
-                params.getParam<String>('idmembergame', ParamType.String, true),
-            date: params.getParam('date', ParamType.String),
-            time: params.getParam('time', ParamType.String),
-            id: params.getParam('id', ParamType.String),
-            gameid: params.getParam('gameid', ParamType.String),
-            nameGame: params.getParam('nameGame', ParamType.String),
-            description: params.getParam('description', ParamType.String),
-            avatar: params.getParam('avatar', ParamType.String),
-            nameUser: params.getParam('nameUser', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'myregistration',
-          path: '/myregistration',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'myregistration')
-              : const MyregistrationWidget(),
-        ),
-        FFRoute(
-          name: 'resource',
-          path: '/resource',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'resource')
-              : const ResourceWidget(),
-        ),
-        FFRoute(
-          name: 'cards',
-          path: '/cards',
-          builder: (context, params) => const CardsWidget(),
-        ),
-        FFRoute(
-          name: 'ProfileCreEdit',
-          path: '/profile',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'ProfileCreEdit')
-              : const ProfileCreEditWidget(),
-        ),
-        FFRoute(
-          name: 'gameFieldCopy',
-          path: '/gameFieldCopy',
-          builder: (context, params) => GameFieldCopyWidget(
-            gamefield: params.getParam('gamefield', ParamType.String),
-            unix: params.getParam('unix', ParamType.int),
-            idmembergame:
-                params.getParam<String>('idmembergame', ParamType.String, true),
-            date: params.getParam('date', ParamType.String),
-            time: params.getParam('time', ParamType.String),
-            id: params.getParam('id', ParamType.String),
-            gameid: params.getParam('gameid', ParamType.String),
-            nameGame: params.getParam('nameGame', ParamType.String),
-            description: params.getParam('description', ParamType.String),
-          ),
-        ),
-        FFRoute(
-          name: 'GameNewBlockPage',
-          path: '/gameNewBlockPage',
-          builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'GameNewBlockPage')
-              : const GameNewBlockPageWidget(),
-        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

@@ -69,6 +69,8 @@ class _GameNewblockWidgetState extends State<GameNewblockWidget>
           !anim.applyInitialState),
       this,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -83,10 +85,10 @@ class _GameNewblockWidgetState extends State<GameNewblockWidget>
     context.watch<FFAppState>();
 
     return Align(
-      alignment: const AlignmentDirectional(0.0, -1.0),
+      alignment: const AlignmentDirectional(0.0, 0.0),
       child: Container(
-        width: 580.0,
-        height: double.infinity,
+        width: MediaQuery.sizeOf(context).width * 1.0,
+        height: MediaQuery.sizeOf(context).height * 0.3,
         constraints: const BoxConstraints(
           maxWidth: 580.0,
           maxHeight: double.infinity,
@@ -116,26 +118,21 @@ class _GameNewblockWidgetState extends State<GameNewblockWidget>
                           children: [
                             Expanded(
                               child: Container(
-                                width: valueOrDefault<double>(
-                                  () {
-                                    if (MediaQuery.sizeOf(context).width <
-                                        kBreakpointSmall) {
-                                      return 50.0;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointMedium) {
-                                      return 120.0;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointLarge) {
-                                      return 237.0;
-                                    } else {
-                                      return 237.0;
-                                    }
-                                  }(),
-                                  237.0,
-                                ),
-                                height: double.infinity,
+                                width: () {
+                                  if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointSmall) {
+                                    return 150.0;
+                                  } else if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointMedium) {
+                                    return 240.0;
+                                  } else if (MediaQuery.sizeOf(context).width <
+                                      kBreakpointLarge) {
+                                    return 240.0;
+                                  } else {
+                                    return 240.0;
+                                  }
+                                }(),
+                                height: 80.0,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,

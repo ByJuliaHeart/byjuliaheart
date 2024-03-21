@@ -54,6 +54,8 @@ class _BlockDateGameCopyWidgetState extends State<BlockDateGameCopyWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockDateGameCopyModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

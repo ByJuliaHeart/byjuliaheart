@@ -44,6 +44,8 @@ class _BlockWidgetState extends State<BlockWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => BlockModel());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -90,13 +92,10 @@ class _BlockWidgetState extends State<BlockWidget> {
                     topRight: Radius.circular(12.0),
                   ),
                   child: Image.network(
-                    valueOrDefault<String>(
-                      widget.img,
-                      'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/imggame/1709737784895000.png',
-                    ),
+                    widget.img!,
                     width: double.infinity,
                     height: 80.0,
-                    fit: BoxFit.contain,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
