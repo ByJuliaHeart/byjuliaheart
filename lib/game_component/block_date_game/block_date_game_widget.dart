@@ -79,8 +79,6 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -299,6 +297,18 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                         fontSize: 11.0,
                                         fontWeight: FontWeight.w300,
                                       ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 8.0, 0.0, 0.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    widget.date,
+                                    '-',
+                                  ).maybeHandleOverflow(maxChars: 10),
+                                  style:
+                                      FlutterFlowTheme.of(context).bodyMedium,
                                 ),
                               ),
                             ],

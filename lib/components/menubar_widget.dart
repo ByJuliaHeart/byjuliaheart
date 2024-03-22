@@ -1,5 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -54,8 +55,6 @@ class _MenubarWidgetState extends State<MenubarWidget> {
         FFAppState().city = _model.user!.first.city!;
       });
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -76,7 +75,10 @@ class _MenubarWidgetState extends State<MenubarWidget> {
         tablet: false,
       ),
       child: Container(
-        width: 270.0,
+        width: valueOrDefault<double>(
+          FFAppState().openMenu == true ? 270.0 : 72.0,
+          270.0,
+        ),
         height: double.infinity,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).primaryBackground,
@@ -104,8 +106,47 @@ class _MenubarWidgetState extends State<MenubarWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if (FFAppState().openMenu == false)
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                    child: FlutterFlowIconButton(
+                      borderRadius: 20.0,
+                      borderWidth: 1.0,
+                      buttonSize: 40.0,
+                      icon: Icon(
+                        Icons.arrow_forward_ios,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
+                      ),
+                      onPressed: () async {
+                        if (FFAppState().openMenu) {
+                          setState(() {
+                            FFAppState().openMenu = false;
+                          });
+                        } else {
+                          setState(() {
+                            FFAppState().openMenu = true;
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 12.0),
+                padding: EdgeInsetsDirectional.fromSTEB(
+                    valueOrDefault<double>(
+                      FFAppState().openMenu == true ? 16.0 : 8.0,
+                      0.0,
+                    ),
+                    0.0,
+                    valueOrDefault<double>(
+                      FFAppState().openMenu == true ? 16.0 : 8.0,
+                      0.0,
+                    ),
+                    12.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -118,16 +159,41 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Expanded(
-                      child: Text(
-                        'Open Heart',
-                        style:
-                            FlutterFlowTheme.of(context).displaySmall.override(
-                                  fontFamily: 'Open Sans',
-                                  fontSize: 16.0,
-                                ),
+                    if (FFAppState().openMenu == true)
+                      Expanded(
+                        child: Text(
+                          'Open Heart',
+                          style: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .override(
+                                fontFamily: 'Open Sans',
+                                fontSize: 16.0,
+                              ),
+                        ),
                       ),
-                    ),
+                    if (FFAppState().openMenu == true)
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 20.0,
+                        borderWidth: 1.0,
+                        buttonSize: 40.0,
+                        icon: Icon(
+                          Icons.arrow_back_ios_new,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                        onPressed: () async {
+                          if (FFAppState().openMenu) {
+                            setState(() {
+                              FFAppState().openMenu = false;
+                            });
+                          } else {
+                            setState(() {
+                              FFAppState().openMenu = true;
+                            });
+                          }
+                        },
+                      ),
                   ],
                 ),
               ),
@@ -219,52 +285,61 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                                         .primaryText,
                                                 size: 24.0,
                                               ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    -1.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          12.0, 0.0, 0.0, 0.0),
-                                                  child: Text(
-                                                    'Женщина с крыльями',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium,
-                                                  ),
-                                                ),
-                                              ),
                                             ],
                                           ),
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                if (FFAppState().gameDrop ==
-                                                    false)
-                                                  Icon(
-                                                    Icons.arrow_right,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
+                                          if (FFAppState().openMenu == true)
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            -1.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Text(
+                                                        'Женщина с крыльями',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium,
+                                                      ),
+                                                    ),
                                                   ),
-                                                if (FFAppState().gameDrop ==
-                                                    true)
-                                                  Icon(
-                                                    Icons.arrow_drop_down,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    size: 24.0,
-                                                  ),
-                                              ],
+                                                  if (FFAppState().gameDrop ==
+                                                      false)
+                                                    Icon(
+                                                      Icons.arrow_right,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                  if (FFAppState().gameDrop ==
+                                                      true)
+                                                    Icon(
+                                                      Icons.arrow_drop_down,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryText,
+                                                      size: 24.0,
+                                                    ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -302,8 +377,21 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       () => _model.mouseRegionHovered2 = false);
                                 }),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0,
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -347,7 +435,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 6.0, 0.0),
+                                            6.0, 0.0, 6.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -360,17 +448,18 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                                       .primaryText,
                                               size: 24.0,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Игры',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                            if (FFAppState().openMenu == true)
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'Игры',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -390,8 +479,21 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       () => _model.mouseRegionHovered3 = false);
                                 }),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0,
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -435,7 +537,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 6.0, 0.0),
+                                            6.0, 0.0, 6.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -446,17 +548,18 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                                       .primaryText,
                                               size: 24.0,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Расписания',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                            if (FFAppState().openMenu == true)
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'Расписания',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -476,8 +579,21 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       () => _model.mouseRegionHovered4 = false);
                                 }),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 16.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0,
+                                      valueOrDefault<double>(
+                                        FFAppState().openMenu == true
+                                            ? 16.0
+                                            : 8.0,
+                                        0.0,
+                                      ),
+                                      0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -521,7 +637,7 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 0.0, 6.0, 0.0),
+                                            6.0, 0.0, 6.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
@@ -532,17 +648,18 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                                       .primaryText,
                                               size: 24.0,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      12.0, 0.0, 0.0, 0.0),
-                                              child: Text(
-                                                'Мои регистрации',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
+                                            if (FFAppState().openMenu == true)
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        12.0, 0.0, 0.0, 0.0),
+                                                child: Text(
+                                                  'Мои регистрации',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                ),
                                               ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -620,15 +737,16 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                         .primaryText,
                                     size: 24.0,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        12.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Мои ресурсы',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium,
+                                  if (FFAppState().openMenu == true)
+                                    Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          12.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Мои ресурсы',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium,
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -702,15 +820,16 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                           .primaryText,
                                       size: 24.0,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Карты',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                    if (FFAppState().openMenu == true)
+                                      Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Карты',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),
@@ -718,14 +837,15 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                           ),
                         ),
                       ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Text(
-                        'Настройки',
-                        style: FlutterFlowTheme.of(context).labelMedium,
+                    if (FFAppState().openMenu == true)
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          'Настройки',
+                          style: FlutterFlowTheme.of(context).labelMedium,
+                        ),
                       ),
-                    ),
                     MouseRegion(
                       opaque: false,
                       cursor: MouseCursor.defer ?? MouseCursor.defer,
@@ -791,17 +911,18 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                                     color: FlutterFlowTheme.of(context).primary,
                                     size: 24.0,
                                   ),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          12.0, 0.0, 0.0, 0.0),
-                                      child: Text(
-                                        'Профиль',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                  if (FFAppState().openMenu == true)
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                            12.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          'Профиль',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium,
+                                        ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
@@ -818,7 +939,17 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                 color: FlutterFlowTheme.of(context).alternate,
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 12.0),
+                padding: EdgeInsetsDirectional.fromSTEB(
+                    valueOrDefault<double>(
+                      FFAppState().openMenu == true ? 16.0 : 8.0,
+                      8.0,
+                    ),
+                    12.0,
+                    valueOrDefault<double>(
+                      FFAppState().openMenu == true ? 16.0 : 8.0,
+                      8.0,
+                    ),
+                    12.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -856,76 +987,78 @@ class _MenubarWidgetState extends State<MenubarWidget> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              FFAppState().name,
-                              style: FlutterFlowTheme.of(context).bodyLarge,
-                            ),
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 0.0),
-                              child: Text(
-                                FFAppState().city,
-                                style: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .override(
-                                      fontFamily: 'Roboto',
-                                      fontSize: 12.0,
-                                    ),
+                    if (FFAppState().openMenu == true)
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              12.0, 0.0, 0.0, 0.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                FFAppState().name,
+                                style: FlutterFlowTheme.of(context).bodyLarge,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 4.0, 0.0, 0.0),
+                                child: Text(
+                                  FFAppState().city,
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelMedium
+                                      .override(
+                                        fontFamily: 'Roboto',
+                                        fontSize: 12.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              if (FFAppState().openMenu == true)
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Align(
+                      alignment: const AlignmentDirectional(1.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          GoRouter.of(context).prepareAuthEvent();
+                          await authManager.signOut();
+                          GoRouter.of(context).clearRedirectLocation();
+
+                          context.pushNamedAuth('AuthReg', context.mounted);
+                        },
+                        text: 'Выход',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Roboto',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        GoRouter.of(context).prepareAuthEvent();
-                        await authManager.signOut();
-                        GoRouter.of(context).clearRedirectLocation();
-
-                        context.pushNamedAuth('AuthReg', context.mounted);
-                      },
-                      text: 'Выход',
-                      options: FFButtonOptions(
-                        height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Roboto',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),

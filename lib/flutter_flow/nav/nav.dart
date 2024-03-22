@@ -187,6 +187,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? const NavBarPage(initialPage: 'GameNewBlockPage')
                   : const GameNewBlockPageWidget(),
+            ),
+            FFRoute(
+              name: 'shimmer',
+              path: 'shimmer',
+              requireAuth: true,
+              builder: (context, params) => const ShimmerWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

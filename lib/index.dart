@@ -16,3 +16,4 @@ export '/pages/blackpage/game_field_copy/game_field_copy_widget.dart'
     show GameFieldCopyWidget;
 export '/pages/game_new_block_page/game_new_block_page_widget.dart'
     show GameNewBlockPageWidget;
+export '/shimmer/shimmer_widget.dart' show ShimmerWidget;

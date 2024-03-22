@@ -27,6 +27,9 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _userRef = prefs.getString('ff_userRef') ?? _userRef;
     });
+    _safeInit(() {
+      _openMenu = prefs.getBool('ff_openMenu') ?? _openMenu;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -179,6 +182,13 @@ class FFAppState extends ChangeNotifier {
   set userRef(String value) {
     _userRef = value;
     prefs.setString('ff_userRef', value);
+  }
+
+  bool _openMenu = true;
+  bool get openMenu => _openMenu;
+  set openMenu(bool value) {
+    _openMenu = value;
+    prefs.setBool('ff_openMenu', value);
   }
 
   final _userdataManager = FutureRequestManager<List<UsersRow>>();

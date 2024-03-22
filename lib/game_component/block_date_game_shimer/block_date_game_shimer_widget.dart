@@ -68,8 +68,6 @@ class _BlockDateGameShimerWidgetState extends State<BlockDateGameShimerWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

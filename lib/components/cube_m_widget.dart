@@ -64,8 +64,6 @@ class _CubeMWidgetState extends State<CubeMWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

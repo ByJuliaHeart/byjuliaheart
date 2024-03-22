@@ -69,8 +69,6 @@ class _GameNewblockWidgetState extends State<GameNewblockWidget>
           !anim.applyInitialState),
       this,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override

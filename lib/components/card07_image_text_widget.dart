@@ -24,8 +24,6 @@ class _Card07ImageTextWidgetState extends State<Card07ImageTextWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Card07ImageTextModel());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
