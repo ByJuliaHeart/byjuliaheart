@@ -122,7 +122,7 @@ class _ResourceWidgetState extends State<ResourceWidget>
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        height: 200.0,
+                        height: MediaQuery.sizeOf(context).height * 1.0,
                         decoration: const BoxDecoration(),
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
