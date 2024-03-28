@@ -83,7 +83,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           routes: [
             FFRoute(
               name: 'AuthReg',
-              path: 'authReg',
+              path: 'authreg',
               builder: (context, params) => AuthRegWidget(
                 refid: params.getParam('refid', ParamType.String),
               ),
@@ -193,6 +193,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               path: 'shimmer',
               requireAuth: true,
               builder: (context, params) => const ShimmerWidget(),
+            ),
+            FFRoute(
+              name: 'tinder',
+              path: 'tinder',
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? const NavBarPage(initialPage: 'tinder')
+                  : const TinderWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -363,7 +371,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/authReg';
+            return '/authreg';
           }
           return null;
         },
@@ -429,7 +437,11 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(
+        hasTransition: true,
+        transitionType: PageTransitionType.fade,
+        duration: Duration(milliseconds: 200),
+      );
 }
 
 class RootPageContext {

@@ -20,8 +20,8 @@ class InviteUsersRow extends SupabaseDataRow {
   DateTime get createdAt => getField<DateTime>('created_at')!;
   set createdAt(DateTime value) => setField<DateTime>('created_at', value);
 
-  String? get referral => getField<String>('referral');
-  set referral(String? value) => setField<String>('referral', value);
+  String? get refid => getField<String>('refid');
+  set refid(String? value) => setField<String>('refid', value);
 
   String? get userId => getField<String>('user_id');
   set userId(String? value) => setField<String>('user_id', value);

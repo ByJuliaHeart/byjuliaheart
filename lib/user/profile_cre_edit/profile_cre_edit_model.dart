@@ -18,10 +18,6 @@ class ProfileCreEditModel extends FlutterFlowModel<ProfileCreEditWidget> {
   FocusNode? nameFocusNode;
   TextEditingController? nameController;
   String? Function(BuildContext, String?)? nameControllerValidator;
-  // State field(s) for lastName widget.
-  FocusNode? lastNameFocusNode;
-  TextEditingController? lastNameController;
-  String? Function(BuildContext, String?)? lastNameControllerValidator;
   // State field(s) for phone widget.
   FocusNode? phoneFocusNode;
   TextEditingController? phoneController;
@@ -44,9 +40,6 @@ class ProfileCreEditModel extends FlutterFlowModel<ProfileCreEditWidget> {
     menubarModel.dispose();
     nameFocusNode?.dispose();
     nameController?.dispose();
-
-    lastNameFocusNode?.dispose();
-    lastNameController?.dispose();
 
     phoneFocusNode?.dispose();
     phoneController?.dispose();

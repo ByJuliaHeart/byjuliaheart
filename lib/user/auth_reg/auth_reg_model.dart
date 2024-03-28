@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'auth_reg_widget.dart' show AuthRegWidget;
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class AuthRegModel extends FlutterFlowModel<AuthRegWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - Query Rows] action in AuthReg widget.
+  List<UsersRow>? userref;
   // State field(s) for emailAddress widget.
   FocusNode? emailAddressFocusNode;
   TextEditingController? emailAddressController;
@@ -40,6 +43,8 @@ class AuthRegModel extends FlutterFlowModel<AuthRegWidget> {
   String? Function(BuildContext, String?)? usercodeControllerValidator;
   // State field(s) for Switch widget.
   bool? switchValue;
+  // Stores action output result for [Backend Call - Insert Row] action in Button widget.
+  InviteUsersRow? invite;
 
   /// Initialization and disposal methods.
 

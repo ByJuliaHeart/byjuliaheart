@@ -1,5 +1,6 @@
 import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:async';
 import 'dategame_widget.dart' show DategameWidget;
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,8 @@ class DategameModel extends FlutterFlowModel<DategameWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  bool requestCompleted = false;
+  String? requestLastUniqueKey;
   // Model for menubar component.
   late MenubarModel menubarModel;
 
@@ -26,4 +29,19 @@ class DategameModel extends FlutterFlowModel<DategameWidget> {
   /// Action blocks are added here.
 
   /// Additional helper methods are added here.
+
+  Future waitForRequestCompleted({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = requestCompleted;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
+  }
 }

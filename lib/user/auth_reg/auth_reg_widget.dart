@@ -92,11 +92,22 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setState(() {
-        _model.create = false;
+        _model.create = true;
       });
-      setState(() {
-        FFAppState().userRef = widget.refid!;
-      });
+      if (!(widget.refid == null || widget.refid == '')) {
+        _model.userref = await UsersTable().queryRows(
+          queryFn: (q) => q.eq(
+            'id',
+            widget.refid,
+          ),
+        );
+        setState(() {
+          FFAppState().userRef = valueOrDefault<String>(
+            widget.refid,
+            '-',
+          );
+        });
+      }
     });
 
     _model.emailAddressController ??= TextEditingController();
@@ -114,7 +125,11 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
     _model.passwordConfirmController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
 
-    _model.usercodeController ??= TextEditingController();
+    _model.usercodeController ??= TextEditingController(
+        text: valueOrDefault<String>(
+      widget.refid,
+      'yyy',
+    ));
     _model.usercodeFocusNode ??= FocusNode();
   }
 
@@ -183,18 +198,6 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                         32.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'by Julia Heart',
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineMedium,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        32.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        widget.refid,
-                                        '===',
-                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium,
                                     ),
@@ -984,93 +987,253 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                               ),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 16.0),
-                                            child: SizedBox(
-                                              width: double.infinity,
-                                              child: TextFormField(
-                                                controller:
-                                                    _model.usercodeController,
-                                                focusNode:
-                                                    _model.usercodeFocusNode,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: 'Код партнёра',
-                                                  labelStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodySmall,
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                      color: Color(0xFFE0E3E7),
-                                                      width: 2.0,
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                            tablet: false,
+                                            tabletLandscape: false,
+                                            desktop: false,
+                                          ))
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 16.0),
+                                              child: SizedBox(
+                                                width: double.infinity,
+                                                child: TextFormField(
+                                                  controller:
+                                                      _model.usercodeController,
+                                                  focusNode:
+                                                      _model.usercodeFocusNode,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'Код партнёра',
+                                                    labelStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodySmall,
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: const BorderSide(
+                                                        color:
+                                                            Color(0xFFE0E3E7),
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
+                                                    focusedBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primary,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                    ),
+                                                    errorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                    ),
+                                                    focusedErrorBorder:
+                                                        OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        width: 2.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              40.0),
+                                                    ),
+                                                    filled: true,
+                                                    fillColor: FlutterFlowTheme
+                                                            .of(context)
+                                                        .secondaryBackground,
+                                                    contentPadding:
+                                                        const EdgeInsets.all(24.0),
+                                                    prefixIcon: Icon(
+                                                      Icons.qr_code_2,
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primary,
-                                                      width: 2.0,
+                                                              .primaryText,
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
                                                   ),
-                                                  errorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  focusedErrorBorder:
-                                                      OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .alternate,
-                                                      width: 2.0,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40.0),
-                                                  ),
-                                                  filled: true,
-                                                  fillColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  contentPadding:
-                                                      const EdgeInsets.all(24.0),
-                                                  prefixIcon: Icon(
-                                                    Icons.qr_code_2,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryText,
-                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium,
+                                                  validator: _model
+                                                      .usercodeControllerValidator
+                                                      .asValidator(context),
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                                validator: _model
-                                                    .usercodeControllerValidator
-                                                    .asValidator(context),
+                                              ),
+                                            ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFFF5F5F5),
+                                              borderRadius:
+                                                  BorderRadius.circular(24.0),
+                                            ),
+                                            child: Visibility(
+                                              visible: widget.refid != null &&
+                                                  widget.refid != '',
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        16.0, 8.0, 8.0, 8.0),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          'Вы приглашены:',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                fontSize: 12.0,
+                                                              ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  4.0,
+                                                                  8.0,
+                                                                  8.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Container(
+                                                            width: 36.0,
+                                                            height: 36.0,
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .accent1,
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border:
+                                                                  Border.all(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                width: 1.0,
+                                                              ),
+                                                            ),
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(2.0),
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            40.0),
+                                                                child: Image
+                                                                    .network(
+                                                                  valueOrDefault<
+                                                                      String>(
+                                                                    _model
+                                                                        .userref
+                                                                        ?.first
+                                                                        .avatar,
+                                                                    'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/gamebasket/9280082.jpg',
+                                                                  ),
+                                                                  width: 60.0,
+                                                                  height: 60.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          _model
+                                                                              .userref
+                                                                              ?.first
+                                                                              .name,
+                                                                          '-',
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Roboto',
+                                                                              fontSize: 10.0,
+                                                                              fontWeight: FontWeight.bold,
+                                                                            ),
+                                                                      ),
+                                                                    ].divide(const SizedBox(
+                                                                        width:
+                                                                            5.0)),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1160,18 +1323,21 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                     await UsersTable().insert({
                                                       'id': currentUserUid,
                                                       'email': currentUserEmail,
+                                                      'status': 'Участник',
                                                     });
                                                     if (widget.refid != null &&
                                                         widget.refid != '') {
-                                                      await InviteUsersTable()
-                                                          .insert({
-                                                        'user_id': widget.refid,
-                                                        'referral':
-                                                            currentUserUid,
+                                                      _model.invite =
+                                                          await InviteUsersTable()
+                                                              .insert({
+                                                        'user_id': _model
+                                                            .usercodeController
+                                                            .text,
+                                                        'refid': currentUserUid,
                                                       });
                                                     }
 
-                                                    context.pushNamedAuth(
+                                                    context.goNamedAuth(
                                                       'ProfileCreateEdit',
                                                       context.mounted,
                                                       extra: <String, dynamic>{
@@ -1181,6 +1347,8 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                           transitionType:
                                                               PageTransitionType
                                                                   .fade,
+                                                          duration: Duration(
+                                                              milliseconds: 0),
                                                         ),
                                                       },
                                                     );
@@ -1245,6 +1413,8 @@ class _AuthRegWidgetState extends State<AuthRegWidget>
                                                       );
                                                     }
                                                   }
+
+                                                  setState(() {});
                                                 },
                                                 text: 'Зарегистрироваться',
                                                 options: FFButtonOptions(

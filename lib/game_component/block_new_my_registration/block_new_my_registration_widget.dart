@@ -1,7 +1,5 @@
 import '/auth/supabase_auth/auth_util.dart';
-import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -9,11 +7,11 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'block_date_game_model.dart';
-export 'block_date_game_model.dart';
+import 'block_new_my_registration_model.dart';
+export 'block_new_my_registration_model.dart';
 
-class BlockDateGameWidget extends StatefulWidget {
-  const BlockDateGameWidget({
+class BlockNewMyRegistrationWidget extends StatefulWidget {
+  const BlockNewMyRegistrationWidget({
     super.key,
     required this.name,
     required this.description,
@@ -25,6 +23,7 @@ class BlockDateGameWidget extends StatefulWidget {
     required this.gamefieldid,
     this.idmembergame,
     required this.dateTime,
+    required this.unix,
   });
 
   final String? name;
@@ -37,14 +36,16 @@ class BlockDateGameWidget extends StatefulWidget {
   final String? gamefieldid;
   final List<String>? idmembergame;
   final String? dateTime;
+  final int? unix;
 
   @override
-  State<BlockDateGameWidget> createState() => _BlockDateGameWidgetState();
+  State<BlockNewMyRegistrationWidget> createState() =>
+      _BlockNewMyRegistrationWidgetState();
 }
 
-class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
-    with TickerProviderStateMixin {
-  late BlockDateGameModel _model;
+class _BlockNewMyRegistrationWidgetState
+    extends State<BlockNewMyRegistrationWidget> with TickerProviderStateMixin {
+  late BlockNewMyRegistrationModel _model;
 
   final animationsMap = {
     'containerOnActionTriggerAnimation': AnimationInfo(
@@ -71,7 +72,7 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => BlockDateGameModel());
+    _model = createModel(context, () => BlockNewMyRegistrationModel());
 
     setupAnimations(
       animationsMap.values.where((anim) =>
@@ -95,7 +96,7 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
     return Align(
       alignment: const AlignmentDirectional(0.0, -1.0),
       child: Container(
-        width: double.infinity,
+        width: 580.0,
         height: double.infinity,
         constraints: const BoxConstraints(
           maxWidth: 580.0,
@@ -126,20 +127,7 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                           children: [
                             Expanded(
                               child: Container(
-                                width: () {
-                                  if (MediaQuery.sizeOf(context).width <
-                                      kBreakpointSmall) {
-                                    return 87.0;
-                                  } else if (MediaQuery.sizeOf(context).width <
-                                      kBreakpointMedium) {
-                                    return 140.0;
-                                  } else if (MediaQuery.sizeOf(context).width <
-                                      kBreakpointLarge) {
-                                    return 200.0;
-                                  } else {
-                                    return 237.0;
-                                  }
-                                }(),
+                                width: 237.0,
                                 height: double.infinity,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
@@ -151,113 +139,6 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                     ).image,
                                   ),
                                   borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 8.0, 0.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      if (FFAppState()
-                                          .roleUsers
-                                          .contains('Admin'))
-                                        FlutterFlowIconButton(
-                                          borderColor: Colors.transparent,
-                                          borderRadius: 30.0,
-                                          borderWidth: 1.0,
-                                          buttonSize: 44.0,
-                                          icon: Icon(
-                                            Icons.close_rounded,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
-                                          ),
-                                          onPressed: () async {
-                                            await GameFieldTable().delete(
-                                              matchingRows: (rows) => rows.eq(
-                                                'id',
-                                                widget.gamefieldid,
-                                              ),
-                                            );
-
-                                            context.pushNamed(
-                                              'GameNewBlockPage',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    const TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
-                                          },
-                                        ),
-                                      Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 0.0, 0.0),
-                                              child: Container(
-                                                width: 80.0,
-                                                height: 28.0,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .tertiary,
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary
-                                                    ],
-                                                    stops: const [0.0, 1.0],
-                                                    begin: const AlignmentDirectional(
-                                                        0.0, -1.0),
-                                                    end: const AlignmentDirectional(
-                                                        0, 1.0),
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          14.0),
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Text(
-                                                    'ONLINE',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Roboto',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent4,
-                                                          fontSize: 12.0,
-                                                        ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
                                 ),
                               ),
                             ),
@@ -290,28 +171,7 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                         fontFamily: 'Roboto',
                                         color: FlutterFlowTheme.of(context)
                                             .primaryText,
-                                        fontSize: valueOrDefault<double>(
-                                          () {
-                                            if (MediaQuery.sizeOf(context)
-                                                    .width <
-                                                kBreakpointSmall) {
-                                              return 12.0;
-                                            } else if (MediaQuery.sizeOf(
-                                                        context)
-                                                    .width <
-                                                kBreakpointMedium) {
-                                              return 16.0;
-                                            } else if (MediaQuery.sizeOf(
-                                                        context)
-                                                    .width <
-                                                kBreakpointLarge) {
-                                              return 16.0;
-                                            } else {
-                                              return 16.0;
-                                            }
-                                          }(),
-                                          16.0,
-                                        ),
+                                        fontSize: 16.0,
                                         fontWeight: FontWeight.w600,
                                       ),
                                 ),
@@ -423,59 +283,58 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          if (functions.conditions(
-                                                  widget.idmembergame!.toList(),
-                                                  currentUserUid) ==
-                                              false) {
-                                            await RegistrGameTable().insert({
-                                              'userid': currentUserUid,
-                                              'gameid': widget.gameid,
-                                              'nameGame': widget.name,
-                                              'description': widget.description,
-                                              'img': widget.img,
-                                              'gamepractice': widget.author,
-                                              'dateGame': widget.date,
-                                              'gamefieldid': widget.gamefieldid,
-                                              'unix': getCurrentTimestamp
-                                                  .millisecondsSinceEpoch,
-                                            });
-
-                                            context.pushNamed(
-                                              'myregistration',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    const TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
-                                          } else {
-                                            context.pushNamed(
-                                              'myregistration',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    const TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType.fade,
-                                                  duration:
-                                                      Duration(milliseconds: 0),
-                                                ),
-                                              },
-                                            );
-                                          }
+                                          context.pushNamed(
+                                            'gameField',
+                                            queryParameters: {
+                                              'gamefield': serializeParam(
+                                                widget.gamefieldid,
+                                                ParamType.String,
+                                              ),
+                                              'idmembergame': serializeParam(
+                                                widget.idmembergame,
+                                                ParamType.String,
+                                                true,
+                                              ),
+                                              'date': serializeParam(
+                                                widget.date,
+                                                ParamType.String,
+                                              ),
+                                              'time': serializeParam(
+                                                widget.dateTime,
+                                                ParamType.String,
+                                              ),
+                                              'id': serializeParam(
+                                                widget.gamefieldid,
+                                                ParamType.String,
+                                              ),
+                                              'gameid': serializeParam(
+                                                widget.gameid,
+                                                ParamType.String,
+                                              ),
+                                              'nameGame': serializeParam(
+                                                widget.name,
+                                                ParamType.String,
+                                              ),
+                                              'description': serializeParam(
+                                                widget.description,
+                                                ParamType.String,
+                                              ),
+                                              'avatar': serializeParam(
+                                                FFAppState().avatar,
+                                                ParamType.String,
+                                              ),
+                                              'nameUser': serializeParam(
+                                                widget.author,
+                                                ParamType.String,
+                                              ),
+                                              'unix': serializeParam(
+                                                widget.unix,
+                                                ParamType.int,
+                                              ),
+                                            }.withoutNulls,
+                                          );
                                         },
-                                        text: functions.conditions(
-                                                    widget.idmembergame!
-                                                        .toList(),
-                                                    currentUserUid) ==
-                                                false
-                                            ? widget.buttonname!
-                                            : 'Зарегистрированы',
+                                        text: 'Начать',
                                         options: FFButtonOptions(
                                           height: 34.0,
                                           padding:

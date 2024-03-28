@@ -38,9 +38,6 @@ class UsersRow extends SupabaseDataRow {
   String? get role => getField<String>('role');
   set role(String? value) => setField<String>('role', value);
 
-  String? get referal => getField<String>('referal');
-  set referal(String? value) => setField<String>('referal', value);
-
   String? get avatar => getField<String>('avatar');
   set avatar(String? value) => setField<String>('avatar', value);
 

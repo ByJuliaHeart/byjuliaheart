@@ -74,7 +74,9 @@ class _MenubarWidgetState extends State<MenubarWidget> {
         phone: false,
         tablet: false,
       ),
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 100),
+        curve: Curves.easeInOut,
         width: valueOrDefault<double>(
           FFAppState().openMenu == true ? 270.0 : 72.0,
           270.0,

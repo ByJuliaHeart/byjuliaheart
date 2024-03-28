@@ -143,6 +143,28 @@ class UsersCall {
           .toList();
 }
 
+class UsCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'us',
+      apiUrl: 'https://supabase-mag.ru/rest/v1/users',
+      callType: ApiCallType.GET,
+      headers: {
+        'apikey':
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzExNDAwNDAwLAogICJleHAiOiAxODY5MTY2ODAwCn0.HtG2Azv4OFDRyd80j8_aKD2IleQ5g7QZKmq80XjYiVI',
+        'Authorization':
+            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.ewogICJyb2xlIjogImFub24iLAogICJpc3MiOiAic3VwYWJhc2UiLAogICJpYXQiOiAxNzExNDAwNDAwLAogICJleHAiOiAxODY5MTY2ODAwCn0.HtG2Azv4OFDRyd80j8_aKD2IleQ5g7QZKmq80XjYiVI',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

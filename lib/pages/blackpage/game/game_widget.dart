@@ -5,7 +5,7 @@ import '/backend/supabase/supabase.dart';
 import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/game_component/block/block_widget.dart';
+import '/pages/blackpage/block/block_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -239,16 +239,10 @@ class _GameWidgetState extends State<GameWidget> {
                                 itemBuilder: (context, gridViewIndex) {
                                   final gridViewGameRow =
                                       gridViewGameRowList[gridViewIndex];
-                                  return BlockWidget(
-                                    key: Key(
-                                        'Keym3c_${gridViewIndex}_of_${gridViewGameRowList.length}'),
-                                    name: gridViewGameRow.nameGame!,
-                                    deskription: gridViewGameRow.description!,
-                                    author: gridViewGameRow.author!,
-                                    img: gridViewGameRow.img!,
-                                    buttonname: 'Расписание',
-                                    id: gridViewGameRow.id,
-                                  );
+                                  return Container(
+                                      width: 100,
+                                      height: 100,
+                                      color: Colors.green);
                                 },
                               );
                             },

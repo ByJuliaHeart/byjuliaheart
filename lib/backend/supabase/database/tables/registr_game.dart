@@ -38,11 +38,11 @@ class RegistrGameRow extends SupabaseDataRow {
   String? get img => getField<String>('img');
   set img(String? value) => setField<String>('img', value);
 
-  String? get discription => getField<String>('discription');
-  set discription(String? value) => setField<String>('discription', value);
+  String? get description => getField<String>('description');
+  set description(String? value) => setField<String>('description', value);
 
-  String? get author => getField<String>('author');
-  set author(String? value) => setField<String>('author', value);
+  String? get gamepractice => getField<String>('gamepractice');
+  set gamepractice(String? value) => setField<String>('gamepractice', value);
 
   String? get gamefieldid => getField<String>('gamefieldid');
   set gamefieldid(String? value) => setField<String>('gamefieldid', value);

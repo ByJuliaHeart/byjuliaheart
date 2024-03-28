@@ -192,46 +192,8 @@ class _BlockDateGameCopyWidgetState extends State<BlockDateGameCopyWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           FFButtonWidget(
-                            onPressed: () async {
-                              if (functions.conditions(
-                                      widget.idmembergame!.toList(),
-                                      currentUserUid) ==
-                                  false) {
-                                await RegistrGameTable().insert({
-                                  'userid': currentUserUid,
-                                  'gameid': widget.gameid,
-                                  'nameGame': widget.name,
-                                  'discription': widget.description,
-                                  'img': widget.img,
-                                  'author': widget.author,
-                                  'dateGame': widget.date,
-                                  'gamefieldid': widget.gamefieldid,
-                                  'unix': getCurrentTimestamp
-                                      .millisecondsSinceEpoch,
-                                });
-
-                                context.pushNamed(
-                                  'myregistration',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 0),
-                                    ),
-                                  },
-                                );
-                              } else {
-                                context.pushNamed(
-                                  'myregistration',
-                                  extra: <String, dynamic>{
-                                    kTransitionInfoKey: const TransitionInfo(
-                                      hasTransition: true,
-                                      transitionType: PageTransitionType.fade,
-                                      duration: Duration(milliseconds: 0),
-                                    ),
-                                  },
-                                );
-                              }
+                            onPressed: () {
+                              print('Button pressed ...');
                             },
                             text: functions.conditions(
                                         widget.idmembergame!.toList(),

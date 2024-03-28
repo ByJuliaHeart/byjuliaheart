@@ -171,7 +171,7 @@ class FFAppState extends ChangeNotifier {
     _phoneProfile = value;
   }
 
-  bool _agreementSwitch = false;
+  bool _agreementSwitch = true;
   bool get agreementSwitch => _agreementSwitch;
   set agreementSwitch(bool value) {
     _agreementSwitch = value;

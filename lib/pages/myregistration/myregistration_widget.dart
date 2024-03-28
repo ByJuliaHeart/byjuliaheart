@@ -3,8 +3,9 @@ import '/backend/supabase/supabase.dart';
 import '/components/menubar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/game_component/block_my_game/block_my_game_widget.dart';
+import '/game_component/block_new_my_registration/block_new_my_registration_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'myregistration_model.dart';
@@ -26,6 +27,15 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => MyregistrationModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        FFAppState().clearMyregCache();
+        _model.requestCompleted = false;
+      });
+      await _model.waitForRequestCompleted();
+    });
   }
 
   @override
@@ -96,190 +106,79 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                       tablet: false,
                     ))
                       Expanded(
-                        child: FutureBuilder<List<RegistrGameRow>>(
-                          future: FFAppState().myreg(
-                            requestFn: () => RegistrGameTable().queryRows(
-                              queryFn: (q) => q.eq(
-                                'userid',
-                                currentUserUid,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 15.0, 0.0, 0.0),
+                          child: FutureBuilder<List<RegistrGameRow>>(
+                            future: FFAppState()
+                                .myreg(
+                              requestFn: () => RegistrGameTable().queryRows(
+                                queryFn: (q) => q.eq(
+                                  'userid',
+                                  currentUserUid,
+                                ),
                               ),
-                            ),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 10.0,
-                                  height: 10.0,
-                                  child: SpinKitDoubleBounce(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 10.0,
-                                  ),
-                                ),
-                              );
-                            }
-                            List<RegistrGameRow> gridViewRegistrGameRowList =
-                                snapshot.data!;
-                            return GridView.builder(
-                              padding: EdgeInsets.zero,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: valueOrDefault<int>(
-                                  () {
-                                    if (MediaQuery.sizeOf(context).width <
-                                        kBreakpointSmall) {
-                                      return 1;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointMedium) {
-                                      return 1;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointLarge) {
-                                      return 2;
-                                    } else {
-                                      return 3;
-                                    }
-                                  }(),
-                                  1,
-                                ),
-                                crossAxisSpacing: valueOrDefault<double>(
-                                  () {
-                                    if (MediaQuery.sizeOf(context).width <
-                                        kBreakpointSmall) {
-                                      return 0.8;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointMedium) {
-                                      return 1.0;
-                                    } else if (MediaQuery.sizeOf(context)
-                                            .width <
-                                        kBreakpointLarge) {
-                                      return 1.0;
-                                    } else {
-                                      return 1.0;
-                                    }
-                                  }(),
-                                  1.0,
-                                ),
-                                mainAxisSpacing: 10.0,
-                                childAspectRatio: 1.0,
-                              ),
-                              scrollDirection: Axis.vertical,
-                              itemCount: gridViewRegistrGameRowList.length,
-                              itemBuilder: (context, gridViewIndex) {
-                                final gridViewRegistrGameRow =
-                                    gridViewRegistrGameRowList[gridViewIndex];
-                                return FutureBuilder<List<GameFieldRow>>(
-                                  future: FFAppState().gameField(
-                                    requestFn: () =>
-                                        GameFieldTable().querySingleRow(
-                                      queryFn: (q) => q.eq(
-                                        'id',
-                                        gridViewRegistrGameRow.gamefieldid,
-                                      ),
+                            )
+                                .then((result) {
+                              _model.requestCompleted = true;
+                              return result;
+                            }),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 10.0,
+                                    height: 10.0,
+                                    child: SpinKitDoubleBounce(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                      size: 10.0,
                                     ),
                                   ),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 10.0,
-                                          height: 10.0,
-                                          child: SpinKitDoubleBounce(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primary,
-                                            size: 10.0,
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                    List<GameFieldRow>
-                                        containerGameFieldRowList =
-                                        snapshot.data!;
-                                    final containerGameFieldRow =
-                                        containerGameFieldRowList.isNotEmpty
-                                            ? containerGameFieldRowList.first
-                                            : null;
-                                    return Container(
-                                      decoration: const BoxDecoration(),
-                                      child: BlockMyGameWidget(
-                                        key: Key(
-                                            'Keyenu_${gridViewIndex}_of_${gridViewRegistrGameRowList.length}'),
-                                        name: containerGameFieldRow!.nameGame!,
-                                        discription:
-                                            containerGameFieldRow.discription!,
-                                        leader: containerGameFieldRow.author!,
-                                        img: containerGameFieldRow.img!,
-                                        buttonname: 'начать игру',
-                                        unix: containerGameFieldRow.unix!,
-                                        idgamefield: containerGameFieldRow.id,
-                                        date: containerGameFieldRow.dateGame
-                                            ?.toString(),
-                                        time:
-                                            '${containerGameFieldRow.hhTime}:${containerGameFieldRow.mmTime}',
-                                        gameID: gridViewRegistrGameRow.gameid!,
-                                        idmembergame:
-                                            containerGameFieldRow.idMemberGame,
-                                        nameUser: FFAppState().name,
-                                        avatar: FFAppState().avatar,
-                                      ),
-                                    );
-                                  },
                                 );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                    if (responsiveVisibility(
-                      context: context,
-                      tabletLandscape: false,
-                      desktop: false,
-                    ))
-                      Expanded(
-                        child: FutureBuilder<List<RegistrGameRow>>(
-                          future: FFAppState().myreg(
-                            requestFn: () => RegistrGameTable().queryRows(
-                              queryFn: (q) => q.eq(
-                                'userid',
-                                currentUserUid,
-                              ),
-                            ),
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 10.0,
-                                  height: 10.0,
-                                  child: SpinKitDoubleBounce(
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    size: 10.0,
+                              }
+                              List<RegistrGameRow> gridViewRegistrGameRowList =
+                                  snapshot.data!;
+                              return GridView.builder(
+                                padding: EdgeInsets.zero,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: valueOrDefault<int>(
+                                    () {
+                                      if (MediaQuery.sizeOf(context).width <
+                                          kBreakpointSmall) {
+                                        return 1;
+                                      } else if (MediaQuery.sizeOf(context)
+                                              .width <
+                                          kBreakpointMedium) {
+                                        return 1;
+                                      } else if (MediaQuery.sizeOf(context)
+                                              .width <
+                                          kBreakpointLarge) {
+                                        return 2;
+                                      } else {
+                                        return 2;
+                                      }
+                                    }(),
+                                    2,
                                   ),
+                                  crossAxisSpacing: 10.0,
+                                  mainAxisSpacing: 10.0,
+                                  childAspectRatio: 3.0,
                                 ),
-                              );
-                            }
-                            List<RegistrGameRow> columnRegistrGameRowList =
-                                snapshot.data!;
-                            return SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: List.generate(
-                                    columnRegistrGameRowList.length,
-                                    (columnIndex) {
-                                  final columnRegistrGameRow =
-                                      columnRegistrGameRowList[columnIndex];
+                                scrollDirection: Axis.vertical,
+                                itemCount: gridViewRegistrGameRowList.length,
+                                itemBuilder: (context, gridViewIndex) {
+                                  final gridViewRegistrGameRow =
+                                      gridViewRegistrGameRowList[gridViewIndex];
                                   return FutureBuilder<List<GameFieldRow>>(
                                     future: FFAppState().gameField(
                                       requestFn: () =>
                                           GameFieldTable().querySingleRow(
                                         queryFn: (q) => q.eq(
                                           'id',
-                                          columnRegistrGameRow.gamefieldid,
+                                          gridViewRegistrGameRow.gamefieldid,
                                         ),
                                       ),
                                     ),
@@ -308,55 +207,36 @@ class _MyregistrationWidgetState extends State<MyregistrationWidget> {
                                               : null;
                                       return Container(
                                         decoration: const BoxDecoration(),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(5.0),
-                                          child: BlockMyGameWidget(
-                                            key: Key(
-                                                'Keyxz2_${columnIndex}_of_${columnRegistrGameRowList.length}'),
-                                            name: valueOrDefault<String>(
-                                              containerGameFieldRow?.nameGame,
-                                              '-',
-                                            ),
-                                            discription: valueOrDefault<String>(
-                                              containerGameFieldRow
-                                                  ?.discription,
-                                              '-',
-                                            ),
-                                            leader: valueOrDefault<String>(
-                                              containerGameFieldRow?.author,
-                                              '-',
-                                            ),
-                                            img: valueOrDefault<String>(
-                                              containerGameFieldRow?.img,
-                                              'https://dsnwvvivuxpvrywcizfb.supabase.co/storage/v1/object/public/gamebasket/useravatar/1709976654976000.png',
-                                            ),
-                                            buttonname: 'начать игру',
-                                            unix: valueOrDefault<int>(
-                                              containerGameFieldRow?.unix,
-                                              123,
-                                            ),
-                                            idgamefield:
-                                                containerGameFieldRow!.id,
-                                            date: containerGameFieldRow
-                                                .dateGame
-                                                ?.toString(),
-                                            time:
-                                                '${containerGameFieldRow.hhTime}:${containerGameFieldRow.mmTime}',
-                                            gameID:
-                                                containerGameFieldRow.gameId!,
-                                            idmembergame: containerGameFieldRow
-                                                .idMemberGame,
-                                            nameUser: FFAppState().name,
-                                            avatar: FFAppState().avatar,
-                                          ),
+                                        child: BlockNewMyRegistrationWidget(
+                                          key: Key(
+                                              'Key1pq_${gridViewIndex}_of_${gridViewRegistrGameRowList.length}'),
+                                          name:
+                                              gridViewRegistrGameRow.nameGame!,
+                                          description: gridViewRegistrGameRow
+                                              .description!,
+                                          author: gridViewRegistrGameRow
+                                              .gamepractice!,
+                                          img: gridViewRegistrGameRow.img!,
+                                          buttonname: 'Начать',
+                                          gameid:
+                                              gridViewRegistrGameRow.gameid!,
+                                          date:
+                                              gridViewRegistrGameRow.dateGame!,
+                                          gamefieldid: gridViewRegistrGameRow
+                                              .gamefieldid!,
+                                          dateTime:
+                                              '${containerGameFieldRow?.hhTime}:${containerGameFieldRow?.mmTime}',
+                                          idmembergame: containerGameFieldRow
+                                              ?.idMemberGame,
+                                          unix: containerGameFieldRow!.unix!,
                                         ),
                                       );
                                     },
                                   );
-                                }).divide(const SizedBox(height: 5.0)),
-                              ),
-                            );
-                          },
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                   ],
