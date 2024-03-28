@@ -204,56 +204,64 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(8.0, 8.0, 0.0, 0.0),
-                                              child: Container(
-                                                width: 80.0,
-                                                height: 28.0,
-                                                decoration: BoxDecoration(
-                                                  gradient: LinearGradient(
-                                                    colors: [
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .tertiary,
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondary
-                                                    ],
-                                                    stops: const [0.0, 1.0],
-                                                    begin: const AlignmentDirectional(
-                                                        0.0, -1.0),
-                                                    end: const AlignmentDirectional(
-                                                        0, 1.0),
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                          ))
+                                            Align(
+                                              alignment: const AlignmentDirectional(
+                                                  0.0, 0.0),
+                                              child: Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        8.0, 8.0, 0.0, 0.0),
+                                                child: Container(
+                                                  width: 80.0,
+                                                  height: 28.0,
+                                                  decoration: BoxDecoration(
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiary,
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondary
+                                                      ],
+                                                      stops: const [0.0, 1.0],
+                                                      begin:
+                                                          const AlignmentDirectional(
+                                                              0.0, -1.0),
+                                                      end: const AlignmentDirectional(
+                                                          0, 1.0),
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14.0),
                                                   ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          14.0),
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Text(
-                                                    'ONLINE',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Roboto',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .accent4,
-                                                          fontSize: 12.0,
-                                                        ),
+                                                  child: Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Text(
+                                                      'ONLINE',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Roboto',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .accent4,
+                                                                fontSize: 12.0,
+                                                              ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                     ],
@@ -322,8 +330,9 @@ class _BlockDateGameWidgetState extends State<BlockDateGameWidget>
                                 child: Text(
                                   valueOrDefault<String>(
                                     widget.description,
-                                    '\"Твое ресурсное состояние\" - игра, которая поможет открыть источник твоей энергии для реализации планов с легкостью и радостью.',
+                                    '-',
                                   ),
+                                  maxLines: 3,
                                   style: FlutterFlowTheme.of(context)
                                       .bodySmall
                                       .override(
